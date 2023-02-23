@@ -25,5 +25,43 @@ public class PitRoom extends Room {
     public int[] getPitPosition() {
         return pitPosition;
     }
+    public class Main {
+    	public static void main(String[] args) {
+    		try {
+    			FileReader reader = new FileReader("trap.txt");
+    			BufferedReader trap = new BufferedReader reader;
+                String line; 
+    			while((line = trap.readLine()) != null) {
+    				System.out.print(line);
+    			}
+    			reader.close();
+                trap.close();
+    			if (getPitPosition() == getPlayerPosition()) {
+    				try {
+    	    			FileReader pitReader = new FileReader("pit.txt");
+                        BufferedReader pitBuffer = new BufferedReader pitReader;
+    			        while((line = pitBuffer.readLine()) != null) {
+    				        System.out.print(line);
+    			        }
+                        pitReader.close();
+                        pitBuffer.close();
+                    }
+                catch (FileNotFoundException e) {
+        			e.printStackTrace();
+
+        		}
+                catch (IOException e) {
+        			e.printStackTrace();
+    			}
+    		}
+
+    		} catch (FileNotFoundException e) {
+    			e.printStackTrace();
+
+    		} catch (IOException e) {
+    			e.printStackTrace();
+
+    		}
+
 
 }
