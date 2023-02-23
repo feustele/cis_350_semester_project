@@ -1,5 +1,7 @@
 //TODO: Add setters/getters for this method.
 import java.util.Random;
+import java.io.FileReader;
+import java.io.BufferedReader;
 
 public abstract class Room {
     private int roomLimit = 5; //Limits the max size of the rooms to spawn
