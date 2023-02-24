@@ -1,4 +1,4 @@
-sample text
-sample text
-does whatever a sample text does
+Files for CIS 350 Project
+as-of-yet untitled adventure game w/ procedural generation
+(AKA Project Sane)
 
