@@ -87,4 +87,11 @@ public class Map {
     public int[] getPlayerPosition() {
         return playerPosition;
     }
+    //public String monsterInteraction(){
+       // if (getPlayerPosition == this.room[monster.ranX][monster.ranY]){
+           // System.out.println(monster.name);
+       // }
+  //  }
+    //if the player enters a space with a monster in it, the monster's flavor text is generated.
+    //will change with combat.
 }
