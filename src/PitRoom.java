@@ -34,9 +34,11 @@ public class PitRoom extends Room {
     			while((line = trap.readLine()) != null) {
     				System.out.print(line);
     			}
+                //reads out room enter text
     			reader.close();
                 trap.close();
     			if (getPitPosition() == getPlayerPosition()) {
+                    //if you fall into the pit, 
     				try {
     	    			FileReader pitReader = new FileReader("pit.txt");
                         BufferedReader pitBuffer = new BufferedReader pitReader;
@@ -46,6 +48,7 @@ public class PitRoom extends Room {
                         pitReader.close();
                         pitBuffer.close();
                     }
+                    // reads out fall text
                 catch (FileNotFoundException e) {
         			e.printStackTrace();
 
