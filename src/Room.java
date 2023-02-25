@@ -11,7 +11,7 @@ public abstract class Room {
     private boolean hasVisited = false; //Determines if the player has already visited this room. Will be used to prevent 
 
     private double itemSpawnChance = .5; //Represents a percentage that an item will spawn
-
+    // private boolean hasMonster - could work the same as item spawns once we have monsters. 
 
     private void generateRoom() {
         Random ran = new Random();
@@ -35,7 +35,10 @@ public abstract class Room {
     }
 
     private void generateEnemies() {
-
+        Random ran = new Random();
+        int ranX = ran.nextInt(roomLimit);
+        int ranY = ran.nextInt(roomLimit);
+        new monster Frog ("A truly terrifying, slimy Frog. It is brightly colored, so it's probably best avoided - for now.", 10, ranX, ranY):
     }
 
 
