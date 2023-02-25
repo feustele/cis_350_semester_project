@@ -20,12 +20,12 @@ public class Items {
         //Index is out of bounds in terms of the item list.
         return null;
     }
-    public static Class getClassType(String className) throws ClassNotFoundException {
-        Class classType = Class.forName(className);
+    public static Class<?> getClassType(String className) throws ClassNotFoundException {
+        Class<?> classType = Class.forName(className);
         return classType;
     }
     public static Object getItem(String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        Class classType = getClassType(className);
+        Class<?> classType = getClassType(className);
         return classType.getDeclaredConstructor().newInstance();
     }
 
