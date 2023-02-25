@@ -1,6 +1,6 @@
 import java.lang.reflect.InvocationTargetException;
 
-public class Items {
+public class Items{
    
     private static String[] listOfItems = {
         "ExperienceRing", //Stat boosting items 
