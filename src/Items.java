@@ -3,7 +3,8 @@ import java.lang.reflect.InvocationTargetException;
 public class Items{
    
     private static String[] listOfItems = {
-        "ExperienceRing", //Stat boosting items 
+        "ExperienceRing", //Stat boosting items
+        "CommandList", //has list of commands player can do in game
         "MysteriousAmulet"};//Quest items
 
 
