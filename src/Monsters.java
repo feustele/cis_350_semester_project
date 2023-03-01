@@ -2,7 +2,7 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Monsters {
     private static String[] listOfMonsters = {
-        "PitRoom"
+        "Frog"
     };
 
 
