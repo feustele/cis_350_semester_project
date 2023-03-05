@@ -26,7 +26,7 @@ public class PitRoom extends Room {
         return pitPosition;
     }
     public class Main {
-    	public static void main(String[] args) {
+    	public static void roomEngine(String[] args) {
     		try {
     			FileReader reader = new FileReader("trap.txt");
     			BufferedReader trap = new BufferedReader reader;
