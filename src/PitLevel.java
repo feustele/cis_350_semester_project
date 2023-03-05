@@ -45,11 +45,13 @@ public class PitLevel extends Room {
     				try {
     	    			FileReader pitReader = new FileReader("pit.txt");
                         BufferedReader pitBuffer = new BufferedReader pitReader;
-    			        while((line = pitBuffer.readLine()) != null) {
+    			        while((line = pitBuffer.readLine()) != null && scnr.next == /n) {
     				        System.out.print(line);
     			        }
                         pitReader.close();
                         pitBuffer.close();
+                        catch (FileNotFoundException e) {
+        			    e.printStackTrace();
                     }
                     // reads out fall text
                 catch (FileNotFoundException e) {
