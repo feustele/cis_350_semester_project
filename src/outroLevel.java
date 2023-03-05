@@ -12,7 +12,7 @@ public class outroLevel extends Room {
     			FileReader reader = new FileReader("outro.txt");
     			BufferedReader outro = new BufferedReader reader;
                 String line; 
-    			while((line = outro.readLine()) != null && scnr.next != null) {
+    			while((line = outro.readLine()) != null && scnr.next == /n) {
     				System.out.print(line);
     			}
                 //reads out room enter text
@@ -25,7 +25,7 @@ public class outroLevel extends Room {
     				try {
     	    			FileReader badReader = new FileReader("badOutro.txt");
                 BufferedReader badBuffer = new BufferedReader badReader;
-    			        while((line = badBuffer.readLine()) != null && scnr.next != null) {
+    			        while((line = badBuffer.readLine()) != null && scnr.next == /n) {
     				        System.out.print(line);
     			        }
                    badReader.close();
@@ -44,7 +44,7 @@ public class outroLevel extends Room {
          try {
     	    			FileReader goodReader = new FileReader("goodOutro.txt");
                 BufferedReader goodBuffer = new BufferedReader goodReader;
-    			        while((line = goodBuffer.readLine()) != null) {
+    			        while((line = goodBuffer.readLine()) != null && scnr.next == /n) {
     				        System.out.print(line);
     			        }
                    goodReader.close();
