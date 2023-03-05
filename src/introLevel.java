@@ -1,7 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class introRoom extends Room {
+public class introLevel extends Room {
+	introLevel.enemySpawnChance = 0;
+	//makes sure you don't get beaned with a monster in the first room
     	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
