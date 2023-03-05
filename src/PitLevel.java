@@ -4,6 +4,7 @@ public class PitLevel extends Room {
     private int[] pitPosition = new int[2]; 
     
     PitLevel.enemySpawnChance = 0;
+    // prevents a monster from being spawned in this room.
 
     private void generatePit() {
         Random rand = new Random();
