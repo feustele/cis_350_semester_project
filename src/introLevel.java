@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class introRoom extends Room {
-    public class Main {
+    public class roomEngine {
     	public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
@@ -28,6 +28,7 @@ public class introRoom extends Room {
                    chickenReader.close();
                    chickenBuffer.close();
              }
+//add ioextension end method to interact with game engine (register an ending)
                     // reads out fall text
              catch (FileNotFoundException e) {
         			  e.printStackTrace();
