@@ -1,7 +1,10 @@
 import java.util.Random;
 
-public class lavaRoom extends Room {
+public class lavaLevel extends Room {
     private int[] lavaPosition = new int[3]; 
+    
+    lavaLevel.enemySpawnChance = 0;
+    // prevents a monster from being spawned in this room.
 
     private void generateLava() {
         Random rand = new Random();
@@ -17,7 +20,7 @@ public class lavaRoom extends Room {
     
     }
 
-    public lavaRoom() {
+    public lavaLevel() {
         super();
         generateLava();
         //creates a room with lava generated in it.
