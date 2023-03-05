@@ -19,7 +19,7 @@ public class PitLevel extends Room {
     
     }
 
-    public PitRoom() {
+    public PitLevel() {
         super();
         generatePit();
         
