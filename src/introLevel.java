@@ -10,12 +10,12 @@ public class introLevel extends Room {
     			FileReader reader = new FileReader("intro.txt");
     			BufferedReader intro = new BufferedReader reader;
                 String line; 
-    			while((line = intro.readLine()) != null) {
+    			while((line = intro.readLine()) != null && scnr.next == /n) {
     				System.out.print(line);
     			}
                 //reads out room enter text
     			reader.close();
-          intro.close();
+          		intro.close();
     			System.out.println("Do you enter the cave?");
 		      String word1 = scnr.next();
           if (word1 == "No" || word1 == "n" || word1 == "NO" || word1 == "no" || word1 == "N"){
@@ -23,11 +23,13 @@ public class introLevel extends Room {
     				try {
     	    			FileReader chickenReader = new FileReader("chicken.txt");
                 BufferedReader chickenBuffer = new BufferedReader chickenReader;
-    			        while((line = chickenBuffer.readLine()) != null) {
+    			        while((line = chickenBuffer.readLine()) != null && && scnr.next == /n) {
     				        System.out.print(line);
     			        }
                    chickenReader.close();
                    chickenBuffer.close();
+		new IOException end;
+		throw end;
              }
 //add ioextension end method to interact with game engine (register an ending)
                     // reads out fall text
