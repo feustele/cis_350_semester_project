@@ -1,7 +1,9 @@
 import java.util.Random;
 
-public class PitRoom extends Room {
+public class PitLevel extends Room {
     private int[] pitPosition = new int[2]; 
+    
+    PitLevel.enemySpawnChance = 0;
 
     private void generatePit() {
         Random rand = new Random();
