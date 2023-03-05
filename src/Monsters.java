@@ -7,6 +7,8 @@ public class Monsters {
     //All of the monsters that can be found within the project
     private static String[] listOfMonsters = {
         "Frog"
+        "Snake"
+        "Zombie"
     };
 
 
