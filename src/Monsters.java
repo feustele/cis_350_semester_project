@@ -6,8 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 public class Monsters {
     //All of the monsters that can be found within the project
     private static String[] listOfMonsters = {
-        "Frog"
-        "Snake"
+        "Frog",
+        "Snake",
         "Zombie"
     };
 
@@ -80,6 +80,25 @@ public class Monsters {
         String name = getMonsterName(index);
         return getMonster(name);
     }
+
+
+    /**
+     * Determines whether the passed class is a enemey class or not.
+     * @param potentialEnemey
+     * @return boolean
+     */
+    public static boolean isObjectAEnemy(Object potentialEnemey) {
+        String name = (potentialEnemey).getClass().getSimpleName();
+        for (int i = 0; i < Rooms.length(); i++) {
+            if (name.equals(Rooms.getRoomName(i))) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
 
     /**
      * Returns the number of rooms

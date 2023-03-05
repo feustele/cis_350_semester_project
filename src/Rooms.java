@@ -80,6 +80,23 @@ public class Rooms {
     }
 
     /**
+     * Determines whether the passed class is a room class or not.
+     * @param potentialRoom
+     * @return boolean
+     */
+    public static boolean isObjectARoom(Object potentialRoom) {
+        String name = potentialRoom.getClass().getSimpleName();
+        for (int i = 0; i < Rooms.length(); i++) {
+            if (name.equals(Rooms.getRoomName(i))) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the number of rooms
      * @return int
      */

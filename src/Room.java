@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -239,6 +240,26 @@ public abstract class Room {
     }
 
     /**
+     * Returns the positons of all of the enemies stored within an ArrayList.
+     * @return ArrayList<int[]>
+     */
+    public ArrayList<int[]> getEnemyPosition() {
+
+        ArrayList<int[]> EnemyPositions = new ArrayList<int[]>();
+        
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room[i].length; j++) {
+                int[] pos = {i, j};
+
+                if(isMonster(pos)) {
+                    EnemyPositions.add(pos);
+                }
+               
+            }
+        }
+        return EnemyPositions;
+    }
+    /**
      * Returns the player's current position
      * @return
      */
@@ -254,6 +275,18 @@ public abstract class Room {
         return new int[] {room.length, room[0].length};
     }
 
+
+    private boolean isMonster(int[] pos) {
+
+        if (room[pos[0]][pos[1]] == null) {
+            return false;
+        }
+
+        if(!Monsters.isObjectAEnemy(room[pos[0]][pos[1]])) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Adds the provided item to the Room at the given position.
@@ -341,5 +374,7 @@ public abstract class Room {
         spawnMonster(mon, pos);
     }
 
+
+     
 
 }
