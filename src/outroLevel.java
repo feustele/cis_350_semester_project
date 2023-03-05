@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class outroRoom extends Room {
     public class Main {
-    	public static void main(String[] args) {
+    	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
     			FileReader reader = new FileReader("outro.txt");
