@@ -37,7 +37,7 @@ public class lavaLevel extends Room {
     			FileReader reader = new FileReader("lavaroom.txt");
     			BufferedReader trap = new BufferedReader reader;
                 String line; 
-    			while((line = trap.readLine()) != null) {
+    			while((line = trap.readLine()) != null && scnr.next != null) {
     				System.out.print(line);
     			}
                 //reads out room enter text
@@ -48,11 +48,13 @@ public class lavaLevel extends Room {
     				try {
     	    			FileReader pitReader = new FileReader("cookedChicken.txt");
                         BufferedReader pitBuffer = new BufferedReader pitReader;
-    			        while((line = pitBuffer.readLine()) != null) {
+    			        while((line = pitBuffer.readLine()) != null && scnr.next != null) {
     				        System.out.print(line);
     			        }
                         pitReader.close();
                         pitBuffer.close();
+                        new IOException end;
+		                throw end;
                     }
                     // reads out fall text
                 catch (FileNotFoundException e) {
