@@ -2,8 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class introRoom extends Room {
-    public class roomEngine {
-    	public static void main(String[] args) {
+    	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
     			FileReader reader = new FileReader("intro.txt");
