@@ -1,7 +1,10 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class outroRoom extends Room {
+public class outroLevel extends Room {
+	outroLevel.enemySpawnChance = 0;
+	//prevents a monster from being spawned in this room.
+	
     public class Main {
     	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
