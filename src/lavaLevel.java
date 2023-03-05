@@ -29,7 +29,7 @@ public class lavaRoom extends Room {
         //returns where the lava is positioned.
     }
     public class Main {
-    	public static void main(String[] args) {
+    	public static void roomEngine(String[] args) {
     		try {
     			FileReader reader = new FileReader("lavaroom.txt");
     			BufferedReader trap = new BufferedReader reader;
