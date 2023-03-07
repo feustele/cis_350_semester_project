@@ -11,6 +11,8 @@ public abstract class Room {
     private int roomLimit = 5; 
     //Holds the player's position
     private int[] playerPosition = new int[2];
+    //Holds the room's position
+    private int[] roomPosition = new int[2];
     
     //If this is true, then square rooms will be generated. Otherwise, rectangle rooms will generate. 
     private boolean isRoomSquare = true; 
@@ -221,6 +223,26 @@ public abstract class Room {
         return;
     }
 
+    /**
+     * Sets the Room's global position along the map to the position passed.
+     * @param position
+     */
+    public void setRoomPosition(int[] position) {
+        if (position.length != 2) {
+            return;
+        }
+
+        roomPosition[0] = position[0];
+        roomPosition[1] = position[1];
+    }
+
+    /**
+     * 
+     * @return int[]
+     */
+    public int[] getRoomPosition() {
+        return roomPosition;
+    }
     /**
      * Returns whether the player has visited this room or not.
      * @return
