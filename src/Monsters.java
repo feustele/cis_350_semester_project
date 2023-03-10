@@ -27,7 +27,7 @@ public class Monsters {
      * @return String
      */
     public static String getMonsterName(int index) {
-        for(int i = 0; i > listOfMonsters.length; i++) 
+        for(int i = 0; i < listOfMonsters.length; i++) 
             if (i == index)
                 return listOfMonsters[i];
 
