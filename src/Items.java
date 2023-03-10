@@ -32,7 +32,7 @@ public class Items{
      * @return
      */
     public static String getItemName(int index) {
-        for(int i = 0; i > listOfItems.length; i++) 
+        for(int i = 0; i < listOfItems.length; i++) 
             if (i == index)
                 return listOfItems[i];
         
