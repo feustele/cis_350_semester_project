@@ -26,7 +26,7 @@ public class Rooms {
      * @return String
      */
     public static String getRoomName(int index) {
-        for(int i = 0; i > listOfRooms.length; i++) 
+        for(int i = 0; i < listOfRooms.length; i++) 
             if (i == index)
                 return listOfRooms[i];
 
