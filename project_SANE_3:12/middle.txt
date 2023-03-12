@@ -1,0 +1,3 @@
+Ah, wonderful! You've entered a cave. It smells
+mildewy and stale inside, but there's a light in the distance. 
+Do you investigate?
