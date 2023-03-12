@@ -19,9 +19,9 @@ public class SaneEngine {
 		try {
 			while(true) {
 				gameMap.playerRoom.roomEngine();
-				// If need be, move player to next room in map
+				gameMap.moveRooms();
 			}
-		} catch {
+		} catch IOException {
 			// Exceptions thrown for the endings
 		}
 	}
