@@ -8,7 +8,7 @@ public class SaneEngine {
 	
 	public SaneEngine() {
 		scnr = = new Scanner(System.in);
-		System.out.print("Enter player name: ");
+		System.out.print("Before you embark on your quest, Hero - What is your name? ");
 		name = scnr.getLine();
 		inventory = new ArrayList<Items>;
 		P1 = new Player(name, inventory);
