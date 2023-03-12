@@ -19,12 +19,21 @@ public class Map {
     //The current position of the player in regards to the map.
     private Room playerRoom;
 
+    private introRoom createIntroRoom() {
+        int[] position = {0, 0};
+        introRoom intro = new introRoom();
+        intro.setRoomPosition(position);
+        return intro;
+    }
 
     private ArrayList<Room> createMap() {
-        return new ArrayList<Room>(); 
+        ArrayList<Room> tempMap = new ArrayList<Room>(); 
+        tempMap.add(createIntroRoom());
+        return tempMap; 
     }
 
     private Room getRoom(int position) {
+        
         if (position < 0) {
             return null;
         }
@@ -65,7 +74,7 @@ public class Map {
     public Map() {
         
         map = createMap();
-        start = new introRoom();
+        start = (introRoom) map.get(0);
         playerRoom = start;
 
         return;
@@ -96,13 +105,13 @@ public class Map {
             position[1] -= 1;
             break;
          case 'd':
-            position[1] += 1;
+            position[0] += 1;
             break;
          case 's':
-            position[0] -= 1;
+            position[1] += 1;
             break;
          case 'a':
-            position[0] += 1;
+            position[0] -= 1;
             break;
         default:
             throw new Exception("Invalid parameters passed");
@@ -116,6 +125,7 @@ public class Map {
         Room room = generateNewRoom();
         room.setPlayerPosition(direction);
         room.setRoomPosition(position);
+        map.add(room);
         playerRoom = room;
         
         
@@ -130,6 +140,10 @@ public class Map {
         return playerRoom;
     }
 
+    /**
+     * Returns the number of elements visited
+     * @return int
+     */
     public int getMapSize() {
         return map.size();
     }
