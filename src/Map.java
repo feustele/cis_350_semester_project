@@ -22,7 +22,14 @@ public class Map {
     private introRoom createIntroRoom() {
         int[] position = {0, 0};
         introRoom intro = new introRoom();
-        intro.setRoomPosition(position);
+
+        try {
+            intro.setRoomPosition(position);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         return intro;
     }
 
@@ -101,16 +108,16 @@ public class Map {
         int[] position = {oldPosition[0], oldPosition[1]};
 
         switch (direction) {
-         case 'w':
+         case 'n':
             position[1] -= 1;
             break;
-         case 'd':
+         case 'e':
             position[0] += 1;
             break;
          case 's':
             position[1] += 1;
             break;
-         case 'a':
+         case 'w':
             position[0] -= 1;
             break;
         default:

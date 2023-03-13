@@ -63,12 +63,12 @@ public abstract class Room {
     private void generateRoom() {
         Random ran = new Random();
 
-        int ranInt = ran.nextInt(roomLimit);
+        int ranInt = ran.nextInt(roomLimit) + 1;
         int[] roomSize = new int[2];
         roomSize[0] = ranInt;
 
         if(!isRoomSquare) {
-            ranInt = ran.nextInt(roomLimit);
+            ranInt = ran.nextInt(roomLimit) + 1;
         }
 
         roomSize[1] = ranInt;
@@ -202,20 +202,21 @@ public abstract class Room {
 
         /**Do not be surprised if I have mixed up my columns of room.*/
         switch(direction) {
-        case 'w':
+        case 'n':
             playerPosition[0] = 0;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length + 1);
+            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
             break;
-        case 'd':
-            playerPosition[0] = ran.nextInt(room.length + 1);
-            playerPosition[1] = room[0].length;
+        case 'e':
+            playerPosition[0] = ran.nextInt(room.length);
+            playerPosition[1] = room[0].length - 1;
             break;
         case 's':
-            playerPosition[0] = room[0].length;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length + 1);
+            playerPosition[0] = room[0].length - 1;
+            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
+
             break;
-        case 'a':
-            playerPosition[0] = ran.nextInt(room.length + 1);
+        case 'w':
+            playerPosition[0] = ran.nextInt(room.length);
             playerPosition[1] = 0;
             break;
         }
@@ -226,10 +227,11 @@ public abstract class Room {
     /**
      * Sets the Room's global position along the map to the position passed.
      * @param position
+     * @throws Exception
      */
-    public void setRoomPosition(int[] position) {
+    public void setRoomPosition(int[] position) throws Exception {
         if (position.length != 2) {
-            return;
+            throw new Exception("Room position must be of length 2");
         }
 
         roomPosition[0] = position[0];
@@ -294,6 +296,10 @@ public abstract class Room {
      * @return
      */
     protected int[] getSize() {
+        if (room.length <= 0 ) {
+            return new int[] {0, 0};
+        }
+
         return new int[] {room.length, room[0].length};
     }
 
