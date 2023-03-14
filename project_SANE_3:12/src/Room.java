@@ -8,26 +8,26 @@ import java.io.BufferedReader;
  */
 public abstract class Room {
     //Limits the max size of the rooms to spawn
-    private int roomLimit = 5; 
+    protected int roomLimit = 5; 
     //Holds the player's position
-    private int[] playerPosition = new int[2];
+    protected int[] playerPosition = new int[2];
     //Holds the room's position
-    private int[] roomPosition = new int[2];
+    protected int[] roomPosition = new int[2];
     
     //If this is true, then square rooms will be generated. Otherwise, rectangle rooms will generate. 
-    private boolean isRoomSquare = true; 
+    protected boolean isRoomSquare = true; 
     //Determines if the player has already visited this room. Will be used to prevent 
-    private boolean hasVisited = false; 
+    protected boolean hasVisited = false; 
 
     //Represents a percentage that an item will spawn
-    private double itemSpawnChance = .5; 
+    protected double itemSpawnChance = .5; 
     //Represents a percentage that an enemy will spawn.
-    private double enemySpawnChance = .5; 
+    protected double enemySpawnChance = .5; 
 
         // private boolean hasMonster - could work the same as item spawns once we have monsters. 
 
     //A grid containing both items and enemies.
-    private Object[][] room; 
+    protected Object[][] room; 
 
   
     
@@ -35,7 +35,7 @@ public abstract class Room {
      * Generates the room by setting up the roomSize
      * @param roomSize
      */
-    private void generateRoom(int[] roomSize) {
+    protected void generateRoom(int[] roomSize) {
         
         if(roomSize[0] > roomLimit) {
             roomSize[0] = roomLimit;
@@ -60,7 +60,7 @@ public abstract class Room {
      * Sets up the room by randomly generating the size of the room.
      * 
      */
-    private void generateRoom() {
+    protected void generateRoom() {
         Random ran = new Random();
 
         int ranInt = ran.nextInt(roomLimit);
@@ -79,7 +79,7 @@ public abstract class Room {
     /**
      * Generates the items that should be contained within the room. 
      */
-    private void generateItems() {
+    protected void generateItems() {
         Random ran = new Random();
 
         for(int x = 0; x < room.length; x++) {
@@ -99,7 +99,7 @@ public abstract class Room {
     /**
      * Generates the enemies that should be contained within the room.
      */
-    private void generateEnemies() {
+    protected void generateEnemies() {
         Random ran = new Random();
 
         for(int x = 0; x < room.length; x++) {
