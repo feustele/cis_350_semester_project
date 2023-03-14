@@ -15,7 +15,7 @@ public class SaneEngine {
 		gameMap = Map();
 	}
 	
-	public static void main() {
+	public static void main(String args[]) {
 		try {
 			while(true) {
 				gameMap.playerRoom.roomEngine();
