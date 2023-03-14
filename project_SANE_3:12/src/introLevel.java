@@ -1,16 +1,20 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-
 public class introLevel extends Room {
-	introLevel.enemySpawnChance = 0;
+	//super.enemySpawnChance = 0;
+	
 	//makes sure you don't get beaned with a monster in the first room
     	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
     			FileReader reader = new FileReader("intro.txt");
-    			BufferedReader intro = new BufferedReader reader;
+    			BufferedReader intro = new BufferedReader(reader);
                 String line; 
-    			while((line = intro.readLine()) != null && scnr.next == /n) {
+    			while((line = intro.readLine()) != null && scnr.nextLine().equals("\n")) {
     				System.out.print(line);
     			}
                 //reads out room enter text
@@ -22,13 +26,13 @@ public class introLevel extends Room {
             //if the player chooses not to enter the cave, the game ends.
     				try {
     	    			FileReader chickenReader = new FileReader("chicken.txt");
-                BufferedReader chickenBuffer = new BufferedReader chickenReader;
-    			        while((line = chickenBuffer.readLine()) != null && && scnr.next == /n) {
+                BufferedReader chickenBuffer = new BufferedReader(chickenReader);
+    			        while((line = chickenBuffer.readLine()) != null && scnr.nextLine().equals("\n")) {
     				        System.out.print(line);
     			        }
                    chickenReader.close();
                    chickenBuffer.close();
-		new IOException end;
+		IOException end = new IOException();
 		throw end;
              }
 //add ioextension end method to interact with game engine (register an ending)
@@ -41,7 +45,6 @@ public class introLevel extends Room {
     			   }
     		}
         else if (word1 == "Yes" || word1 == "Y" || word1 == "YES" || word1 == "yes" || word1 == "y"){
-          Room();
           //if player enters the cave from the intro room, then a new room is generated.
         }
 
@@ -54,4 +57,5 @@ public class introLevel extends Room {
     		}
 
 
+    	}
 }
