@@ -43,7 +43,7 @@ public abstract class Monster {
 	 * @return int
 	 */
 	public int getlocX() {
-		return locx;
+		return locX;
 	}
 	/**
 	 * 
