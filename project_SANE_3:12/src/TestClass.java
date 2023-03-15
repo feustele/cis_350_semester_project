@@ -39,7 +39,7 @@ public class TestClass {
             }
 
             Object object2;
-            try { object2 = Rooms.getRoom("PitRoom"); }
+            try { object2 = Rooms.getRoom("PitLevel"); }
             catch(Exception e) {
                 object2 = null;
             }
@@ -232,11 +232,11 @@ public class TestClass {
     public static void main(String args[]) {
         //Map map = new Map();
 
-        Object object2;
-        try { 
-            object2 = Rooms.getRoom("PitLevel"); }
-        catch(Exception e) {
-            object2 = null;
+        Object object1;
+        try {
+            object1 = Rooms.getRoom(0);
+        } catch(Exception e) {
+            object1 = null;
         }
     }
 }
