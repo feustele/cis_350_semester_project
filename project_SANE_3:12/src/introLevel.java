@@ -11,30 +11,26 @@ public class introLevel extends Room {
     	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
     		try {
-    			FileReader reader = new FileReader("intro.txt");
-    			BufferedReader intro = new BufferedReader(reader);
-                String line; 
-    			while((line = intro.readLine()) != null && scnr.nextLine().equals("\n")) {
+    			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
+                	String line; 
+    			while((line = intro.readLine()) != null && scnr.next() == "\n") {
     				System.out.print(line);
     			}
-                //reads out room enter text
-    			reader.close();
+                	//reads out room enter text
           		intro.close();
     			System.out.println("Do you enter the cave?");
 		      String word1 = scnr.next();
           if (word1 == "No" || word1 == "n" || word1 == "NO" || word1 == "no" || word1 == "N"){
             //if the player chooses not to enter the cave, the game ends.
-    				try {
-    	    			FileReader chickenReader = new FileReader("chicken.txt");
-                BufferedReader chickenBuffer = new BufferedReader(chickenReader);
-    			        while((line = chickenBuffer.readLine()) != null && scnr.nextLine().equals("\n")) {
+    			try {
+    	    			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
+    			        while((line = chickenBuffer.readLine()) != null && scnr.next() == "\n") {
     				        System.out.print(line);
     			        }
-                   chickenReader.close();
-                   chickenBuffer.close();
-		IOException end = new IOException();
-		throw end;
-             }
+                   		chickenBuffer.close();
+				IOException end = new IOException();
+				throw end;
+            		 }
 //add ioextension end method to interact with game engine (register an ending)
                     // reads out fall text
              catch (FileNotFoundException e) {
