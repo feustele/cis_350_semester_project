@@ -6,6 +6,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class monsterLevel extends Room {
+	
+	public monsterLevel() {
+        	super();
+   	}
     
     //monsterLevel.enemySpawnChance = 1;
     	public void roomEngine(String[] args) {
