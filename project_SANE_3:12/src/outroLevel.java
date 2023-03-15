@@ -11,7 +11,7 @@ public class outroLevel extends Room {
     		try {
     			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
                 	String line; 
-    			while((line = outro.readLine()) != null && scnr.next() == "/n") {
+    			while((line = outro.readLine()) != null && scnr.next().equals("/n")) {
     				System.out.print(line);
     			}
                 //reads out room enter text
@@ -23,7 +23,7 @@ public class outroLevel extends Room {
             //if the player chooses not to take the amulet, the game ends.
     				try {
     	    			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
-    			        while((line = badBuffer.readLine()) != null && scnr.next() == "/n") {
+    			        while((line = badBuffer.readLine()) != null && scnr.next().equals("/n")) {
     				        System.out.print(line);
     			        }
                    badReader.close();
@@ -41,7 +41,7 @@ public class outroLevel extends Room {
         else if (word1 == "Yes" || word1 == "Y" || word1 == "YES" || word1 == "yes" || word1 == "y"){
          	try {
     			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
-    			while((line = goodBuffer.readLine()) != null && scnr.next() == "/n") {
+    			while((line = goodBuffer.readLine()) != null && scnr.next().equals("/n")) {
     			System.out.print(line);
     		}
 
