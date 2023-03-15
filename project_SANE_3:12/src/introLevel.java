@@ -7,6 +7,11 @@ import java.util.Scanner;
 public class introLevel extends Room {
 	//super.enemySpawnChance = 0;
 	
+	public introLevel() {
+        super();
+           
+    	}
+	
 	//makes sure you don't get beaned with a monster in the first room
     	public static void roomEngine(String[] args) {
         Scanner scnr = new Scanner(System.in);
