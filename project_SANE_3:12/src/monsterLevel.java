@@ -45,9 +45,8 @@ public class monsterLevel extends Room {
                         // if you interact with the frog
                     }   
     				try {
-    	    			FileReader pitReader = new FileReader("poisonEnemy.txt");
-                        	BufferedReader pitBuffer = new BufferedReader pitReader;
-    			        while((line = pitBuffer.readLine()) != null && scnr.next == /n) {
+                        	BufferedReader pitBuffer = new BufferedReader(new FileReader("poisonEnemy.txt"));
+    			        while((line = pitBuffer.readLine()) != null && scnr.next() == "/n") {
     				        System.out.print(line);
     			        }
 				//reads out the poisoned ending, with each new line being generated when the player hits enter
