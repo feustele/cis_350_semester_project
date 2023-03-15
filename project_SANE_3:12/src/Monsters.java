@@ -15,9 +15,9 @@ public class Monsters {
      * @return String[]
      */
     public monsters(){
-        new Frog toad;
-        new Snake hiss;
-        new Zombie carl;
+        super() Frog;
+        super () Snake;
+        super() Zombie;
     }
     // creates some monsters
     public static String[] getMonsters() {
