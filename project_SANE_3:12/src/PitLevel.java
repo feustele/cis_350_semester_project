@@ -20,6 +20,9 @@ public class PitLevel extends Room {
         // }
         pitPosition = super.getSize();
 
+        if(pitPosition[0] < 2) pitPosition[0] = 2;
+        if(pitPosition[1] < 2) pitPosition[1] = 2; 
+        
         pitPosition[0] = rand.nextInt(pitPosition[0] - 1); //Subtract one so that it so it cannot generate a pit on the exit.
         pitPosition[1] = rand.nextInt(pitPosition[1] - 1); 
     
