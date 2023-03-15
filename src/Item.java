@@ -82,7 +82,7 @@ public abstract class Item {
 	// }
 
 	/**
-	 * Sets the amount of experience gain that that the item gives to a specific value.
+	 * Sets the amount of experience gain that the item gives to a specific value.
 	 * @param exp
 	 * @see setStat
 	 * @see setHealth

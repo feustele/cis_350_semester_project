@@ -13,7 +13,7 @@ public class Items{
         "MysteriousAmulet",
 
         //Misc
-        "CommandList" //has list of commands player can do in game
+        //"CommandList" //has list of commands player can do in game
     };
 
 

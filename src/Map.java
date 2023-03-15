@@ -3,51 +3,44 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Acts as a map, storing all the rooms within a linked list, and the player's position on the map.
- */
+        * Acts as a map, storing all the rooms within a linked list, and the player's position on the map.
+        */
 public class Map {
-    /**An arrayList of Room classes, which stores the order of rooms that are visited, with the tail 
-    being the current position.
-    */
+    /**An arrayList of Room classes, which stores the order of rooms that are visited, with the tail
+     being the current position.
+     */
     /**NOTE: The size of the row will likely differ, as you travel down the column.*/
-    /**NOTE: The size of the columns will likely differ, as you travel down the row.*/ 
-    private ArrayList<Room> map; 
+    /**NOTE: The size of the columns will likely differ, as you travel down the row.*/
+    private ArrayList<Room> map;
 
     //The location where the player starts at
-    private introRoom start;
-    
+    private introLevel start;
+
     //The current position of the player in regards to the map.
     private Room playerRoom;
 
-    private introRoom createIntroRoom() {
+    private introLevel createIntroRoom() {
         int[] position = {0, 0};
-        introRoom intro = new introRoom();
-
-        try {
-            intro.setRoomPosition(position);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        introLevel intro = new introLevel();
+        intro.setRoomPosition(position);
         return intro;
     }
 
     private ArrayList<Room> createMap() {
-        ArrayList<Room> tempMap = new ArrayList<Room>(); 
+        ArrayList<Room> tempMap = new ArrayList<Room>();
         tempMap.add(createIntroRoom());
-        return tempMap; 
+        return tempMap;
     }
 
     private Room getRoom(int position) {
-        
+
         if (position < 0) {
             return null;
         }
         if(position >= getMapSize()) {
             return null;
         }
-        
+
         return map.get(position);
 
     }
@@ -79,14 +72,14 @@ public class Map {
      * Default constructor Creates a new map.
      */
     public Map() {
-        
+
         map = createMap();
-        start = (introRoom) map.get(0);
+        start = (introLevel) map.get(0);
         playerRoom = start;
 
         return;
     }
-    
+
     /**
      * Returns the map object.
      * @return ArrayList<ArrayList<Room>>
@@ -108,34 +101,34 @@ public class Map {
         int[] position = {oldPosition[0], oldPosition[1]};
 
         switch (direction) {
-         case 'n':
-            position[1] -= 1;
-            break;
-         case 'e':
-            position[0] += 1;
-            break;
-         case 's':
-            position[1] += 1;
-            break;
-         case 'w':
-            position[0] -= 1;
-            break;
-        default:
-            throw new Exception("Invalid parameters passed");
+            case 'w':
+                position[1] -= 1;
+                break;
+            case 'd':
+                position[0] += 1;
+                break;
+            case 's':
+                position[1] += 1;
+                break;
+            case 'a':
+                position[0] -= 1;
+                break;
+            default:
+                throw new Exception("Invalid parameters passed");
         }
-        
+
         if(hasVisitedPosition(position)) {
             throw new Exception("Room has already been visited");
-            
+
         }
-        
+
         Room room = generateNewRoom();
         room.setPlayerPosition(direction);
         room.setRoomPosition(position);
         map.add(room);
         playerRoom = room;
-        
-        
+
+
         return getPlayerRoom();
     }
 
@@ -156,10 +149,10 @@ public class Map {
     }
 
     //public String monsterInteraction(){
-       // if (getPlayerPosition == this.room[monster.ranX][monster.ranY]){
-           // System.out.println(monster.name);
-       // }
-  //  }
+    // if (getPlayerPosition == this.room[monster.ranX][monster.ranY]){
+    // System.out.println(monster.name);
+    // }
+    //  }
     //if the player enters a space with a monster in it, the monster's flavor text is generated.
     //will change with combat.
 }

@@ -1,17 +1,17 @@
 import java.lang.reflect.InvocationTargetException;
 
 /**
-* File folder for all Room classes. Allows easy retrieval of a certain Room class. 
-*
-*/
+ * File folder for all Room classes. Allows easy retrieval of a certain Room class.
+ *
+ */
 public class Rooms {
-   //Stores all of the rooms that will be used by the game.
+    //Stores all of the rooms that will be used by the game.
     private static String[] listOfRooms = {
-        "PitRoom"
+            "PitLevel"
     };
 
 
-    
+
     /**
      *  Returns a list of strings representing the name of all Room Classes
      * @return String[]
@@ -19,14 +19,14 @@ public class Rooms {
     public static String[] getRooms() {
         return listOfRooms;
     }
-    
+
     /**
      * Returns the name of the Room Class stored at some index.
      * @param index
      * @return String
      */
     public static String getRoomName(int index) {
-        for(int i = 0; i < listOfRooms.length; i++) 
+        for(int i = 0; i < listOfRooms.length; i++)
             if (i == index)
                 return listOfRooms[i];
 
@@ -46,7 +46,7 @@ public class Rooms {
     }
 
     /**
-     * Returns a newly created instance of the class associated with the string.  
+     * Returns a newly created instance of the class associated with the string.
      * @param className
      * @return Object
      * @throws InstantiationException
