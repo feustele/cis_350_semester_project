@@ -19,7 +19,7 @@ public class outroLevel extends Room {
           		goodOutro.close();
     			System.out.println("Do retrieve the Mysterious Amulet?");
 		      String word1 = scnr.next();
-          if (word1 == "No" || word1 == "n" || word1 == "NO" || word1 == "no" || word1 == "N"){
+          if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
             //if the player chooses not to take the amulet, the game ends.
     				try {
     	    			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
@@ -38,7 +38,7 @@ public class outroLevel extends Room {
         			  e.printStackTrace();
     			   }
     		}
-        else if (word1 == "Yes" || word1 == "Y" || word1 == "YES" || word1 == "yes" || word1 == "y"){
+        else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")){{
          	try {
     			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
     			while((line = goodBuffer.readLine()) != null && scnr.next().equals("/n")) {
