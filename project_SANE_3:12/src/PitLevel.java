@@ -2,8 +2,9 @@ import java.util.Random;
 
 public class PitLevel extends Room {
     private int[] pitPosition = new int[2]; 
+    Scanner scnr = new Scanner(System.in);
     
-    PitLevel.enemySpawnChance = 0;
+   // PitLevel.enemySpawnChance = 0;
     // prevents a monster from being spawned in this room.
 
     private void generatePit() {
@@ -28,8 +29,9 @@ public class PitLevel extends Room {
     public int[] getPitPosition() {
         return pitPosition;
     }
+    
     public class Main {
-    	public static void roomEngine(String[] args) {
+    	public void roomEngine(String[] args) {
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
                 String line; 
@@ -42,31 +44,33 @@ public class PitLevel extends Room {
                     //if you fall into the pit, 
     				try {
     			        BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
-                        String line; 
-    			        while((line = pit.readLine()) != null && scnr.next().equals("\n")) {
-    				        System.out.print(line);
+                        String line1; 
+    			        while((line1 = pit.readLine()) != null && scnr.next().equals("\n")) {
+    				        System.out.print(line1);
     			        }
-                        pitBuffer.close();
-                        catch (FileNotFoundException e) {
-        			    e.printStackTrace();
-                    }
+                        pit.close();
+    				}
                     // reads out fall text
-                catch (FileNotFoundException e) {
-        			e.printStackTrace();
+    				catch (FileNotFoundException e) {
+    					e.printStackTrace();
 
-        		}
-                catch (IOException e) {
-        			e.printStackTrace();
+    				}
+    				catch (IOException e) {
+    					e.printStackTrace();
+    					System.out.print("Sorry! You can't do that here.");
+    				}
     			}
     		}
 
-    		} catch (FileNotFoundException e) {
+    		catch (FileNotFoundException e) {
     			e.printStackTrace();
 
     		} catch (IOException e) {
     			e.printStackTrace();
+    			System.out.print("Sorry! You can't do that here.");
 
     		}
-
-
+    	}
+    }
+    
 }
