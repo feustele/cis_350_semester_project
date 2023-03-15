@@ -10,13 +10,16 @@ public class Monsters {
         "Snake",
         "Zombie"
     };
-
-
-    
     /** 
      *  Returns a list of strings representing the name of all Monster Classes
      * @return String[]
      */
+    public monsters(){
+        new Frog toad;
+        new Snake hiss;
+        new Zombie carl;
+    }
+    // creates some monsters
     public static String[] getMonsters() {
         return listOfMonsters;
     }
