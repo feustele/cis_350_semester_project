@@ -10,7 +10,7 @@ public class Items{
         "ExperienceRing", 
 
         //Quest items
-        "MysteriousAmulet",
+        "MysteriousAmulet"
 
         //Misc
         //"CommandList" //has list of commands player can do in game
