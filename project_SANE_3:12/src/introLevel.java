@@ -13,18 +13,18 @@ public class introLevel extends Room {
     		try {
     			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
                 	String line; 
-    			while((line = intro.readLine()) != null && scnr.next() == "\n") {
+    			while((line = intro.readLine()) != null && scnr.next().equals("\n")) {
     				System.out.print(line);
     			}
                 	//reads out room enter text
           		intro.close();
     			System.out.println("Do you enter the cave?");
 		      String word1 = scnr.next();
-          if (word1 == "No" || word1 == "n" || word1 == "NO" || word1 == "no" || word1 == "N"){
+          if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
             //if the player chooses not to enter the cave, the game ends.
     			try {
     	    			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
-    			        while((line = chickenBuffer.readLine()) != null && scnr.next() == "\n") {
+    			        while((line = chickenBuffer.readLine()) != null && scnr.next().equals("\n")) {
     				        System.out.print(line);
     			        }
                    		chickenBuffer.close();
@@ -40,7 +40,7 @@ public class introLevel extends Room {
         			  e.printStackTrace();
     			   }
     		}
-        else if (word1 == "Yes" || word1 == "Y" || word1 == "YES" || word1 == "yes" || word1 == "y"){
+        else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")){
           //if player enters the cave from the intro room, then a new room is generated.
         }
 
