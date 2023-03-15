@@ -31,24 +31,21 @@ public class PitLevel extends Room {
     public class Main {
     	public static void roomEngine(String[] args) {
     		try {
-    			FileReader reader = new FileReader("trap.txt");
-    			BufferedReader trap = new BufferedReader reader;
+    			BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
                 String line; 
-    			while((line = trap.readLine()) != null) {
+    			while((line = trap.readLine()) != null && scnr.next().equals("\n")) {
     				System.out.print(line);
     			}
                 //reads out room enter text
-    			reader.close();
                 trap.close();
     			if (getPitPosition() == getPlayerPosition()) {
                     //if you fall into the pit, 
     				try {
-    	    			FileReader pitReader = new FileReader("pit.txt");
-                        BufferedReader pitBuffer = new BufferedReader pitReader;
-    			        while((line = pitBuffer.readLine()) != null && scnr.next == /n) {
+    			        BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
+                        String line; 
+    			        while((line = pit.readLine()) != null && scnr.next().equals("\n")) {
     				        System.out.print(line);
     			        }
-                        pitReader.close();
                         pitBuffer.close();
                         catch (FileNotFoundException e) {
         			    e.printStackTrace();
