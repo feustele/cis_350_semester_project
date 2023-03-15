@@ -47,7 +47,7 @@ public class Items{
      * @return
      * @throws ClassNotFoundException
      */
-    public static Class<?> getClassType(String className) throws ClassNotFoundException {
+    private static Class<?> getClassType(String className) throws ClassNotFoundException {
         Class<?> classType = Class.forName(className);
         return classType;
     }

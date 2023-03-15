@@ -1,3 +1,4 @@
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -7,7 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 public class Rooms {
    //Stores all of the rooms that will be used by the game.
     private static String[] listOfRooms = {
-        "PitLevel"
+        "PitLevel",
+        "lavaLevel"
     };
 
 
@@ -59,7 +61,8 @@ public class Rooms {
      */
     public static Object getRoom(String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
         Class<?> classType = getClassType(className);
-        return classType.getDeclaredConstructor().newInstance();
+        Constructor<?> classConstructor = classType.getDeclaredConstructor();
+        return classConstructor.newInstance();
     }
 
     /**

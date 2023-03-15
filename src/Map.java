@@ -14,14 +14,14 @@ public class Map {
     private ArrayList<Room> map; 
 
     //The location where the player starts at
-    private introRoom start;
+    private introLevel start;
     
     //The current position of the player in regards to the map.
     private Room playerRoom;
 
-    private introRoom createIntroRoom() {
+    private introLevel createintroLevel() {
         int[] position = {0, 0};
-        introRoom intro = new introRoom();
+        introLevel intro = new introLevel();
 
         try {
             intro.setRoomPosition(position);
@@ -35,7 +35,7 @@ public class Map {
 
     private ArrayList<Room> createMap() {
         ArrayList<Room> tempMap = new ArrayList<Room>(); 
-        tempMap.add(createIntroRoom());
+        tempMap.add(createintroLevel());
         return tempMap; 
     }
 
@@ -81,7 +81,7 @@ public class Map {
     public Map() {
         
         map = createMap();
-        start = (introRoom) map.get(0);
+        start = (introLevel) map.get(0);
         playerRoom = start;
 
         return;
