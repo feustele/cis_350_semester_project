@@ -63,12 +63,12 @@ public abstract class Room {
     protected void generateRoom() {
         Random ran = new Random();
 
-        int ranInt = ran.nextInt(roomLimit);
+        int ranInt = ran.nextInt(roomLimit) + 1;
         int[] roomSize = new int[2];
         roomSize[0] = ranInt;
 
         if(!isRoomSquare) {
-            ranInt = ran.nextInt(roomLimit);
+            ranInt = ran.nextInt(roomLimit) + 1;
         }
 
         roomSize[1] = ranInt;

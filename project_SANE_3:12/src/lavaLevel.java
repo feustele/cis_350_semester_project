@@ -18,7 +18,14 @@ public class lavaLevel extends Room {
         // if (super.getSize()[0] == 0 or super.getSize()[1] == 0) {
         //     exception
         // }
+        /**Note by Steven:
+         * super is a reference to Room, meaning getSize() returns an array of two ints, not three
+         * Returns the array [room.length, room[0].length]
+         */
         lavaPosition = super.getSize();
+
+        if(lavaPosition[0] < 2) lavaPosition[0] = 2; //Checks if an index out of bounds error will occur or not.
+        if(lavaPosition[1] < 2) lavaPosition[1] = 2; //Checks if an index out of bounds error will occur or not.
 
         lavaPosition[0] = rand.nextInt(lavaPosition[0] - 1); //Subtract one so that it so it cannot generate a pit on the exit.
         lavaPosition[1] = rand.nextInt(lavaPosition[1] - 1); 

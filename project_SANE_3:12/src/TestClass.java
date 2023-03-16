@@ -17,7 +17,7 @@ public class TestClass {
             }
 
             Object object2;
-            try { object2 = Items.getItem("ExperienceRing"); }
+            try { object2 = Items.getItem(ExperienceRing.class); }
             catch(Exception e) {
                 object2 = null;
             }
@@ -39,7 +39,7 @@ public class TestClass {
             }
 
             Object object2;
-            try { object2 = Rooms.getRoom("PitLevel"); }
+            try { object2 = Rooms.getRoom(PitLevel.class); }
             catch(Exception e) {
                 object2 = null;
             }
@@ -60,7 +60,7 @@ public class TestClass {
             }
 
             Object object2;
-            try { object2 = Monsters.getMonster("Frog"); }
+            try { object2 = Monsters.getMonster(Frog.class); }
             catch(Exception e) {
                 object2 = null;
             }
@@ -233,10 +233,10 @@ public class TestClass {
         //Map map = new Map();
 
         Object object1;
-        try {
-            object1 = Rooms.getRoom(0);
-        } catch(Exception e) {
-            object1 = null;
-        }
+            try {
+                object1 = Rooms.getRoom(0);
+            } catch(Exception e) {
+                object1 = null;
+            }
     }
 }
