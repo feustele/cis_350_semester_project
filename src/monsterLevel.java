@@ -11,8 +11,8 @@ public class monsterLevel extends Room {
         	super();
    	}
     
-    //monsterLevel.enemySpawnChance = 1;
-    	public void roomEngine(String[] args) {
+        enemySpawnChance = 1;
+    	public void roomEngine() {
     		Scanner scnr = new Scanner(System.in);
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("monsterLevelText.txt"));
