@@ -17,9 +17,10 @@ public class monsterLevel extends Room {
     		Scanner scnr = new Scanner(System.in);
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("monsterLevelText.txt"));
-                	String line; 
-    			while((line = trap.readLine()) != null && scnr.next().equals("/n")) {
+                	String line = trap.readLine(); 
+    			while(line != null && scnr.next().equals("/n")) {
     				System.out.print(line);
+				line = trap.readLine();
     			}
                		//reads out room enter text, with each new line being generated when the player hits enter
                 	trap.close();
@@ -55,8 +56,10 @@ public class monsterLevel extends Room {
                     	} 
     				try {
                         	BufferedReader pitBuffer = new BufferedReader(new FileReader("poisonEnemy.txt"));
-    			        while((line = pitBuffer.readLine()) != null && scnr.next().equals("/n")) {
-    				        System.out.print(line);
+				String line2 =  pitBuffer.readLine());
+    			        while(line2 != null && scnr.next().equals("/n")) {
+    				        System.out.print(line2);
+					line2 =  pitBuffer.readLine());
     			        }
 				//reads out the poisoned ending, with each new line being generated when the player hits enter
                         pitBuffer.close();
