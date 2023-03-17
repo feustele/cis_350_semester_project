@@ -29,7 +29,11 @@ public abstract class Room {
     //A grid containing both items and enemies.
     protected Object[][] room; 
 
-  
+    /**
+     * An abstract method for other room classes to override
+    */
+    public abstract void roomEngine();
+    
     
     /** 
      * Generates the room by setting up the roomSize
