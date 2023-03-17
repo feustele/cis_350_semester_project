@@ -56,10 +56,10 @@ public class monsterLevel extends Room {
                     	} 
     				try {
                         	BufferedReader pitBuffer = new BufferedReader(new FileReader("poisonEnemy.txt"));
-				String line2 =  pitBuffer.readLine());
+				String line2 =  pitBuffer.readLine();
     			        while(line2 != null && scnr.next().equals("/n")) {
     				        System.out.print(line2);
-					line2 =  pitBuffer.readLine());
+					line2 =  pitBuffer.readLine();
     			        }
 				//reads out the poisoned ending, with each new line being generated when the player hits enter
                         pitBuffer.close();
