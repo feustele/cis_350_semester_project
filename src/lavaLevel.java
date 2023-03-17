@@ -48,7 +48,7 @@ public class lavaLevel extends Room {
     	public void roomEngine(){
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
-                	String line = trap.readLine()); 
+                	String line = trap.readLine(); 
     			while(line != null && scnr.next().equals("/n")) {
     				System.out.print(line);
 				line = trap.readLine(); 
