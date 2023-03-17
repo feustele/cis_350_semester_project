@@ -38,8 +38,7 @@ public class PitLevel extends Room {
         return pitPosition;
     }
     
-    public class Main {
-    	public void roomEngine(String[] args) {
+    	public void roomEngine() {
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
                 String line; 
