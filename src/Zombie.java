@@ -3,9 +3,11 @@ public class Zombie extends Monster {
 	 * 
 	 * @param name
 	 * @param combatPower
-	 * @param locX
-	 * @param locY
 	 */
-	public Zombie(String name, int combatPower, int locX, int locY) {
-		super(name,combatPower,locX,locY);
-}}
+	public Zombie() {
+        	super("Zombie",100); 
+    	}
+	public Zombie(String name, int combatPower) {
+		super(name,combatPower);
+	}
+}

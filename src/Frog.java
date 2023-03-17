@@ -6,11 +6,12 @@ public class Frog extends Monster{
 	 * 
 	 * @param name
 	 * @param combatPower
-	 * @param locX
-	 * @param locY
 	 */
-    public Frog(String name, int combatPower, int locX, int locY) {
-        super(name,combatPower,locX,locY);
+	public Frog() {
+        	super("Dart Frog",100); 
+    	}
+    public Frog(String name, int combatPower) {
+        super(name,combatPower);
     }
 
 }

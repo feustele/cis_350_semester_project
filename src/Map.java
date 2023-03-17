@@ -14,28 +14,21 @@ public class Map {
     private ArrayList<Room> map; 
 
     //The location where the player starts at
-    private introRoom start;
+    private introLevel start;
     
     //The current position of the player in regards to the map.
     private Room playerRoom;
 
-    private introRoom createIntroRoom() {
+    private introLevel createintroLevel() {
         int[] position = {0, 0};
-        introRoom intro = new introRoom();
-
-        try {
-            intro.setRoomPosition(position);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        introLevel intro = new introLevel();
+        intro.setRoomPosition(position);
         return intro;
     }
 
     private ArrayList<Room> createMap() {
         ArrayList<Room> tempMap = new ArrayList<Room>(); 
-        tempMap.add(createIntroRoom());
+        tempMap.add(createintroLevel());
         return tempMap; 
     }
 
@@ -50,6 +43,27 @@ public class Map {
         
         return map.get(position);
 
+    }
+
+    private Room generateOutroRoom() {
+        return new outroLevel();
+    }
+
+    private Room tryGeneratingOutro(Player player) {
+        ArrayList<Item> inv = player.openInventory();
+
+        /**
+         * Determines if the player contains a 'quest item'. 
+         * Currently, the only quest item is the MysteriousAmulet
+         */
+        for (int i = 0; i < inv.size(); i++) {
+            Item item = inv.get(i);
+            if(QuestItem.class.isAssignableFrom(item.getClass())) {
+                return generateOutroRoom();
+            }
+        }
+        
+        return null;
     }
 
     private Room generateNewRoom() throws Exception {
@@ -81,7 +95,7 @@ public class Map {
     public Map() {
         
         map = createMap();
-        start = (introRoom) map.get(0);
+        start = (introLevel) map.get(0);
         playerRoom = start;
 
         return;
@@ -102,7 +116,7 @@ public class Map {
      * @return Room
      * @throws Exception
      */
-    public Room moveRooms(char direction) throws Exception {
+    public Room moveRooms(char direction, Player player) throws Exception {
         int[] oldPosition = playerRoom.getRoomPosition();
         /**Creates a hard copy of oldPosition */
         int[] position = {oldPosition[0], oldPosition[1]};
@@ -128,8 +142,12 @@ public class Map {
             throw new Exception("Room has already been visited");
             
         }
-        
-        Room room = generateNewRoom();
+
+        Room room = tryGeneratingOutro(player);
+        if (room == null) {
+            room = generateNewRoom();
+        }
+
         room.setPlayerPosition(direction);
         room.setRoomPosition(position);
         map.add(room);

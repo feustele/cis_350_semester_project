@@ -5,57 +5,31 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class Items{
    //Lists all items within the game
-    private static String[] listOfItems = {
+    private static Class<?>[] listOfItems = new Class[] {
         //Stat boosting items 
-        "ExperienceRing", 
+        ExperienceRing.class, 
 
         //Quest items
-        "MysteriousAmulet",
+        MysteriousAmulet.class
 
         //Misc
-        "CommandList" //has list of commands player can do in game
+        //"CommandList" //has list of commands player can do in game
     };
 
 
     
     /** 
      * Returns a list of strings representing the name of all Item classes
-     * @return String[]
+     * @return Class<?>[]
      */
-    public static String[] getItems() {
+    public static Class<?>[] getItems() {
         return listOfItems;
     }
 
     /**
-     * Returns the name of the Room Class stored at some index.
-     * @param index
-     * @return
-     */
-    public static String getItemName(int index) {
-        for(int i = 0; i < listOfItems.length; i++) 
-            if (i == index)
-                return listOfItems[i];
-        
-
-        //Index is out of bounds in terms of the item list.
-        return null;
-    }
-
-    /**
-     * Returns the class associated with the string.
-     * @param className
-     * @return
-     * @throws ClassNotFoundException
-     */
-    public static Class<?> getClassType(String className) throws ClassNotFoundException {
-        Class<?> classType = Class.forName(className);
-        return classType;
-    }
-
-    /**
      * Returns a newly created instance of the class associated with the string.
-     * @param className
-     * @return
+     * @param classToInitialize
+     * @return Object
      * @throws InstantiationException
      * @throws IllegalAccessException
      * @throws IllegalArgumentException
@@ -64,9 +38,8 @@ public class Items{
      * @throws SecurityException
      * @throws ClassNotFoundException
      */
-    public static Object getItem(String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        Class<?> classType = getClassType(className);
-        return classType.getDeclaredConstructor().newInstance();
+    public static Object getItem(Class<?> classToInitialize) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+        return classToInitialize.getDeclaredConstructor().newInstance();
     }
 
  /**
@@ -82,8 +55,8 @@ public class Items{
      * @throws ClassNotFoundException
      */
     public static Object getItem(int index) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        String name = getItemName(index);
-        return getItem(name);
+        Class<?> classToInitialize = listOfItems[index];
+        return getItem(classToInitialize);
     }
 
     /**

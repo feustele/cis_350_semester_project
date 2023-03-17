@@ -1,9 +1,15 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Random;
+import java.util.Scanner;
 
 public class lavaLevel extends Room {
+	Scanner scnr = new Scanner(System.in);
     private int[] lavaPosition = new int[3]; 
     
-    lavaLevel.enemySpawnChance = 0;
+   // lavaLevel.enemySpawnChance = 0;
     // prevents a monster from being spawned in this room.
 
     private void generateLava() {
@@ -12,11 +18,18 @@ public class lavaLevel extends Room {
         // if (super.getSize()[0] == 0 or super.getSize()[1] == 0) {
         //     exception
         // }
+        /**Note by Steven:
+         * super is a reference to Room, meaning getSize() returns an array of two ints, not three
+         * Returns the array [room.length, room[0].length]
+         */
         lavaPosition = super.getSize();
 
-        lavaPosition[0] = rand.nextInt(pitPosition[0] - 1); //Subtract one so that it so it cannot generate a pit on the exit.
-        lavaPosition[1] = rand.nextInt(pitPosition[1] - 1); 
-        lavaPosition[2] = rand.nextInt(pitPosition[2] - 1); 
+        if(lavaPosition[0] < 2) lavaPosition[0] = 2; //Checks if an index out of bounds error will occur or not.
+        if(lavaPosition[1] < 2) lavaPosition[1] = 2; //Checks if an index out of bounds error will occur or not.
+
+        lavaPosition[0] = rand.nextInt(lavaPosition[0] - 1); //Subtract one so that it so it cannot generate a pit on the exit.
+        lavaPosition[1] = rand.nextInt(lavaPosition[1] - 1); 
+        lavaPosition[2] = rand.nextInt(lavaPosition[2] - 1); 
     
     }
 
@@ -32,28 +45,24 @@ public class lavaLevel extends Room {
         //returns where the lava is positioned.
     }
     public class Main {
-    	public static void roomEngine(String[] args) {
+    	public void roomEngine(String[] args) throws Exception {
     		try {
-    			FileReader reader = new FileReader("lavaroom.txt");
-    			BufferedReader trap = new BufferedReader reader;
+    			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
                 String line; 
-    			while((line = trap.readLine()) != null && scnr.next == /n) {
+    			while((line = trap.readLine()) != null && scnr.next().equals("/n")) {
     				System.out.print(line);
     			}
                 //reads out room enter text
-    			reader.close();
-          trap.close();
+         		trap.close();
     			if (getLavaPosition() == getPlayerPosition()) {
                     //if you fall into the lava, 
     				try {
-    	    			FileReader pitReader = new FileReader("cookedChicken.txt");
-                        BufferedReader pitBuffer = new BufferedReader pitReader;
-    			        while((line = pitBuffer.readLine()) != null && scnr.next == /n) {
+                       		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
+    			        while((line = pitBuffer.readLine()) != null && scnr.next().equals("/n")) {
     				        System.out.print(line);
     			        }
-                        pitReader.close();
                         pitBuffer.close();
-                        new IOException end;
+                        Exception end = null;
 		                throw end;
                     }
                     // reads out fall text
@@ -65,6 +74,7 @@ public class lavaLevel extends Room {
         			e.printStackTrace();
     			}
     		}
+   
 
     		} catch (FileNotFoundException e) {
     			e.printStackTrace();
@@ -73,6 +83,6 @@ public class lavaLevel extends Room {
     			e.printStackTrace();
 
     		}
-
-
+    	}
+    }
 }

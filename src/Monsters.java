@@ -5,28 +5,28 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class Monsters {
     //All of the monsters that can be found within the project
-    private static String[] listOfMonsters = {
-        "Frog",
-        "Snake",
-        "Zombie"
+    private static Class<?>[] listOfMonsters = new Class<?>[]{
+        Frog.class,
+        Snake.class,
+        Zombie.class
     };
 
 
     
     /** 
      *  Returns a list of strings representing the name of all Monster Classes
-     * @return String[]
+     * @return Class<?>[]
      */
-    public static String[] getMonsters() {
+    public static Class<?>[] getMonsters() {
         return listOfMonsters;
     }
     
     /**
      * Returns the name of the Room Class stored at some index.
      * @param index
-     * @return String
+     * @return Class<?>
      */
-    public static String getMonsterName(int index) {
+    public static Class<?> getMonsterClass(int index) {
         for(int i = 0; i < listOfMonsters.length; i++) 
             if (i == index)
                 return listOfMonsters[i];
@@ -35,21 +35,9 @@ public class Monsters {
         return null;
     }
 
-  
-    /**
-     * Returns the class associated with the string.
-     * @param className
-     * @return Class<?>
-     * @throws ClassNotFoundException
-     */
-    public static Class<?> getClassType(String className) throws ClassNotFoundException {
-        Class<?> classType = Class.forName(className);
-        return classType;
-    }
-
     /**
      * Returns a newly created instance of the class associated with the string.  
-     * @param className
+     * @param classToInitialize
      * @return Object
      * @throws InstantiationException
      * @throws IllegalAccessException
@@ -59,9 +47,8 @@ public class Monsters {
      * @throws SecurityException
      * @throws ClassNotFoundException
      */
-    public static Object getMonster(String className) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        Class<?> classType = getClassType(className);
-        return classType.getDeclaredConstructor().newInstance();
+    public static Object getMonster(Class<?>  classToInitialize) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+        return classToInitialize.getDeclaredConstructor().newInstance();
     }
 
     /**
@@ -77,20 +64,19 @@ public class Monsters {
      * @throws ClassNotFoundException
      */
     public static Object getMonster(int index) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
-        String name = getMonsterName(index);
-        return getMonster(name);
+        Class<?> classToInitialize = listOfMonsters[index];
+        return getMonster(classToInitialize);
     }
 
 
     /**
      * Determines whether the passed class is a enemey class or not.
-     * @param potentialEnemey
+     * @param potentialEnemy
      * @return boolean
      */
-    public static boolean isObjectAEnemy(Object potentialEnemey) {
-        String name = (potentialEnemey).getClass().getSimpleName();
+    public static boolean isObjectAEnemy(Object potentialEnemy) {
         for (int i = 0; i < Rooms.length(); i++) {
-            if (name.equals(Rooms.getRoomName(i))) {
+            if (potentialEnemy.getClass().equals(listOfMonsters[i])) {
                 return true;
             }
 
