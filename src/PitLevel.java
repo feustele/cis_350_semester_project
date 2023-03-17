@@ -42,7 +42,7 @@ public class PitLevel extends Room {
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
                 String line = trap.readLine(); 
-    			while((line != null && scnr.next().equals("\n")) {
+    			while(line != null && scnr.next().equals("\n")) {
     				System.out.print(line);
                     line = trap.readLine(); 
     			}
@@ -55,7 +55,7 @@ public class PitLevel extends Room {
     				try {
     			        BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
                         String line1 = pit.readLine(); 
-    			        while((line1 != null && scnr.next().equals("\n")) {         
+    			        while(line1 != null && scnr.next().equals("\n")) {         
     				        System.out.print(line1);
                             line1 = pit.readLine(); 
     			        }
