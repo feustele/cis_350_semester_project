@@ -9,8 +9,7 @@ public class outroLevel extends Room {
         	super();
     	}
 	
-    public class Main {
-    	public static void roomEngine(String[] args) {
+    	public void roomEngine() {
         Scanner scnr = new Scanner(System.in);
     		try {
     			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
