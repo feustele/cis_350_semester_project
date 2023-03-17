@@ -202,20 +202,20 @@ public abstract class Room {
 
         /**Do not be surprised if I have mixed up my columns of room.*/
         switch(direction) {
-        case 'w':
+        case 'n':
             playerPosition[0] = 0;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length + 1);
+            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
             break;
-        case 'd':
-            playerPosition[0] = ran.nextInt(room.length + 1);
-            playerPosition[1] = room[0].length;
+        case 'e':
+            playerPosition[0] = ran.nextInt(room.length);
+            playerPosition[1] = room[0].length - 1;
             break;
         case 's':
-            playerPosition[0] = room[0].length;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length + 1);
+            playerPosition[0] = room[0].length - 1;
+            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
             break;
-        case 'a':
-            playerPosition[0] = ran.nextInt(room.length + 1);
+        case 'w':
+            playerPosition[0] = ran.nextInt(room.length);
             playerPosition[1] = 0;
             break;
         }
