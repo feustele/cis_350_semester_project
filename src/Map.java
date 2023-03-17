@@ -45,11 +45,11 @@ public class Map {
 
     }
 
-    private Room generateOutroRoom() {
+    private Room createOutroRoom() {
         return new outroLevel();
     }
 
-    private Room tryGeneratingOutro(Player player) {
+    private Room tryCreatingOutro(Player player) {
         ArrayList<Item> inv = player.openInventory();
 
         /**
@@ -59,7 +59,7 @@ public class Map {
         for (int i = 0; i < inv.size(); i++) {
             Item item = inv.get(i);
             if(QuestItem.class.isAssignableFrom(item.getClass())) {
-                return generateOutroRoom();
+                return createOutroRoom();
             }
         }
         
@@ -109,6 +109,23 @@ public class Map {
         return map;
     }
 
+
+     /**
+     * Moves the player to the exit.
+     * @return Room
+     */
+    public Room moveRooms() {
+        boolean debounce = false;
+
+        if (debounce) {
+            return null;
+        }
+
+        Room outro = createOutroRoom();
+        map.add(outro);
+        return outro;
+    }
+
     /**
      * Moves the player to the next room. Will generate the next room if the room does not already exist
      * @param currentRoom
@@ -117,6 +134,7 @@ public class Map {
      * @throws Exception
      */
     public Room moveRooms(char direction, Player player) throws Exception {
+        
         int[] oldPosition = playerRoom.getRoomPosition();
         /**Creates a hard copy of oldPosition */
         int[] position = {oldPosition[0], oldPosition[1]};
@@ -143,7 +161,7 @@ public class Map {
             
         }
 
-        Room room = tryGeneratingOutro(player);
+        Room room = tryCreatingOutro(player);
         if (room == null) {
             room = generateNewRoom();
         }
