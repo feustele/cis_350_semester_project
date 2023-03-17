@@ -7,8 +7,8 @@ import java.lang.reflect.Constructor;
 public class Rooms {
    //Stores all of the rooms that will be used by the game.
     private static Class<?>[] listOfRooms = new Class[] {
-        PitLevel.class,
-        lavaLevel.class
+        PitLevel.class//,
+        //lavaLevel.class
     };
 
 

@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.FileReader;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.io.BufferedReader;
 
 /**
  * The parent class to all rooms implemented. Holds the framework that will be used by all rooms.
  */
 public abstract class Room {
+    //TODO: The pitLevel will cause issues with the game because the size of the room.
+    //TODO: Create an exit to the room.
     //Limits the max size of the rooms to spawn
     protected int roomLimit = 5; 
     //Holds the player's position
@@ -32,7 +36,7 @@ public abstract class Room {
     /**
      * An abstract method for other room classes to override
     */
-    public abstract void roomEngine();
+    public abstract char roomEngine();
     
     
     /** 
@@ -148,7 +152,7 @@ public abstract class Room {
         generateItems();
         
         //Generate enemies
-        generateEnemies();
+        //generateEnemies();
         
     }
 
@@ -165,7 +169,7 @@ public abstract class Room {
         generateItems();
         
         //Generate enemies
-        generateEnemies();
+        //generateEnemies();
         
     }
 
@@ -181,10 +185,15 @@ public abstract class Room {
         generateItems();
         
         //Generate enemies
-        generateEnemies();
+        //generateEnemies();
         
     }
 
+    //TODO: I need to fill out the below method to move the player around the class.
+
+    public void movePlayer(char d) {
+
+    }
     /**
      * Sets the player's position. Should only be used when they enter the room. 
      * @param pos
@@ -285,6 +294,17 @@ public abstract class Room {
         }
         return EnemyPositions;
     }
+
+
+    /**
+     * 
+     * @return
+     */
+
+    //  public Monster[] getMonsters() {
+
+    //     Monster[] monsters = new Monster[getEnemyPosition().size()]
+    //  } 
     /**
      * Returns the player's current position
      * @return
@@ -338,16 +358,20 @@ public abstract class Room {
         Random ran = new Random();
         int ranInt = ran.nextInt(Items.length());
 
+        Object itemObj;
         try {
-
-            Object itemObj = Items.getItem(ranInt);
+            itemObj = Items.getItem(ranInt);
             Item item = (Item) itemObj;
 
             spawnItem(item, pos);
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
        
-        }catch (Exception e) {
-            System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
-        }    
+            //System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
+        
     }
 
     private void spawnItemRandomly(Item item) {
@@ -386,7 +410,7 @@ public abstract class Room {
             spawnMonster(item, pos);
        
         }catch (Exception e) {
-            System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
+            System.out.println("Unable to create a monster... An monster in 'Monsters' list of monsters likely does not correspond to an Monster\n");
         }
        
         
