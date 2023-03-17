@@ -3,24 +3,29 @@ import java.util.ArrayList;
 public class Player {
 	//String Class;
 	String Name;
-	ArrayList <Items> Inventory = new ArrayList <Items>();
+	ArrayList <Item> Inventory = new ArrayList <Item>();
 
-	public Player (String Name, ArrayList <Items> Inventory) {
+	public Player (String Name, ArrayList <Item> Inventory) {
 		//this.Class = Class;
 		this.Name = Name;
 		this.Inventory = Inventory;
 	}
 	
+	public Player (String Name) {
+		//this.Class = Class;
+		this.Name = Name;
+		
+	}
 	/** 
 	 * @return ArrayList<Items>
 	 */
 	//Items getWeapon() {
 		//return Weapon;
 	//}
-	ArrayList<Items> openInventory() {
+	ArrayList<Item> openInventory() {
 		return Inventory;
 	}
-	String addItem(Items selectedItem) {
+	String addItem(Item selectedItem) {
 		Inventory.add(selectedItem);
 		String finalLine = "You picked up the " + selectedItem + "!";
 		if (Inventory.size() > 10) {
@@ -28,7 +33,7 @@ public class Player {
 		}
 		return finalLine;
 	}
-	String dropItem(Items selectedItem) {
+	String dropItem(Item selectedItem) {
 		Inventory.remove(selectedItem);
 		String finalLine = "You dropped the " + selectedItem + "!";
 		return finalLine;

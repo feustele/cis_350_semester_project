@@ -2,6 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 
 
 public class TestClass {
@@ -77,15 +78,19 @@ public class TestClass {
         introLevel tempVar = new introLevel();
         assertEquals(1, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
+        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
+        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
 
     @Test
     public void mapMoveARoomSouth() throws Exception  {
         Map map = new Map();
+        Player player = new Player("Test");
+
         introLevel tempVar = new introLevel();
         int[] setPosition = {0, 1};
 
-        map.moveRooms('s');
+        map.moveRooms('s', player);
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
@@ -94,15 +99,18 @@ public class TestClass {
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
-    
+        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
+        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
     @Test
     public void mapMoveARoomNorth() throws Exception {
         Map map = new Map();
+        Player player = new Player("Test");
+
         introLevel tempVar = new introLevel();
         int[] setPosition = {0, -1};
 
-        map.moveRooms('w');
+        map.moveRooms('n', player);
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
@@ -111,15 +119,18 @@ public class TestClass {
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
-    
+        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
+        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
     @Test
     public void mapMoveARoomEast() throws Exception {
         Map map = new Map();
+        Player player = new Player("Test");
+
         introLevel tempVar = new introLevel();
         int[] setPosition = {1, 0};
 
-        map.moveRooms('d');
+        map.moveRooms('e', player);
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
@@ -128,15 +139,17 @@ public class TestClass {
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
-    
+        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
+        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
     @Test
     public void mapMoveARoomWest() throws Exception {
         Map map = new Map();
+        Player player = new Player("Test");
         introLevel tempVar = new introLevel();
         int[] setPosition = {-1, 0};
 
-        map.moveRooms('a');
+        map.moveRooms('w', player);
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
@@ -145,27 +158,47 @@ public class TestClass {
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
+        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
+        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
+    }
+
+    @Test
+    public void mapMoveARoomGenerateEnding() throws Exception {
+        Map map = new Map();
+        ArrayList<Item> inventory = new ArrayList<Item>();
+        inventory.add(new MysteriousAmulet());
+        Player player = new Player("Test", inventory);
+        
+        map.moveRooms('w', player);
+
+        assertEquals(outroLevel.class, map.getMap().get(1).getClass());
+
     }
 
     @Test(expected = Exception.class)
     public void mapMoveToPrevVisitedSquareSimple() throws Exception {
         Map map = new Map();
+        Player player = new Player("Test");
 
-        map.moveRooms('a');
 
-        map.moveRooms('d');
+        map.moveRooms('w', player);
+
+        map.moveRooms('e', player);
     }
 
     @Test(expected = Exception.class)
     public void mapMoveToPrevVisitedSquareComplex() throws Exception {
         Map map = new Map();
+        Player player = new Player("Test");
 
-        map.moveRooms('a');
+        map.moveRooms('w', player);
 
-        map.moveRooms('s');
-        map.moveRooms('d');
-        map.moveRooms('w');
+        map.moveRooms('s', player);
+        map.moveRooms('e', player);
+        map.moveRooms('n', player);
     }
+
+    
 
     @Test
     public void roomMovePlayerNorth() {
@@ -184,7 +217,7 @@ public class TestClass {
     @Test
     public void roomMovePlayerEast() {
         PitLevel room = new PitLevel();
-        room.setPlayerPosition('d');
+        room.setPlayerPosition('e');
         assertEquals(room.getSize()[1] - 1, room.getPlayerPosition()[1]);
         
     }  
@@ -229,14 +262,15 @@ public class TestClass {
     
 
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         //Map map = new Map();
 
-        Object object1;
-            try {
-                object1 = Rooms.getRoom(0);
-            } catch(Exception e) {
-                object1 = null;
-            }
+        Map map = new Map();
+        Player player = new Player("Test");
+
+        introLevel tempVar = new introLevel();
+        int[] setPosition = {0, 1};
+
+        map.moveRooms('s', player);
     }
 }

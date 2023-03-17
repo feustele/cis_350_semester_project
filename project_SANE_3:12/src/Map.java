@@ -45,6 +45,27 @@ public class Map {
 
     }
 
+    private Room generateOutroRoom() {
+        return new outroLevel();
+    }
+
+    private Room tryGeneratingOutro(Player player) {
+        ArrayList<Item> inv = player.openInventory();
+
+        /**
+         * Determines if the player contains a 'quest item'. 
+         * Currently, the only quest item is the MysteriousAmulet
+         */
+        for (int i = 0; i < inv.size(); i++) {
+            Item item = inv.get(i);
+            if(QuestItem.class.isAssignableFrom(item.getClass())) {
+                return generateOutroRoom();
+            }
+        }
+        
+        return null;
+    }
+
     private Room generateNewRoom() throws Exception {
         Random ran = new Random();
         int roomToGenerate = ran.nextInt(Rooms.length());
@@ -95,22 +116,22 @@ public class Map {
      * @return Room
      * @throws Exception
      */
-    public Room moveRooms(char direction) throws Exception {
+    public Room moveRooms(char direction, Player player) throws Exception {
         int[] oldPosition = playerRoom.getRoomPosition();
         /**Creates a hard copy of oldPosition */
         int[] position = {oldPosition[0], oldPosition[1]};
 
         switch (direction) {
-         case 'w':
+         case 'n':
             position[1] -= 1;
             break;
-         case 'd':
+         case 'e':
             position[0] += 1;
             break;
          case 's':
             position[1] += 1;
             break;
-         case 'a':
+         case 'w':
             position[0] -= 1;
             break;
         default:
@@ -121,8 +142,12 @@ public class Map {
             throw new Exception("Room has already been visited");
             
         }
-        
-        Room room = generateNewRoom();
+
+        Room room = tryGeneratingOutro(player);
+        if (room == null) {
+            room = generateNewRoom();
+        }
+
         room.setPlayerPosition(direction);
         room.setRoomPosition(position);
         map.add(room);
