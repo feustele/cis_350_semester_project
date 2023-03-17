@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class SaneEngine {
 	Scanner scnr;
 	String name;
-	ArrayList<Items> inventory;
+	ArrayList<Item> inventory;
 	Player P1;
 	Map gameMap;
 	
@@ -12,7 +12,7 @@ public class SaneEngine {
 		scnr = new Scanner(System.in);
 		System.out.print("Before you embark on your quest, Hero - What is your name? ");
 		name = scnr.nextLine();
-		inventory = new ArrayList<Items>();
+		inventory = new ArrayList<Item>();
 		P1 = new Player(name, inventory);
 		gameMap = new Map();
 	}
@@ -22,10 +22,8 @@ public class SaneEngine {
 		try {
 			while(true) {
 				game.gameMap.getPlayerRoom().roomEngine();
-				game.gameMap.moveRooms('w');
+				game.gameMap.moveRooms();
 			}
-		} catch (IOException e) {
-			// Exceptions thrown for the endings
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
