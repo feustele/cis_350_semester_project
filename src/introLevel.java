@@ -19,7 +19,7 @@ public class introLevel extends Room {
     		try {
     			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
                 	String line = intro.readLine(); ; 
-    			while((line != null && scnr.next().equals("\n")) {	
+    			while(line != null && scnr.next().equals("\n")) {	
     				System.out.print(line);
 				line = intro.readLine(); 
     			}
@@ -32,7 +32,7 @@ public class introLevel extends Room {
     			try {
     	    			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
 				String line2 = chickenBuffer.readLine(); 
-    			        while((line2 != null && scnr.next().equals("\n")) {
+    			        while(line2 != null && scnr.next().equals("\n")) {
     				        System.out.print(line2);
 					line2 = chickenBuffer.readLine(); 
     			        }
