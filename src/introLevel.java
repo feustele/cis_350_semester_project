@@ -18,20 +18,23 @@ public class introLevel extends Room {
         Scanner scnr = new Scanner(System.in);
     		try {
     			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
-                	String line; 
-    			while((line = intro.readLine()) != null && scnr.next().equals("\n")) {
+                	String line = intro.readLine(); ; 
+    			while((line != null && scnr.next().equals("\n")) {	
     				System.out.print(line);
+				line = intro.readLine(); 
     			}
                 	//reads out room enter text
           		intro.close();
     			System.out.println("Do you enter the cave?");
-		      String word1 = scnr.next();
+		      	String word1 = scnr.next();
           if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
             //if the player chooses not to enter the cave, the game ends.
     			try {
     	    			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
-    			        while((line = chickenBuffer.readLine()) != null && scnr.next().equals("\n")) {
-    				        System.out.print(line);
+				String line2 = chickenBuffer.readLine(); 
+    			        while((line2 != null && scnr.next().equals("\n")) {
+    				        System.out.print(line2);
+					line2 = chickenBuffer.readLine(); 
     			        }
                    		chickenBuffer.close();
 				IOException end = new IOException();
