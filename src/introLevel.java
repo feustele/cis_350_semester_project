@@ -13,7 +13,8 @@ public class introLevel extends Room {
     	}
 	
 	//makes sure you don't get beaned with a monster in the first room
-    	public static void roomEngine(String[] args) {
+	@Override
+    	public void roomEngine() {
         Scanner scnr = new Scanner(System.in);
     		try {
     			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
