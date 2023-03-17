@@ -47,7 +47,7 @@ public class outroLevel extends Room {
          	try {
     			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
 			String line3 = goodBuffer.readLine());
-    			while(line != null && scnr.next().equals("/n")) {
+    			while(line3 != null && scnr.next().equals("/n")) {
     			System.out.print(line);
 			line3 = goodBuffer.readLine();
     		}
@@ -64,6 +64,18 @@ public class outroLevel extends Room {
         			  e.printStackTrace();
     			   }
         }
+	try {
+    			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
+			String line4 = creditBuffer.readLine());
+    			while(line4 != null && scnr.next().equals("/n")) {
+    				System.out.print(line);
+				line4 = goodBuffer.readLine();
+			}
+
+                   creditBuffer.close();
+		 new IOException end;
+		throw end;
+             }
 
     		} catch (FileNotFoundException e) {
     			e.printStackTrace();
