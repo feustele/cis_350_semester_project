@@ -48,18 +48,22 @@ public class lavaLevel extends Room {
     	public void roomEngine(){
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
-                String line; 
-    			while((line = trap.readLine()) != null && scnr.next().equals("/n")) {
+                	String line = trap.readLine()); 
+    			while((line != null && scnr.next().equals("/n")) {
     				System.out.print(line);
+				line = trap.readLine()); 
     			}
+			System.out.print("Tread lightly, dear hero.");
                 //reads out room enter text
          		trap.close();
     			if (getLavaPosition() == getPlayerPosition()) {
                     //if you fall into the lava, 
     				try {
                        		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
-    			        while((line = pitBuffer.readLine()) != null && scnr.next().equals("/n")) {
+				String line2 = pitBuffer.readLine());
+    			        while((line2 != null && scnr.next().equals("/n")) {
     				        System.out.print(line);
+					line2 = pitBuffer.readLine());
     			        }
                         pitBuffer.close();
                         Exception end = null;
