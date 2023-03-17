@@ -44,8 +44,8 @@ public class lavaLevel extends Room {
         return lavaPosition;
         //returns where the lava is positioned.
     }
-    public class Main {
-    	public void roomEngine(String[] args) throws Exception {
+
+    	public void roomEngine(){
     		try {
     			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
                 String line; 
@@ -84,5 +84,4 @@ public class lavaLevel extends Room {
 
     		}
     	}
-    }
 }
