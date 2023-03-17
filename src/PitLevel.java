@@ -58,32 +58,42 @@ public class PitLevel extends Room {
             System.out.print("Where do you go?");   
             
             String word1 = scnr.next();
+		while (getPlayerPosition != null && (word1.equalsIgnoreCase('w') || word1.equalsIgnoreCase('a') || word1.equalsIgnoreCase('s') || word1.equalsIgnoreCase('d'))){
+			super.movePlayer(word1);
+			if (getPitPosition() == getPlayerPosition()) {
+                		//if you fall into the pit, 
+               			try {
+                    			BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
+                   			 String line2 = pit.readLine(); 
+                    			while(line2 != null && scnr.next().equals("\n")) {         
+                        			System.out.print(line2);
+                        			line2 = pit.readLine(); 
+                    			}
+                    			pit.close();
+                		}
+                		// reads out fall text
+                		catch (FileNotFoundException e) {
+                   			e.printStackTrace();
+
+                		}
+                		catch (IOException e) {
+                   			e.printStackTrace();
+                    			System.out.print("Sorry! You can't do that here.");
+                		}
+           		 }
+        	}
+			System.out.print("Where next?"); 
+			word1 = scnr.next();
+	}
+	    if (getPlayerPosition != null){
+		    System.out.print("Sorry! You can't do that here.");
+	    }
+		    
             //TODO: Create a loop which will constantly move the player
             //The loop can use the super.movePlayer(direction) method. Once the player moves off 
             //of the room, I will then create a new Room via the map object. 
             //TODO: Move below into a function please
-            if (getPitPosition() == getPlayerPosition()) {
-                //if you fall into the pit, 
-                try {
-                    BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
-                    String line1 = pit.readLine(); 
-                    while(line1 != null && scnr.next().equals("\n")) {         
-                        System.out.print(line1);
-                        line1 = pit.readLine(); 
-                    }
-                    pit.close();
-                }
-                // reads out fall text
-                catch (FileNotFoundException e) {
-                    e.printStackTrace();
-
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.print("Sorry! You can't do that here.");
-                }
-            }
-        }
+            
 
         catch (FileNotFoundException e) {
             e.printStackTrace();
