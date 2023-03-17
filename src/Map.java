@@ -123,6 +123,7 @@ public class Map {
 
         Room outro = createOutroRoom();
         map.add(outro);
+        playerRoom = outro;
         return outro;
     }
 
