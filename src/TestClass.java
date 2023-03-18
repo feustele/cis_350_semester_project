@@ -78,8 +78,7 @@ public class TestClass {
         introLevel tempVar = new introLevel();
         assertEquals(1, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
-        assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
-        assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
+        
     }
 
     @Test
@@ -201,28 +200,28 @@ public class TestClass {
     
 
     @Test
-    public void roomMovePlayerNorth() {
+    public void roomSetPlayerNorth() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('w');
         assertEquals(0, room.getPlayerPosition()[0]);
         
     }  
     @Test
-    public void roomMovePlayerSouth() {
+    public void roomSetPlayerSouth() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('s');
         assertEquals(room.getSize()[0] - 1, room.getPlayerPosition()[0]);
         
     }  
     @Test
-    public void roomMovePlayerEast() {
+    public void roomSetPlayerEast() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('e');
         assertEquals(room.getSize()[1] - 1, room.getPlayerPosition()[1]);
         
     }  
     @Test
-    public void roomMovePlayerWest() {
+    public void roomSetPlayerWest() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('a');
         assertEquals(0, room.getPlayerPosition()[1]);
@@ -236,7 +235,6 @@ public class TestClass {
         try {
             room.setRoomPosition(pos);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         assertEquals(pos[0], room.getRoomPosition()[0]);
@@ -259,18 +257,172 @@ public class TestClass {
         assertEquals(pos[1], room.getRoomPosition()[0]);
     }
 
-    
+    @Test
+    public void roomMovePlayerNorth() {
+        int[] pos = {1,1};
+        int[] finalPos = {1, 0};
+        Room room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('n');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+        
 
+        pos[0] = 0;
+        pos[1] = room.getSize()[1] - 1;
+
+        finalPos[0] = 0;
+        finalPos[1] = room.getSize()[1] - 2;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('n');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+
+
+        pos[0] = room.getSize()[0] - 1;
+        pos[1] = room.getSize()[1] - 1;
+
+        finalPos[0] = room.getSize()[0] - 1;
+        finalPos[1] = room.getSize()[1] - 2;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('n');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+    }
+
+    @Test
+    public void roomMovePlayerSouth() {
+        int[] pos = {1,1};
+        int[] finalPos = {1, 2};
+        Room room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('s');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+        
+
+        pos[0] = 0;
+        pos[1] = 0;
+
+        finalPos[0] = 0;
+        finalPos[1] = 1;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('s');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+
+
+        pos[0] = room.getSize()[0] - 1 ;
+        pos[1] = room.getSize()[1] - 2;
+
+        finalPos[0] = room.getSize()[0] - 1;
+        finalPos[1] = room.getSize()[1] - 1;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('s');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+    }
+    
+    @Test
+    public void roomMovePlayerEast() {
+        int[] pos = {1,1};
+        int[] finalPos = {2, 1};
+        Room room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('e');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+        
+
+        pos[0] = 0;
+        pos[1] = 0;
+
+        finalPos[0] = 1;
+        finalPos[1] = 0;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('e');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+
+
+        pos[0] = room.getSize()[0] - 2;
+        pos[1] = room.getSize()[1] - 1;
+
+        finalPos[0] = room.getSize()[0] - 1;
+        finalPos[1] = room.getSize()[1] - 1;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('e');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+    }
+
+    @Test
+    public void roomMovePlayerWest() {
+        int[] pos = {1,1};
+        int[] finalPos = {0, 1};
+        Room room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('w');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+        
+
+        pos[0] = 1;
+        pos[1] = 0;
+
+        finalPos[0] = 0;
+        finalPos[1] = 0;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('w');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+
+
+        pos[0] = room.getSize()[0] - 1;
+        pos[1] = room.getSize()[1] - 1;
+
+        finalPos[0] = room.getSize()[0] - 2;
+        finalPos[1] = room.getSize()[1] - 1;
+        room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('w');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+    }
+    
 
     public static void main(String args[]) throws Exception {
         //Map map = new Map();
+        Room room = new PitLevel();
+        int[] pos = {room.getSize()[0], room.getSize()[1] - 2};
+        
 
-        Map map = new Map();
-        Player player = new Player("Test");
+        int[] finalPos = {room.getSize()[0], room.getSize()[1] - 2};
 
-        introLevel tempVar = new introLevel();
-        int[] setPosition = {0, 1};
-
-        map.moveRooms('s', player);
+        room.setPlayerPosition(pos);
+        room.movePlayer('s');
+        
+        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
+        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
+        
     }
 }

@@ -29,7 +29,6 @@ public class SaneEngine {
 				//game.gameMap.moveRooms();
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

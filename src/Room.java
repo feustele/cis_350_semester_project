@@ -3,6 +3,7 @@ import java.util.Random;
 import java.io.FileReader;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
+import java.security.InvalidParameterException;
 import java.io.BufferedReader;
 
 /**
@@ -28,8 +29,6 @@ public abstract class Room {
     //Represents a percentage that an enemy will spawn.
     protected double enemySpawnChance = .5; 
 
-        // private boolean hasMonster - could work the same as item spawns once we have monsters. 
-
     //A grid containing both items and enemies.
     protected Object[][] room; 
 
@@ -38,13 +37,16 @@ public abstract class Room {
     */
     public abstract char roomEngine();
     
-    
+
     /** 
      * Generates the room by setting up the roomSize
      * @param roomSize
      */
     protected void generateRoom(int[] roomSize) {
-        
+        if(roomSize.length != 2) {
+            throw new InvalidParameterException();
+        }
+
         if(roomSize[0] > roomLimit) {
             roomSize[0] = roomLimit;
         }
@@ -60,6 +62,12 @@ public abstract class Room {
         }
 
         room = new Object[roomSize[0]][roomSize[1]];
+
+        //Generate items in the room
+        generateItems();
+        
+        //Generate enemies
+        //generateEnemies();
         return;
 
     }
@@ -82,6 +90,12 @@ public abstract class Room {
         roomSize[1] = ranInt;
 
         room = new Object[roomSize[0]][roomSize[1]];
+
+        //Generate items in the room
+        generateItems();
+        
+        //Generate enemies
+        //generateEnemies();
     }
 
     /**
@@ -145,14 +159,10 @@ public abstract class Room {
         if(enemySpawnChance >= 0)
             this.enemySpawnChance = enemySpawnChance;
 
-        //Generates the number of sections within the room. 
+        //Generates the number of sections, enemies, and items within the room.
         generateRoom(roomSize);
 
-        //Generate items in the room
-        generateItems();
         
-        //Generate enemies
-        //generateEnemies();
         
     }
 
@@ -189,11 +199,46 @@ public abstract class Room {
         
     }
 
-    //TODO: I need to fill out the below method to move the player around the class.
-
     public void movePlayer(char d) {
+        switch(d) {
+        case 'n':
+            if(playerPosition[0] < 0 || playerPosition[0] > getSize()[0] - 1) 
+                return;
+            if(playerPosition[1] <= 0 || playerPosition[1] > getSize()[1] - 1)
+                return;
+            
+            playerPosition[1] -= 1;
+            break;
+        case 'e':
+            if(playerPosition[0] < 0 || playerPosition[0] >= getSize()[0] - 1) 
+                return;
+            if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
+                return;
 
+            playerPosition[0] += 1;
+            break;
+        case 's':
+            if(playerPosition[0] < 0 || playerPosition[0] > getSize()[0] - 1) 
+                return;
+            if(playerPosition[1] < 0 || playerPosition[1] >= getSize()[1] - 1)
+                return;
+
+            playerPosition[1] += 1;
+            break;
+        case 'w':
+            if(playerPosition[0] <= 0 || playerPosition[0] > getSize()[0] - 1) 
+                return;
+            if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
+                return;
+            playerPosition[0] -= 1;
+            break;
+
+        default:
+            throw new InvalidParameterException();
+        }
+        
     }
+
     /**
      * Sets the player's position. Should only be used when they enter the room. 
      * @param pos
@@ -366,7 +411,6 @@ public abstract class Room {
             spawnItem(item, pos);
         } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
                 | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
        
