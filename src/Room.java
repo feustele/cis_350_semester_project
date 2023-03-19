@@ -10,7 +10,6 @@ import java.io.BufferedReader;
  * The parent class to all rooms implemented. Holds the framework that will be used by all rooms.
  */
 public abstract class Room {
-    //TODO: The pitLevel will cause issues with the game because the size of the room.
     //TODO: Create an exit to the room.
     //Limits the max size of the rooms to spawn
     protected int roomLimit = 5; 
@@ -202,15 +201,20 @@ public abstract class Room {
     public void movePlayer(char d) {
         switch(d) {
         case 'n':
-            if(playerPosition[0] < 0 || playerPosition[0] > getSize()[0] - 1) 
-                return;
-            if(playerPosition[1] <= 0 || playerPosition[1] > getSize()[1] - 1)
+            if(playerPosition[0] < 0) 
+                return;    
+                //throw new IndexOutOfBoundsException();
+            if(playerPosition[1] <= 0)
+                throw new IndexOutOfBoundsException();
+            if(playerPosition[0] > getSize()[0] - 1 || playerPosition[1] > getSize()[1] - 1)
                 return;
             
             playerPosition[1] -= 1;
             break;
         case 'e':
-            if(playerPosition[0] < 0 || playerPosition[0] >= getSize()[0] - 1) 
+            if(playerPosition[0] >= getSize()[0] - 1) 
+                throw new IndexOutOfBoundsException();
+            if(playerPosition[0] < 0 )
                 return;
             if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
                 return;
@@ -220,16 +224,21 @@ public abstract class Room {
         case 's':
             if(playerPosition[0] < 0 || playerPosition[0] > getSize()[0] - 1) 
                 return;
-            if(playerPosition[1] < 0 || playerPosition[1] >= getSize()[1] - 1)
+            if(playerPosition[1] < 0)
                 return;
+            if(playerPosition[1] >= getSize()[1] - 1)
+                throw new IndexOutOfBoundsException();
 
             playerPosition[1] += 1;
             break;
         case 'w':
-            if(playerPosition[0] <= 0 || playerPosition[0] > getSize()[0] - 1) 
+            if(playerPosition[0] <= 0) 
+                throw new IndexOutOfBoundsException();
+            if(playerPosition[0] > getSize()[0] - 1) 
                 return;
             if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
                 return;
+
             playerPosition[0] -= 1;
             break;
 
@@ -365,7 +374,6 @@ public abstract class Room {
     protected int[] getSize() {
         return new int[] {room.length, room[0].length};
     }
-
 
     private boolean isMonster(int[] pos) {
 

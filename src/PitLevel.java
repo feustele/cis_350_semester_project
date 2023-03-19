@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import javax.print.attribute.PrintServiceAttributeSet;
+
 public class PitLevel extends Room {
     private int[] pitPosition = new int[2];
     Scanner scnr = new Scanner(System.in);
@@ -48,6 +50,48 @@ public class PitLevel extends Room {
         return pitPosition;
     }
 
+    private void generatePitText() {
+        try {
+
+            BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
+            String line2 = pit.readLine(); 
+            while(line2 != null && scnr.next().equals("\n")) {         
+                System.out.println(line2);
+                line2 = pit.readLine(); 
+            }
+            pit.close();
+        
+        }
+        // reads out fall text
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Sorry! You can't do that here.");
+        }
+    }
+
+    private void move(char dir) {            
+        while (getPlayerPosition() != null && 
+                (  dir == 'w'
+                || dir == 'a' 
+                || dir == 's'
+                || dir == 'd')) {
+            
+            
+            movePlayer(dir);
+           
+            
+            if (getPitPosition() == getPlayerPosition()) {
+                //if you fall into the pit, 
+               generatePitText();
+            }
+        }
+        
+    }
+
     public char roomEngine() {
         try {
             
@@ -61,43 +105,25 @@ public class PitLevel extends Room {
             }
             //reads out room enter text
             trap.close();
-            System.out.println("Where do you go?");   
-            
-            String word1 = scnr.next();
-            while (getPlayerPosition() != null && 
-                    (word1.equalsIgnoreCase("w") 
-                    || word1.equalsIgnoreCase("a") 
-                    || word1.equalsIgnoreCase("s") 
-                    || word1.equalsIgnoreCase("d"))) {
-                
-                super.movePlayer(word1.charAt(0));
-                
-                if (getPitPosition() == getPlayerPosition()) {
-                    //if you fall into the pit, 
+
+            //TODO: We need to loop through until a index out of bounds exception occurs from moving rooms
+            while(true) { //I want to adjust this so it's not a while true loop... It'll function the same, I just want a fail safe.
+                System.out.println("What would you like to do?");
+                String action = scnr.next();
+                //Manipulate string here...
+                if() { //If the first word within the action string is equal to move, then move
+                    char direction = ;
                     try {
+                        move(direction); //Perform string manipulation to pass the lower case character for direction to move
 
-                        BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
-                        String line2 = pit.readLine(); 
-                        while(line2 != null && scnr.next().equals("\n")) {         
-                            System.out.println(line2);
-                            line2 = pit.readLine(); 
-                        }
-                        pit.close();
-                    
+                    } catch(IndexOutOfBoundsException e) {
+                        break;
                     }
-                    // reads out fall text
-                    catch (FileNotFoundException e) {
-                        e.printStackTrace();
-
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                        System.out.println("Sorry! You can't do that here.");
-                    }
-           		}
-        	}
-			System.out.println("Where next?"); 
-			word1 = scnr.next();
+                }
+                
+            }
+            //TODO: The code below all is a special condition when the user wants to move.
+            
 	    } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

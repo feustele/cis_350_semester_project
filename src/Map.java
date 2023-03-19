@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -154,12 +155,11 @@ public class Map {
             position[0] -= 1;
             break;
         default:
-            throw new Exception("Invalid parameters passed");
-        }
+            throw new InvalidParameterException();
+    }
         
         if(hasVisitedPosition(position)) {
             throw new Exception("Room has already been visited");
-            
         }
 
         Room room = tryCreatingOutro(player);
@@ -172,9 +172,10 @@ public class Map {
         map.add(room);
         playerRoom = room;
         
-        
         return getPlayerRoom();
     }
+
+    
 
     /**
      * Returns the current player's room.
