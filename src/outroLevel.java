@@ -15,11 +15,11 @@ public class outroLevel extends Room {
     		try {
     			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
                 	String line = outro.readLine(); 
-    			while(line != null && scnr.next().equals("/n")) {
-    				System.out.print(line);
-				line = outro.readLine();
-    			}
-                //reads out room enter text
+    			System.out.println(line);
+			while (line != null && scnr.next().equals(" ")) {
+                		line = outro.readLine();
+				System.out.println(line);
+            		}
           		outro.close();
     			System.out.println("Do retrieve the Mysterious Amulet?");
 		      String word1 = scnr.next();
@@ -28,9 +28,11 @@ public class outroLevel extends Room {
     				try {
 				String line2 = badBuffer.readLine();
     	    			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
-    			        while(line2 != null && scnr.next().equals("/n")) {
-    				        System.out.print(line2);
-					line2 = badBuffer.readLine();
+    			        System.out.println(line2);
+				while (line2 != null && scnr.next().equals(" ")) {
+                			line2 = badBuffer.readLine();
+					System.out.println(line2);
+            			}
     			        }
                    badBuffer.close();
 		   new IOException end;
@@ -47,9 +49,11 @@ public class outroLevel extends Room {
          	try {
     			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
 			String line3 = goodBuffer.readLine());
-    			while(line3 != null && scnr.next().equals("/n")) {
-    			System.out.print(line);
-			line3 = goodBuffer.readLine();
+    			System.out.println(line3);
+			while (line3 != null && scnr.nextLine.equals(" ")) {
+                		line3 = goodBuffer.readLine();
+				System.out.println(line3);
+            		}
     		}
 
                    goodBuffer.close();
@@ -67,10 +71,11 @@ public class outroLevel extends Room {
 	try {
     			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
 			String line4 = creditBuffer.readLine());
-    			while(line4 != null && scnr.next().equals("/n")) {
-    				System.out.print(line);
-				line4 = goodBuffer.readLine();
-			}
+    			System.out.println(line4);
+			while (line4 != null && scnr.nextLine.equals(" ")) {
+                		line4 = credit.readLine();
+				System.out.println(line4);
+            		}
 
                    creditBuffer.close();
 		 new IOException end;
