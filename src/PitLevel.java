@@ -106,23 +106,28 @@ public class PitLevel extends Room {
             //reads out room enter text
             trap.close();
 
-            //TODO: We need to loop through until a index out of bounds exception occurs from moving rooms
-            while(true) { //I want to adjust this so it's not a while true loop... It'll function the same, I just want a fail safe.
+            //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
+            while(isPositionValid(playerPosition)) { //I want to adjust this so it's not a while true loop... It'll function the same, I just want a fail safe.
                 System.out.println("What would you like to do?");
-                String action = scnr.next();
+                String action = scnr.nextLine();
+                
                 //Manipulate string here...
-                if() { //If the first word within the action string is equal to move, then move
-                    char direction = ;
-                    try {
-                        move(direction); //Perform string manipulation to pass the lower case character for direction to move
 
-                    } catch(IndexOutOfBoundsException e) {
-                        break;
+                if (action.length() > 5) {
+                
+                    if(action.substring(0, 4).toLowerCase().equals("move")) { //If the first word within the action string is equal to move, then move
+                        char direction = action.toLowerCase().charAt(5);
+                        System.out.println(direction);
+                        try {
+                            move(direction); 
+
+                        } catch(IndexOutOfBoundsException e) {
+                            break;
+                        }
                     }
                 }
                 
-            }
-            //TODO: The code below all is a special condition when the user wants to move.
+            } 
             
 	    } catch (FileNotFoundException e) {
             e.printStackTrace();

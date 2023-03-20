@@ -137,6 +137,23 @@ public abstract class Room {
         }
     }
 
+    protected boolean isPositionValid(int[] position) {
+        if (position.length != 2) {
+            throw new InvalidParameterException();
+        }  
+
+        if (position[0] < 0 || position[1] < 0) {
+            return false;
+        }
+
+        if(position[0] >= getSize()[0] || position[1] >= getSize()[1]) {
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     
     /**
@@ -464,9 +481,8 @@ public abstract class Room {
         }catch (Exception e) {
             System.out.println("Unable to create a monster... An monster in 'Monsters' list of monsters likely does not correspond to an Monster\n");
         }
-       
-        
     }
+
     private void spawnMonsterRandomly(Monster mon) {
         int[] pos = new int[2];
         Random ran = new Random();
