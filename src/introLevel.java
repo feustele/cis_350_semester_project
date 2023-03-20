@@ -19,16 +19,13 @@ public class introLevel extends Room {
 	public char roomEngine() {
 		Scanner scnr = new Scanner(System.in);
 		try {
-			File file = new File(
-					"C:\\Users\\Bees\\Documents\\School\\GVSU\\2022WinterSemester\\CIS 350\\Project\\Project Sane\\intro.txt");
-			BufferedReader intro = new BufferedReader(new FileReader(file));
+			BufferedReader intro = new BufferedReader(new FileReader(intro.txt));
 			String line = intro.readLine();
-
-			while (line != null && !line.equals("\n")) {
-				System.out.print(line);
-				System.out.println();
-				line = intro.readLine();
-			}
+			System.out.println(line);
+			while (line != null && scnr.next().equals(" ")) {
+                		line = trap.readLine();
+				System.out.println(line);
+            		}
 			// reads out room enter text
 			intro.close();
 			System.out.println("Do you enter the cave?");
@@ -39,7 +36,8 @@ public class introLevel extends Room {
 				try {
 					BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
 					String line2 = chickenBuffer.readLine();
-					while (line2 != null && scnr.next().equals("\n")) {
+					System.out.print(line2);
+					while (line2 != null && scnr.next().equals(" ")) {
 						System.out.print(line2);
 						line2 = chickenBuffer.readLine();
 					}
