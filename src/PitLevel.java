@@ -94,15 +94,13 @@ public class PitLevel extends Room {
 
     public char roomEngine() {
         try {
-            
-            File file = new File(
-					"C:\\Users\\Bees\\Documents\\School\\GVSU\\2022WinterSemester\\CIS 350\\Project\\Project Sane\\trap.txt");
-            BufferedReader trap = new BufferedReader(new FileReader(file));
-            String line = trap.readLine(); 
-			while (line != null && !line.equals("\n")) {
-                System.out.println(line);
-                line = trap.readLine(); 
-            }
+            	BufferedReader trap = new BufferedReader(new FileReader(trap.txt));
+            	String line = trap.readLine(); 
+		System.out.println(line);
+			while (line != null && scnr.nextLine.equals(" ")) {
+                		line = trap.readLine();
+				System.out.println(line);
+            		}
             //reads out room enter text
             trap.close();
 
