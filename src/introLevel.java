@@ -23,7 +23,7 @@ public class introLevel extends Room {
 			String line = intro.readLine();
 			System.out.println(line);
 			while (line != null && scnr.next().equals(" ")) {
-                		line = trap.readLine();
+                		line = intro.readLine();
 				System.out.println(line);
             		}
 			// reads out room enter text
