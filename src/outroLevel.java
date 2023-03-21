@@ -1,14 +1,27 @@
 import java.util.Random;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+/**
+ * The outroLevel class represents the final room in the game.
+ * It prompts the player to retrieve the Mysterious Amulet and
+ * displays different endings based on the player's choice.
+ * prevents a monster from being spawned in this room.
+ */
 public class outroLevel extends Room {
-	//outroLevel.enemySpawnChance = 0;
-	//prevents a monster from being spawned in this room.
-	
+	/**
+         * Creates a new outroLevel object.
+         */
 	public outroLevel() {
         	super();
     	}
-	
+	/**
+         * Runs the logic for the outroLevel room.
+         * Prompts the player to retrieve the Mysterious Amulet and
+         * displays different endings based on the player's choice.
+         */
 	@Override
     	public void roomEngine() {
         Scanner scnr = new Scanner(System.in);
@@ -20,6 +33,7 @@ public class outroLevel extends Room {
                 		line = outro.readLine();
 				System.out.println(line);
             		}
+			// reads out room enter text
           		outro.close();
     			System.out.println("Do retrieve the Mysterious Amulet?");
 		      String word1 = scnr.next();
@@ -35,6 +49,7 @@ public class outroLevel extends Room {
             			}
     			        }
                    badBuffer.close();
+		   // end the game here
 		   new IOException end;
 		   throw end;
             }
@@ -56,7 +71,8 @@ public class outroLevel extends Room {
             		}
     		}
 
-                   goodBuffer.close();
+                 goodBuffer.close();
+		 // display credits here
 		 new IOException end;
 		throw end;
              }
@@ -77,7 +93,8 @@ public class outroLevel extends Room {
 				System.out.println(line4);
             		}
 
-                   creditBuffer.close();
+                 creditBuffer.close();
+		 // end the game here
 		 new IOException end;
 		throw end;
              }
