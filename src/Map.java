@@ -7,9 +7,10 @@ import java.util.Arrays;
  * Acts as a map, storing all the rooms within a linked list, and the player's position on the map.
  */
 public class Map {
-    /**An arrayList of Room classes, which stores the order of rooms that are visited, with the tail 
-    being the current position.
-    */
+    /**
+     *An arrayList of Room classes, which stores the order of rooms that are visited, with the tail 
+     *being the current position.
+     */
     /**NOTE: The size of the row will likely differ, as you travel down the column.*/
     /**NOTE: The size of the columns will likely differ, as you travel down the row.*/ 
     private ArrayList<Room> map; 
@@ -20,6 +21,10 @@ public class Map {
     //The current position of the player in regards to the map.
     private Room playerRoom;
 
+    /**
+     * Creates the intro level of the map.
+     * @return introLevel
+     */
     private introLevel createintroLevel() {
         int[] position = {0, 0};
         introLevel intro = new introLevel();
@@ -27,12 +32,21 @@ public class Map {
         return intro;
     }
 
+    /**
+     * Creates a new ArrayList object that contains the introLevel object.
+     * @return ArrayList<Room>
+     */
     private ArrayList<Room> createMap() {
         ArrayList<Room> tempMap = new ArrayList<Room>(); 
         tempMap.add(createintroLevel());
         return tempMap; 
     }
 
+    /**
+     * Returns the Room object at a given position on the map.
+     * @param position The position of the Room object to return.
+     * @return Room
+     */
     private Room getRoom(int position) {
         
         if (position < 0) {
@@ -45,11 +59,20 @@ public class Map {
         return map.get(position);
 
     }
-
+    
+    /**
+     * Creates the outro level of the map.
+     * @return Room
+     */
     private Room createOutroRoom() {
         return new outroLevel();
     }
 
+    /**
+     * Attempts to create the outro level of the map, if the player has a specific item.
+     * @param player The player object.
+     * @return Room
+     */
     private Room tryCreatingOutro(Player player) {
         ArrayList<Item> inv = player.openInventory();
 
@@ -67,6 +90,12 @@ public class Map {
         return null;
     }
 
+    
+    /**
+     * Generates a new Room object at random.
+     * @return Room
+     * @throws Exception
+     */
     private Room generateNewRoom() throws Exception {
         Random ran = new Random();
         int roomToGenerate = ran.nextInt(Rooms.length());
@@ -79,6 +108,11 @@ public class Map {
     }
 
 
+    /**
+     * Checks if a given position on the map has already been visited.
+     * @param position The position to check.
+     * @return boolean
+     */
     private boolean hasVisitedPosition(int[] position) {
         for (int i = 0; i < getMapSize(); i++) {
             if(Arrays.equals(getRoom(i).getRoomPosition(), position)) {
@@ -103,7 +137,7 @@ public class Map {
     }
     
     /**
-     * Returns the map object.
+     * Returns the ArrayList object containing all the Room objects.
      * @return ArrayList<ArrayList<Room>>
      */
     public ArrayList<Room> getMap() {
