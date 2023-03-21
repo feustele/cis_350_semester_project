@@ -7,14 +7,24 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class introLevel extends Room {
-	// super.enemySpawnChance = 0;
-
+	
+        /**
+	 * Constructs a new introLevel object. 
+	 * Calls the constructor of the superclass, Room.
+	 */
 	public introLevel() {
 		super();
 
 	}
 
-	// makes sure you don't get beaned with a monster in the first room
+	/**
+	 * This method contains the specific behavior of the intro room.
+	 * It reads the intro text from a file, and prompts the user to enter the cave.
+	 * If the user decides not to enter, the game ends. If the user enters the cave,
+	 * a new room is generated.
+	 * 
+	 * @return 's' character, indicating the direction of the player's movement.
+	 */
 	@Override
 	public char roomEngine() {
 		Scanner scnr = new Scanner(System.in);
