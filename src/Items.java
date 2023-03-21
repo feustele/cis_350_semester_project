@@ -42,7 +42,7 @@ public class Items{
         return classToInitialize.getDeclaredConstructor().newInstance();
     }
 
- /**
+    /**
      * Returns a newly created instance of the class associated with the string stored at some index
      * @param index
      * @return Object
