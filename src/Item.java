@@ -11,7 +11,7 @@ public abstract class Item {
 
 	/** 
 	 * Default Constructor creates a new item
-	*/
+	 */
 	protected Item() {
 		//stats.put("Health", 0);
 		stats.put("Attack", 0);
