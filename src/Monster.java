@@ -9,20 +9,25 @@ public abstract class Monster {
 	 */
 	private String name;
 	protected int combatPower = 0;
-	private int locX;
-	private int locY;
+	// private int locX;
+	// private int locY;
 	/**
-	 * Creates a new monster with the specified power level
+	 * To find the position of an enemy, loop through the items within the room. 
+	 */
+	
+	/**
+	 * Creates a new monster with the specified power level. 
 	 * @param name
 	 * @param combatPower
 	 * @param locX
 	 * @param locY
 	*/
-	public Monster (String name, int combatPower, int locX, int locY) {
+	
+	public Monster (String name, int combatPower) {//, int locX, int locY) {
 		this.name = name;
 		this.combatPower = combatPower;
-		this.locX = locX;
-		this.locY =locY;
+		// this.locX = locX;
+		// this.locY =locY;
 	}
 	/**
 	 * 
@@ -38,20 +43,21 @@ public abstract class Monster {
 	protected int getCombatPower() {
 		return combatPower;
 	}
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getlocX() {
-		return locX;
-	}
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getlocY() {
-		return locY;
-	}
+
+	// /**
+	//  * 
+	//  * @return int
+	//  */
+	// public int getlocX() {
+	// 	return locX;
+	// }
+	// /**
+	//  * 
+	//  * @return int
+	//  */
+	// public int getlocY() {
+	// 	return locY;
+	// }
 
 
 }
