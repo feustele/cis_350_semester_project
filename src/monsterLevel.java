@@ -5,13 +5,25 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * A subclass of Room that represents a room with a chance of spawning an enemy.
+ */
 public class monsterLevel extends Room {
-	
+	/**
+	 * Creates a new instance of MonsterLevel.
+	 */
 	public monsterLevel() {
         	super();
    	}
-    
+	
+        /**
+         * The chance of an enemy spawning in this room.
+         */
         enemySpawnChance = 1;
+	
+	/**
+	 * Runs the engine for this room, prompting the user for input and displaying text based on the input.
+	 */
 	@Override
     	public void roomEngine() {
     		Scanner scnr = new Scanner(System.in);
