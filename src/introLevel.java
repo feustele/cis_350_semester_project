@@ -21,7 +21,10 @@ public class introLevel extends Room {
 		super();
 
 	}
-
+       
+	/**
+         * Reads and prints the introduction text from the "intro.txt" file
+         */
 	private void generateIntroText() {
 		try {
 			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
@@ -42,7 +45,10 @@ public class introLevel extends Room {
 
 		}
 	} 
-
+       
+	/**
+        * Reads and prints the text about the chicken from the "chicken.txt" file
+        */
 	private void generateChickenText() {
 		try {
 			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
