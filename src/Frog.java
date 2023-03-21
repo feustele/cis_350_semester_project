@@ -14,8 +14,8 @@ public class Frog extends Monster{
     
     /**
      * Creates a new Frog with specified properties.
-     * @param name the name of the Frog enemy
-     * @param combatPower the combat power of the Frog enemy
+     * @param name is the name of the Frog enemy
+     * @param combatPower is the combat power of the Frog enemy
      */
     public Frog(String name, int combatPower) {
         super(name, combatPower);

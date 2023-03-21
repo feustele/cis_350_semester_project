@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+/**
+ * The main game engine for the game.
+ */
 public class SaneEngine {
 	Scanner scnr;
 	String name;
@@ -8,6 +12,9 @@ public class SaneEngine {
 	Player P1;
 	Map gameMap;
 	
+	/**
+         * Creates a new game instance and initializes a new player and game map.
+         */
 	public SaneEngine() {
 		scnr = new Scanner(System.in);
 		System.out.print("Before you embark on your quest, Hero - What is your name? ");
@@ -18,6 +25,9 @@ public class SaneEngine {
 		runGameLoop();
 	}
 	
+	/**
+         * The main loop that runs the game.
+         */
 	private void runGameLoop() {
 		try {
 			while(true) {
@@ -33,6 +43,10 @@ public class SaneEngine {
 		}
 	}
 
+	/**
+         * The entry point of the program that creates a new game instance.
+         * @param args The command line arguments.
+         */
 	public static void main(String args[]) {
 		SaneEngine game = new SaneEngine();
 	}

@@ -2,6 +2,7 @@ import java.lang.reflect.Constructor;
 
 /**
 * File folder for all Room classes. Allows easy retrieval of a certain Room class. 
+* The Rooms class is a utility class that provides access to the Room classes used in the game.
 *
 */
 public class Rooms {
@@ -15,7 +16,7 @@ public class Rooms {
     
     /**
      *  Returns a list of strings representing the name of all Room Classes
-     * @return String[]
+     * @return The list of Room classes.
      */
     public static Class<?>[] getRooms() {
         return listOfRooms;
@@ -24,8 +25,8 @@ public class Rooms {
     /**
      * Returns the name of the Room Class stored at some index.
      *
-     * @param index
-     * @return Class<?>
+     * @param index The index of the Room class to retrieve.
+     * @return The Room class at the specified index.
      */
     public static Class<?> getRoomClass(int index) {
         for(int i = 0; i < listOfRooms.length; i++) 
@@ -38,9 +39,9 @@ public class Rooms {
 
     /**
      * Returns a newly created instance of the class associated with the string.  
-     * @param classToInitialize
-     * @return Object
-     * @throws Exception
+     * @param classToInitialize The Room class to create an instance of.
+     * @return A new instance of the specified Room class.
+     * @throws Exception If there is an error creating the new instance.
      */
     public static Object getRoom(Class<?> classToInitialize) throws Exception {
         try {
@@ -57,9 +58,9 @@ public class Rooms {
 
     /**
      * Returns a newly created instance of the class associated with the string stored at some index
-     * @param index
-     * @return Object
-     * @throws Exception
+     * @param index The index of the Room class to create an instance of.
+     * @return A new instance of the Room class at the specified index.
+     * @throws Exception If there is an error creating the new instance.
      */
     public static Object getRoom(int index) throws Exception {
         try {
@@ -73,8 +74,8 @@ public class Rooms {
 
     /**
      * Determines whether the passed class is a room class or not.
-     * @param potentialRoom
-     * @return boolean
+     * @param potentialRoom The object to check.
+     * @return True if the object is an instance of a Room class, false otherwise.
      */
     public static boolean isObjectARoom(Object potentialRoom) {
         

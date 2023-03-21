@@ -1,5 +1,6 @@
 /**
  * An item that boosts the amount of experience that a player gains
+ * It is a subclass of the Item class.
  */
 public class ExperienceRing extends Item {
     

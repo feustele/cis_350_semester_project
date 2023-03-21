@@ -4,54 +4,45 @@ import java.util.ArrayList;
  * The parent class to all Monsters implemented. Holds the framework that will be used by all Monster.
  */
 public abstract class Monster {
-        /**
-	 * The amount of damage that a monster does
-	 */
-	private String name;
-	protected int combatPower = 0;
-	private int locX;
-	private int locY;
+       
 	/**
-	 * Creates a new monster with the specified power level
-	 * @param name
-	 * @param combatPower
-	 * @param locX
-	 * @param locY
-	*/
-	public Monster (String name, int combatPower, int locX, int locY) {
+         * The name of the monster.
+         */
+	private String name;
+	
+	/**
+         * The combat power of the monster.
+         */
+	protected int combatPower = 0;
+
+	
+	/**
+	 * Creates a new monster with the specified power level. 
+	 * @param name the name of the Monster
+	 * @param combatPower the combat power of the Mon
+	 */
+	
+	public Monster (String name, int combatPower) {
 		this.name = name;
 		this.combatPower = combatPower;
-		this.locX = locX;
-		this.locY =locY;
+		
 	}
+	
 	/**
-	 * 
-	 * @return String
-	 */
+         * Returns the name of the monster.
+         * @return the name of the monster
+         */
 	public String getname() {
 		return name;
 	}
+	
 	/** 
-	 * 
-	 * @return int
-	 */
+         * Returns the combat power of the monster.
+         * @return the combat power of the monster
+         */
 	protected int getCombatPower() {
 		return combatPower;
 	}
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getlocX() {
-		return locX;
-	}
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getlocY() {
-		return locY;
-	}
 
-
+	
 }
