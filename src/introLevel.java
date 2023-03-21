@@ -26,16 +26,16 @@ public class introLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	@Override
-	public char roomEngine() {
+	public char roomEngine() throws IOException {
 		Scanner scnr = new Scanner(System.in);
 		try {
-			BufferedReader intro = new BufferedReader(new FileReader(intro.txt));
+			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
 			String line = intro.readLine();
 			System.out.println(line);
 			while (line != null && scnr.next().equals(" ")) {
-                		line = intro.readLine();
+				line = intro.readLine();
 				System.out.println(line);
-            		}
+			}
 			// reads out room enter text
 			intro.close();
 			System.out.println("Do you enter the cave?");

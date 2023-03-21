@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
 /**
  * The outroLevel class represents the final room in the game.
  * It prompts the player to retrieve the Mysterious Amulet and
@@ -11,101 +12,132 @@ import java.io.IOException;
  * prevents a monster from being spawned in this room.
  */
 public class outroLevel extends Room {
+	Scanner scnr = new Scanner(System.in);
+
 	/**
-         * Creates a new outroLevel object.
-         */
+	 * Creates a new outroLevel object.
+	 */
 	public outroLevel() {
-        	super();
-    	}
+		super();
+	}
+
+	private void generateOutroText() {
+		try {
+
+			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
+			String line = outro.readLine(); 
+			System.out.println(line);
+			
+			while (line != null && scnr.next().equals(" ")) {
+				line = outro.readLine();
+				System.out.println(line);
+			}
+			outro.close();
+		} catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Sorry! You can't do that here.");
+        }
+	}
+
+
+	private void generateBadEnding() {
+		try {
+			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
+			String line2 = badBuffer.readLine();
+
+			System.out.println(line2);
+			while (line2 != null && scnr.next().equals(" ")) {
+				line2 = badBuffer.readLine();
+				System.out.println(line2);
+			}
+		
+			badBuffer.close();
+	// end the game here
+			throw new IOException(); //This will be caught by the try catch below...???
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void generateGoodEnding() {
+		try {
+			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
+			String line3 = goodBuffer.readLine();
+			System.out.println(line3);
+			while (line3 != null && scnr.next().equals(" ")) {
+				line3 = goodBuffer.readLine();
+				System.out.println(line3);
+			}
+			goodBuffer.close();
+			// display credits here
+			throw new IOException(); //This will be caught by the try/catch below...?
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
+
+	private void generateCredits() {
+		try {
+			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
+			String line4 = creditBuffer.readLine();
+			System.out.println(line4);
+			while (line4 != null && scnr.next().equals(" ")) {
+				line4 = creditBuffer.readLine();
+				System.out.println(line4);
+			}
+
+			creditBuffer.close();
+			// end the game here
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+	}
 	/**
          * Runs the logic for the outroLevel room.
          * Prompts the player to retrieve the Mysterious Amulet and
          * displays different endings based on the player's choice.
+		 * @throws IOException
          */
 	@Override
-    	public void roomEngine() {
-        Scanner scnr = new Scanner(System.in);
-    		try {
-    			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
-                	String line = outro.readLine(); 
-    			System.out.println(line);
-			while (line != null && scnr.next().equals(" ")) {
-                		line = outro.readLine();
-				System.out.println(line);
-            		}
-			// reads out room enter text
-          		outro.close();
-    			System.out.println("Do retrieve the Mysterious Amulet?");
-		      String word1 = scnr.next();
-          if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
-            //if the player chooses not to take the amulet, the game ends.
-    				try {
-				String line2 = badBuffer.readLine();
-    	    			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
-    			        System.out.println(line2);
-				while (line2 != null && scnr.next().equals(" ")) {
-                			line2 = badBuffer.readLine();
-					System.out.println(line2);
-            			}
-    			        }
-                   badBuffer.close();
-		   // end the game here
-		   new IOException end;
-		   throw end;
-            }
-             catch (FileNotFoundException e) {
-        			  e.printStackTrace();
-        		 }
-             catch (IOException e) {
-        			  e.printStackTrace();
-    			   }
-    		}
-        else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")){{
-         	try {
-    			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
-			String line3 = goodBuffer.readLine());
-    			System.out.println(line3);
-			while (line3 != null && scnr.nextLine.equals(" ")) {
-                		line3 = goodBuffer.readLine();
-				System.out.println(line3);
-            		}
-    		}
+    public char roomEngine() throws IOException {
+		generateOutroText();
+		// reads out room enter text
+		String word1;
 
-                 goodBuffer.close();
-		 // display credits here
-		 new IOException end;
-		throw end;
-             }
-                    // reads out ending text.
-             catch (FileNotFoundException e) {
-        			  e.printStackTrace();
-        		 }
-             catch (IOException e) {
-        			  e.printStackTrace();
-    			   }
-        }
-	try {
-    			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
-			String line4 = creditBuffer.readLine());
-    			System.out.println(line4);
-			while (line4 != null && scnr.nextLine.equals(" ")) {
-                		line4 = credit.readLine();
-				System.out.println(line4);
-            		}
+		do {
+			System.out.println("Do retrieve the Mysterious Amulet?");
+			word1 = scnr.next();
+		} while(!(
+			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
+			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
 
-                 creditBuffer.close();
-		 // end the game here
-		 new IOException end;
-		throw end;
-             }
 
-    		} catch (FileNotFoundException e) {
-    			e.printStackTrace();
+		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N"))
+		//if the player chooses not to take the amulet, the game ends.
+			generateBadEnding();
+		else if (word1.equalsIgnoreCase("YES") 
+				|| word1.equalsIgnoreCase("Y")) 
+			generateGoodEnding();
+		
+		// reads out ending text.
 
-    		} catch (IOException e) {
-    			e.printStackTrace();
-
-    		}
-
+		generateCredits();
+		
+		//It should generate an exception within the generation of credits
+		throw new IOException();
+	}
 
 }
