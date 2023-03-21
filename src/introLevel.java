@@ -5,16 +5,61 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * The introLevel class represents the first room in the game.
+ * It prompts the player to enter the cave
+ * displays different endings based on the player's choice.
+ * Prevents a monster from being spawned in this room.
+ */
 public class introLevel extends Room {
-	
+	Scanner scnr = new Scanner(System.in);
+
         /**
-	 * Constructs a new introLevel object. 
-	 * Calls the constructor of the superclass, Room.
+	 * Creates a new introLevel object
 	 */
 	public introLevel() {
 		super();
 
+	}
+
+	private void generateIntroText() {
+		try {
+			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
+			String line = intro.readLine();
+
+			while (line != null && !line.equals("\n")) {
+				System.out.print(line);
+				System.out.println();
+				line = intro.readLine();
+			}
+			// reads out room enter text
+			intro.close(); 
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+	} 
+
+	private void generateChickenText() {
+		try {
+			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
+			String line2 = chickenBuffer.readLine();
+			System.out.print(line2);
+			while (line2 != null && !line2.equals("\n")) {
+				System.out.print(line2);
+				System.out.println();
+				line2 = chickenBuffer.readLine();
+			}
+			chickenBuffer.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**
@@ -27,53 +72,34 @@ public class introLevel extends Room {
 	 */
 	@Override
 	public char roomEngine() throws IOException {
-		Scanner scnr = new Scanner(System.in);
-		try {
-			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
-			String line = intro.readLine();
-			System.out.println(line);
-			while (line != null && scnr.next().equals(" ")) {
-				line = intro.readLine();
-				System.out.println(line);
-			}
-			// reads out room enter text
-			intro.close();
+		
+		generateIntroText();
+
+		String word1;
+		do {
 			System.out.println("Do you enter the cave?");
-			String word1 = scnr.next();
+			word1 = scnr.next();
+		} while(!(
+			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
+			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
 
-			if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
-				// if the player chooses not to enter the cave, the game ends.
-				try {
-					BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
-					String line2 = chickenBuffer.readLine();
-					System.out.print(line2);
-					while (line2 != null && scnr.next().equals(" ")) {
-						System.out.print(line2);
-						line2 = chickenBuffer.readLine();
-					}
-					chickenBuffer.close();
-					IOException end = new IOException();
-					throw end;
-				}
-				// add ioextension end method to interact with game engine (register an ending)
-				// reads out fall text
-				catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")) {
-				// if player enters the cave from the intro room, then a new room is generated.
-				
-			}
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
+			// if the player chooses not to enter the cave, the game ends.
+			generateChickenText();
+			IOException end = new IOException(); 
+			throw end;
+			// add ioextension end method to interact with game engine (register an ending)
+			// reads out fall text
+			
+		} 
+		/**
+		 * Because the game is thrown into two states - enter the cave or not, 
+		 *we know the game is currently in the enter the cave state.
+		 */
+		
+		//Move south by default
+		
 		return 's';
 
 	}
