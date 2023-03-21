@@ -14,8 +14,8 @@ public abstract class QuestItem extends Item {
     }
 
     /**
-     * Creates a new Quest Item
-     * @param quest
+     * Creates a new Quest Item with the specified quest.
+     * @param quest The quest that the item is involved with.
      */
     protected QuestItem(String quest) {
         super();
@@ -26,14 +26,14 @@ public abstract class QuestItem extends Item {
     
     /** 
      * Sets the quest (ending)
-     * @param quest
+     * @param quest The quest that the item is involved with.
      */
     protected void setEnd(String quest) {
         this.quest = quest;
     }
     /**
      * Returns the quest (ending) that the item is involved with.
-     * @return String
+     * @return String The quest that the item is involved with.
      */
     protected String ending() {
         return this.quest;
