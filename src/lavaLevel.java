@@ -8,17 +8,15 @@ import java.util.Scanner;
 public class lavaLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
     private int[] lavaPosition = new int[3]; 
-    
-   // lavaLevel.enemySpawnChance = 0;
-    // prevents a monster from being spawned in this room.
-
+   
+    /**
+     * Generates the position of the lava pit in the room.
+     * prevents a monster from being spawned in this room.
+     */
     private void generateLava() {
         Random rand = new Random();
-        //Likely can be removed. 
-        // if (super.getSize()[0] == 0 or super.getSize()[1] == 0) {
-        //     exception
-        // }
-        /**Note by Steven:
+        
+	/**
          * super is a reference to Room, meaning getSize() returns an array of two ints, not three
          * Returns the array [room.length, room[0].length]
          */
@@ -32,18 +30,28 @@ public class lavaLevel extends Room {
         lavaPosition[2] = rand.nextInt(lavaPosition[2] - 1); 
     
     }
-
+   
+    /**
+     * Creates a new instance of lavaLevel with a randomly generated lava pit position.
+     */
     public lavaLevel() {
         super();
         generateLava();
         //creates a room with lava generated in it.
         
     }
-
+    
+    /**
+     * Returns the position of the lava pit in the room.
+     * @return An integer array representing the position of the lava pit in the room.
+     */
     public int[] getLavaPosition() {
         return lavaPosition;
         //returns where the lava is positioned.
     }
+	/**
+         * Overrides the method in Room to implement custom room functionality for lavaLevel.
+         */
 	@Override
     	public void roomEngine(){
     		try {
@@ -54,7 +62,7 @@ public class lavaLevel extends Room {
 				line = trap.readLine(); 
     			}
 			System.out.print("Tread lightly, dear hero.");
-                //reads out room enter text
+                    //reads out room enter text
          		trap.close();
     			if (getLavaPosition() == getPlayerPosition()) {
                     //if you fall into the lava, 
