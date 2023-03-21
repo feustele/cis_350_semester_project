@@ -4,23 +4,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * A class that represents a room in game that contains a pit. The player must navigate
- * around the pit to avoid falling in.
- */
+
 public class PitLevel extends Room {
     private int[] pitPosition = new int[2];
     Scanner scnr = new Scanner(System.in);
 
-    /**
+   /**
      * Generates the position of the pit within the room.
      * prevents a monster from being spawned in this room.
      */
-      private void generatePit() {
-        
-        
+
+    private void generatePit() {
+   
         pitPosition = getSize();
-         // Ensure that the pit is not generated on the edge of the room, which would cause an index out of bounds error.
+
+        // Ensure that the pit is sized correctly, which could cause an index out of bounds error.
+
         if (pitPosition[0] < 2)
             pitPosition[0] = 2; // Checks if an index out of bounds error will occur or not.
         if (pitPosition[1] < 2)
@@ -34,7 +33,7 @@ public class PitLevel extends Room {
         //pitPosition[1] = rand.nextInt(pitPosition[1] - 1);
 
     }
-    
+
     /**
      * Constructs a new PitLevel object with a randomly generated room and pit position.
      */
@@ -58,12 +57,38 @@ public class PitLevel extends Room {
     /**
      * Reads the text file containing the text for falling into the pit trap and prints it to the console.
      */
+    private void generateIntroText() {
+        try {
+        BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
+        	String line = trap.readLine(); 
+	    	System.out.println(line);
+			while (line != null && scnr.next().equals(" ")) {
+                line = trap.readLine();
+				System.out.println(line);
+            }
+            //reads out room enter text
+            trap.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Sorry! You can't do that here.");
+        }
+    }
+
+    /**
+    * Moves the player in the specified direction and checks if they have fallen into the pit trap.
+    * 
+    * @param dir a char representing the direction the player wants to move.
+    */
     private void generatePitText() {
         try {
 
             BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
             String line2 = pit.readLine(); 
-	    System.out.println(line2);
+            System.out.println(line2);
             while(line2 != null && scnr.next().equals(" ")) {         
                 System.out.println(line2);
                 line2 = pit.readLine(); 
@@ -81,12 +106,19 @@ public class PitLevel extends Room {
             System.out.println("Sorry! You can't do that here.");
         }
     }
-	
-   /**
-    * Moves the player in the specified direction and checks if they have fallen into the pit trap.
-    * 
-    * @param dir a char representing the direction the player wants to move.
-    */
+
+
+    private void fullFillAction(String action) {
+        if (action.length() > 5) {
+            if(action.substring(0, 4).toLowerCase()
+                    .equals("move")) { //If the first word within the action string is equal to move, then move
+                char direction = action.toLowerCase().charAt(5);
+                
+                move(direction); 
+            }
+        }
+    }
+
     private void move(char dir) {            
         while (getPlayerPosition() != null && 
                 (  dir == 'w'
@@ -103,58 +135,33 @@ public class PitLevel extends Room {
                generatePitText();
             }
         }
+    }
+    
+     //TODO: Fill this method out still
+    private char directionToMoveRoomsIn() {
         
+        return 's';
     }
 
-   /**
-    * Executes the game logic for the PitLevel room.
-    * 
-    * @return a char representing the outcome of the game (s for success, f for failure).
-    */
     public char roomEngine() {
-        try {
-        	BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
-        	String line = trap.readLine(); 
-	    	System.out.println(line);
-			while (line != null && scnr.next().equals(" ")) {
-                line = trap.readLine();
-				System.out.println(line);
+        	
+        generateIntroText();
+
+        //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
+        while(isPositionValid(playerPosition)) {
+            System.out.println("What would you like to do?");
+            String action = scnr.nextLine();
+            try {
+                fullFillAction(action);
+            } catch(IndexOutOfBoundsException e) {
+                return directionToMoveRoomsIn();
             }
-            //reads out room enter text
-            trap.close();
-
-            //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
-            while(isPositionValid(playerPosition)) { //I want to adjust this so it's not a while true loop... It'll function the same, I just want a fail safe.
-                System.out.println("What would you like to do?");
-                String action = scnr.nextLine();
-                
-                //Manipulate string here...
-
-                if (action.length() > 5) {
-                
-                    if(action.substring(0, 4).toLowerCase().equals("move")) { //If the first word within the action string is equal to move, then move
-                        char direction = action.toLowerCase().charAt(5);
-                        System.out.println(direction);
-                        try {
-                            move(direction); 
-
-                        } catch(IndexOutOfBoundsException e) {
-                            break;
-                        }
-                    }
-                }
-            } 
+        } 
             
-	    } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
-        }
-
-	    if (getPlayerPosition() != null){
-		    System.out.println("Sorry! You can't do that here.");
-	    }
+	   
+	    // if (getPlayerPosition() != null){
+		//     System.out.println("Sorry! You can't do that here.");
+	    // }
 		
         return 's';
 
