@@ -137,6 +137,13 @@ public abstract class Room {
         }
     }
 
+    /**
+     * Checks if the given position is valid.
+     *
+     * @param position an array of two integers representing the position to be checked
+     * @return true if the position is valid, false otherwise
+     * @throws InvalidParameterException if the position array does not contain exactly two elements
+     */
     protected boolean isPositionValid(int[] position) {
         if (position.length != 2) {
             throw new InvalidParameterException();
@@ -215,6 +222,12 @@ public abstract class Room {
         
     }
 
+    /**
+     * Moves the player in a given direction.
+     * @param d The direction to move the player in ('n' for north, 'e' for east, 's' for south, 'w' for west).
+     * @throws IndexOutOfBoundsException If the player attempts to move outside the game board boundaries.
+     * @throws InvalidParameterException If the direction parameter is not a valid character ('n', 'e', 's', or 'w').
+     */
     public void movePlayer(char d) {
         switch(d) {
         case 'n':
@@ -392,15 +405,24 @@ public abstract class Room {
         return new int[] {room.length, room[0].length};
     }
 
+    /**
+     * Determines whether the object at the given position is a monster or not.
+     *
+     * @param pos the position to check, represented as an array of two integers
+     * @return true if the object at the given position is a monster, false otherwise
+     */
     private boolean isMonster(int[] pos) {
-
+       
+        // If the room at the given position is null, there can be no monster
         if (room[pos[0]][pos[1]] == null) {
             return false;
         }
-
+        // If the object at the given position is not an enemy, it is not a monster
         if(!Monsters.isObjectAEnemy(room[pos[0]][pos[1]])) {
             return false;
         }
+        
+        // Otherwise, the object is a monster
         return true;
     }
 
@@ -415,6 +437,9 @@ public abstract class Room {
 
     }
     
+    /**
+     *Spawn a random item at a random position in the room
+     */
     private void spawnItemRandomly() {
         //Randomly generate a position
         int[] pos = new int[2];
@@ -424,6 +449,10 @@ public abstract class Room {
         spawnItemRandomly(pos);
     }
 
+    /**
+     *Spawn an item at the specified position
+     *@param pos the position where the item should be spawned
+     */
     private void spawnItemRandomly(int[] pos) {
         Random ran = new Random();
         int ranInt = ran.nextInt(Items.length());
@@ -442,7 +471,11 @@ public abstract class Room {
             //System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
         
     }
-
+    
+    /**
+     *Spawn the specified item at a random position in the room
+     *@param item the item to be spawned
+     */
     private void spawnItemRandomly(Item item) {
         int[] pos = new int[2];
         Random ran = new Random();
@@ -452,12 +485,19 @@ public abstract class Room {
         spawnItem(item, pos);
     }
 
-
+    /**
+     *Spawn the specified monster at the specified position in the room
+     *@param enemy the monster to be spawned
+     *@param pos the position where the monster should be spawned
+     */
     private void spawnMonster(Monster enemy, int[] pos) {
 
         room[pos[0]][pos[1]] = enemy;
     }
 
+    /**
+     *Spawn a random monster at a random position in the room
+     */
     private void spawnMonsterRandomly() {
         //Randomly generate a position
         int[] pos = new int[2];
@@ -466,7 +506,11 @@ public abstract class Room {
         pos[1] = ran.nextInt(room[0].length);
         spawnMonsterRandomly(pos);
     }
-
+    
+    /**
+     *Spawn a monster at the specified position in the room
+     *@param pos the position where the monster should be spawned
+     */
     private void spawnMonsterRandomly(int[] pos) {
         Random ran = new Random();
         int ranInt = ran.nextInt(Items.length());
@@ -482,7 +526,11 @@ public abstract class Room {
             System.out.println("Unable to create a monster... An monster in 'Monsters' list of monsters likely does not correspond to an Monster\n");
         }
     }
-
+   
+    /**
+     *Spawn the specified monster at a random position in the room
+     *@param mon the monster to be spawned
+     */
     private void spawnMonsterRandomly(Monster mon) {
         int[] pos = new int[2];
         Random ran = new Random();
