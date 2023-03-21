@@ -20,6 +20,11 @@ public class SaneEngine {
 		runGameLoop();
 	}
 	
+	/**
+         * The main loop that runs the game.
+         * This method executes the game loop where the player's actions are read in and acted upon.
+         * @throws IOException if there is an input/output error
+         */
 	private void runGameLoop() {
 		try {
 			while(true) {
@@ -34,7 +39,11 @@ public class SaneEngine {
 			e.printStackTrace();
 		}
 	}
-
+	
+        /**
+         * The entry point of the program that creates a new game instance.
+         * @param args 
+         */
 	public static void main(String args[]) {
 		SaneEngine game = new SaneEngine();
 	}
