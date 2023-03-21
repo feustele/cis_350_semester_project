@@ -1,12 +1,9 @@
-import java.util.Random;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-import javax.print.attribute.PrintServiceAttributeSet;
 
 public class PitLevel extends Room {
     private int[] pitPosition = new int[2];
@@ -16,7 +13,6 @@ public class PitLevel extends Room {
     // prevents a monster from being spawned in this room.
 
     private void generatePit() {
-        Random rand = new Random();
         // Likely can be removed.
         // if (super.getSize()[0] == 0 or super.getSize()[1] == 0) {
         // exception
@@ -95,13 +91,13 @@ public class PitLevel extends Room {
 
     public char roomEngine() {
         try {
-            	BufferedReader trap = new BufferedReader(new FileReader(trap.txt));
-            	String line = trap.readLine(); 
-		System.out.println(line);
+        	BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
+        	String line = trap.readLine(); 
+	    	System.out.println(line);
 			while (line != null && scnr.next().equals(" ")) {
-                		line = trap.readLine();
+                line = trap.readLine();
 				System.out.println(line);
-            		}
+            }
             //reads out room enter text
             trap.close();
 
@@ -125,7 +121,6 @@ public class PitLevel extends Room {
                         }
                     }
                 }
-                
             } 
             
 	    } catch (FileNotFoundException e) {
@@ -138,11 +133,7 @@ public class PitLevel extends Room {
 	    if (getPlayerPosition() != null){
 		    System.out.println("Sorry! You can't do that here.");
 	    }
-		    
-            
-            
-
-       
+		
         return 's';
 
     }
