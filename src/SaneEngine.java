@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * The main game engine for a text-based adventure game.
+ * The main game engine for the game.
  */
 public class SaneEngine {
 	Scanner scnr;
