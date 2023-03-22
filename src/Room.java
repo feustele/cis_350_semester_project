@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.security.InvalidParameterException;
@@ -34,7 +35,7 @@ public abstract class Room {
     /**
      * An abstract method for other room classes to override
     */
-    public abstract char roomEngine();
+    public abstract char roomEngine() throws IOException;
     
 
     /** 
