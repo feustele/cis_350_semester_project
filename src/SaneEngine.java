@@ -28,7 +28,7 @@ public class SaneEngine {
 	private void runGameLoop() {
 		try {
 			while(true) {
-				gameMap.getPlayerRoom().roomEngine(gameMap, P1);
+				gameMap.getPlayerRoom().roomEngine(gameMap);
 				//gameMap.moveRooms(c, P1);
 
 				

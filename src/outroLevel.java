@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -130,7 +129,7 @@ public class outroLevel extends Room {
 	 * @throws IOException
          */
 	@Override
-    public void roomEngine(Map map, Player p1) throws IOException{
+    public void roomEngine(Map map) throws IOException{
 		generateOutroText();
 		// reads out room enter text
 		String word1;

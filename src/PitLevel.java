@@ -63,7 +63,7 @@ public class PitLevel extends Room {
      */
     private void generateIntroText() {
         try {
-        BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
+            BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
         	String line = trap.readLine(); 
 	    	System.out.println(line);
 			while (line != null && !line.equals("\n")) {
@@ -113,21 +113,25 @@ public class PitLevel extends Room {
      * Parses and executes the action string entered by the player.
      * @param action the action string to execute
      */
-    private void fullFillAction(Map m, Player p1, String action) {
+    private void fullFillAction(Map m, String action) {
         if (action.length() > 5) {
             if(action.substring(0, 4).toLowerCase()
                     .equals("move")) { //If the first word within the action string is equal to move, then move
                 char direction = action.toLowerCase().charAt(5);
                 
-                move(m, p1, direction);; 
+                move(m, direction); 
             }
         }
     }
 
-    private void mapMove(Map m, Player p1, char dir) {
+    private void mapMove(Map m, char dir) {
         try {
-            m.moveRooms(dir, p1);
+            m.move(dir);
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
         } catch (Exception e) {
+            //The general exception will be thrown if the room has already been visited
+
             e.printStackTrace();
         }
     }
@@ -137,42 +141,27 @@ public class PitLevel extends Room {
      * @param dir the direction to move in
      * @throws Exception
      */
-    private void move(Map m, Player p1, char dir) { 
+    private void move(Map m, char dir) { 
         if (getPlayerPosition() != null && 
                 (  dir == 'w'
                 || dir == 'a' 
                 || dir == 's'
                 || dir == 'd')) {
             
-            try {
-                movePlayer(dir);
-            } catch(IndexOutOfBoundsException e) {
-                mapMove(m, p1, dir);
-            }
-           
+            mapMove(m, dir);
+            
             if (getPitPosition() == getPlayerPosition()) {
                 //if you fall into the pit, 
                generatePitText();
             }
         }
     }
-    
-   /**
-    *Determines the direction in which to move the player after an index out of bounds exception has been caught.
-    *@return A character representing the direction to move in.
-    */
-     //TODO: Fill this method out still
-    private char directionToMoveRoomsIn() {
-
-
-        return 's';
-    }
 
     /**
      *Runs the game engine loop until the player's position is no longer valid within the game's map.
      *@return A character representing the direction to move in after the game is finished.
      */
-    public void roomEngine(Map map, Player p1) throws IOException{
+    public void roomEngine(Map map) throws IOException{
         	
         generateIntroText();
 
@@ -181,9 +170,9 @@ public class PitLevel extends Room {
             System.out.println("What would you like to do?");
             String action = scnr.nextLine();
             try {
-                fullFillAction(map, p1, action);
+                fullFillAction(map, action);
             } catch(IndexOutOfBoundsException e) {
-
+                return;
             }
         } 
             

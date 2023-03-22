@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 /**
  * The introLevel class represents the first room in the game.
@@ -19,6 +17,8 @@ public class introLevel extends Room {
 	 */
 	public introLevel() {
 		super();
+		int[] size = {1, 1};
+		generateRoom(size);
 
 	}
        
@@ -77,7 +77,7 @@ public class introLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	@Override
-	public void roomEngine(Map map, Player p1) throws IOException {
+	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
 
@@ -107,7 +107,8 @@ public class introLevel extends Room {
 		//Move south by default
 		
 		try {
-			map.moveRooms('s', p1);
+			map.move('s');
+		} catch (IndexOutOfBoundsException e ) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

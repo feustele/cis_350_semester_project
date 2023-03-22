@@ -32,7 +32,7 @@ public abstract class Room {
     /**
      * An abstract method for other room classes to override
     */
-    public abstract void roomEngine(Map map, Player p1) throws IOException;
+    public abstract void roomEngine(Map map) throws IOException;
     
 
     /** 
