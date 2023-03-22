@@ -130,13 +130,13 @@ public class outroLevel extends Room {
 	 * @throws IOException
          */
 	@Override
-    public char roomEngine() throws IOException {
+    public void roomEngine(Map map, Player p1) throws IOException{
 		generateOutroText();
 		// reads out room enter text
 		String word1;
 
 		do {
-			System.out.println("Do retrieve the Mysterious Amulet?");
+			System.out.println("Do you retrieve the Mysterious Amulet?");
 			word1 = scnr.next();
 		} while(!(
 			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 

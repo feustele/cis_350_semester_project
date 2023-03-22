@@ -1,11 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.security.InvalidParameterException;
-import java.io.BufferedReader;
 
 /**
  * The parent class to all rooms implemented. Holds the framework that will be used by all rooms.
@@ -35,7 +32,7 @@ public abstract class Room {
     /**
      * An abstract method for other room classes to override
     */
-    public abstract char roomEngine() throws IOException;
+    public abstract void roomEngine(Map map, Player p1) throws IOException;
     
 
     /** 

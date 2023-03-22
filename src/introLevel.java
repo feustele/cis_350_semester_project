@@ -77,7 +77,7 @@ public class introLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	@Override
-	public char roomEngine() throws IOException {
+	public void roomEngine(Map map, Player p1) throws IOException {
 		
 		generateIntroText();
 
@@ -106,7 +106,11 @@ public class introLevel extends Room {
 		
 		//Move south by default
 		
-		return 's';
+		try {
+			map.moveRooms('s', p1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 }
