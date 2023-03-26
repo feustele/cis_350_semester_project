@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,7 +19,11 @@ public class outroLevel extends Room {
 	public outroLevel() {
 		super();
 	}
-
+	
+	/**
+         * Generates the text for the outroLevel room by reading from a file called "outro.txt"
+         * @throws IOException if there is an error reading the file
+         */
 	private void generateOutroText() {
 		try {
 
@@ -42,7 +45,11 @@ public class outroLevel extends Room {
         }
 	}
 
-
+        /**
+         * Generates the bad ending text by reading from a file called "badOutro.txt"
+         * and then throws an IOException to end the game.
+         * @throws IOException if there is an error reading the file or to end the game
+         */
 	private void generateBadEnding() {
 		try {
 			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
@@ -66,6 +73,11 @@ public class outroLevel extends Room {
 		}
 	}
 
+	/**
+         * Generates the good ending text by reading from a file called "goodOutro.txt"
+         * and then throws an IOException to display the credits.
+         * @throws IOException if there is an error reading the file or to display the credits
+         */
 	private void generateGoodEnding() {
 		try {
 			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
@@ -86,6 +98,11 @@ public class outroLevel extends Room {
 		}		
 	}
 
+	 /**
+          * Generates the credits text by reading from a file called "credits.txt"
+          * and then throws an IOException to end the game.
+          * @throws IOException if there is an error reading the file or to end the game
+          */
 	private void generateCredits() {
 		try {
 			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
@@ -109,16 +126,16 @@ public class outroLevel extends Room {
          * Runs the logic for the outroLevel room.
          * Prompts the player to retrieve the Mysterious Amulet and
          * displays different endings based on the player's choice.
-		 * @throws IOException
+	 * @throws IOException
          */
 	@Override
-    public char roomEngine() throws IOException {
+    public void roomEngine(Map map) throws IOException{
 		generateOutroText();
 		// reads out room enter text
 		String word1;
 
 		do {
-			System.out.println("Do retrieve the Mysterious Amulet?");
+			System.out.println("Do you retrieve the Mysterious Amulet?");
 			word1 = scnr.next();
 		} while(!(
 			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 

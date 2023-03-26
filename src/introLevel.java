@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 /**
  * The introLevel class represents the first room in the game.
@@ -14,15 +12,19 @@ import java.util.Scanner;
 public class introLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
 
-    /**
-	 * Constructs a new introLevel object. 
-	 * Calls the constructor of the superclass, Room.
+        /**
+	 * Creates a new introLevel object
 	 */
 	public introLevel() {
 		super();
+		int[] size = {1, 1};
+		generateRoom(size);
 
 	}
-
+       
+	/**
+         * Reads and prints the introduction text from the "intro.txt" file
+         */
 	private void generateIntroText() {
 		try {
 			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
@@ -43,7 +45,10 @@ public class introLevel extends Room {
 
 		}
 	} 
-
+       
+	/**
+        * Reads and prints the text about the chicken from the "chicken.txt" file
+        */
 	private void generateChickenText() {
 		try {
 			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
@@ -72,7 +77,7 @@ public class introLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	@Override
-	public char roomEngine() throws IOException {
+	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
 
@@ -101,7 +106,12 @@ public class introLevel extends Room {
 		
 		//Move south by default
 		
-		return 's';
+		try {
+			map.move('s');
+		} catch (IndexOutOfBoundsException e ) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 }

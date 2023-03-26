@@ -4,21 +4,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-
+/**
+ * A room in the game with a pit trap that can cause the player to fall in and lose the game.
+ */
 public class PitLevel extends Room {
     private int[] pitPosition = new int[2];
     Scanner scnr = new Scanner(System.in);
 
-   /**
-     * Generates the position of the pit within the room.
-     * prevents a monster from being spawned in this room.
+    // PitLevel.enemySpawnChance = 0;
+    // prevents a monster from being spawned in this room.
+
+    /**
+     * Generates the location of the pit in the room based on the room's size.
      */
-
     private void generatePit() {
-   
+        // Likely can be removed.
+        // if (super.getSize()[0] == 0 or super.getSize()[1] == 0) {
+        // exception
+        // }
+        
         pitPosition = getSize();
-
-        // Ensure that the pit is sized correctly, which could cause an index out of bounds error.
 
         if (pitPosition[0] < 2)
             pitPosition[0] = 2; // Checks if an index out of bounds error will occur or not.
@@ -35,7 +40,7 @@ public class PitLevel extends Room {
     }
 
     /**
-     * Constructs a new PitLevel object with a randomly generated room and pit position.
+     * Creates a new PitLevel room with a random size and a generated pit trap location.
      */
     public PitLevel() {
         super();
@@ -46,23 +51,22 @@ public class PitLevel extends Room {
     }
 
     /**
-     * Returns the position of the pit within the room.
-     *
-     * @return an array containing the x and y coordinates of the pit within the room
+     * Gets the location of the pit in the room.
+     * @return an array containing the x and y coordinates of the pit
      */
     public int[] getPitPosition() {
         return pitPosition;
     }
 
     /**
-     * Reads the text file containing the text for falling into the pit trap and prints it to the console.
+     * Generates the introduction text for the room and reads it from a file.
      */
     private void generateIntroText() {
         try {
-        BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
+            BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
         	String line = trap.readLine(); 
 	    	System.out.println(line);
-			while (line != null && scnr.next().equals(" ")) {
+			while (line != null && !line.equals("\n")) {
                 line = trap.readLine();
 				System.out.println(line);
             }
@@ -79,17 +83,15 @@ public class PitLevel extends Room {
     }
 
     /**
-    * Moves the player in the specified direction and checks if they have fallen into the pit trap.
-    * 
-    * @param dir a char representing the direction the player wants to move.
-    */
+     * Generates the text for falling into the pit and reads it from a file.
+     */
     private void generatePitText() {
         try {
 
             BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
             String line2 = pit.readLine(); 
             System.out.println(line2);
-            while(line2 != null && scnr.next().equals(" ")) {         
+            while(line2 != null && !line2.equals("\n")) {         
                 System.out.println(line2);
                 line2 = pit.readLine(); 
             }
@@ -106,29 +108,47 @@ public class PitLevel extends Room {
             System.out.println("Sorry! You can't do that here.");
         }
     }
-
-
-    private void fullFillAction(String action) {
+	
+    /**
+     * Parses and executes the action string entered by the player.
+     * @param action the action string to execute
+     */
+    private void fullFillAction(Map m, String action) {
         if (action.length() > 5) {
             if(action.substring(0, 4).toLowerCase()
                     .equals("move")) { //If the first word within the action string is equal to move, then move
                 char direction = action.toLowerCase().charAt(5);
                 
-                move(direction); 
+                move(m, direction); 
             }
         }
     }
 
-    private void move(char dir) {            
-        while (getPlayerPosition() != null && 
+    private void mapMove(Map m, char dir) {
+        try {
+            m.move(dir);
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
+        } catch (Exception e) {
+            //The general exception will be thrown if the room has already been visited
+
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Moves the player in the specified direction and checks if they fall into the pit trap.
+     * @param dir the direction to move in
+     * @throws Exception
+     */
+    private void move(Map m, char dir) { 
+        if (getPlayerPosition() != null && 
                 (  dir == 'w'
                 || dir == 'a' 
                 || dir == 's'
                 || dir == 'd')) {
             
-            
-            movePlayer(dir);
-           
+            mapMove(m, dir);
             
             if (getPitPosition() == getPlayerPosition()) {
                 //if you fall into the pit, 
@@ -136,14 +156,12 @@ public class PitLevel extends Room {
             }
         }
     }
-    
-     //TODO: Fill this method out still
-    private char directionToMoveRoomsIn() {
-        
-        return 's';
-    }
 
-    public char roomEngine() {
+    /**
+     *Runs the game engine loop until the player's position is no longer valid within the game's map.
+     *@return A character representing the direction to move in after the game is finished.
+     */
+    public void roomEngine(Map map) throws IOException{
         	
         generateIntroText();
 
@@ -152,9 +170,9 @@ public class PitLevel extends Room {
             System.out.println("What would you like to do?");
             String action = scnr.nextLine();
             try {
-                fullFillAction(action);
+                fullFillAction(map, action);
             } catch(IndexOutOfBoundsException e) {
-                return directionToMoveRoomsIn();
+                return;
             }
         } 
             
@@ -163,7 +181,7 @@ public class PitLevel extends Room {
 		//     System.out.println("Sorry! You can't do that here.");
 	    // }
 		
-        return 's';
+        
 
     }
 
