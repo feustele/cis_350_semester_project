@@ -30,10 +30,10 @@ public class introLevel extends Room {
 			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
 			String line = intro.readLine();
 
-			while (line != null && !line.equals("\n")) {
+			while (line != null && scnr.hasNext()) {
 				System.out.print(line);
-				System.out.println();
 				line = intro.readLine();
+				scnr.next();
 			}
 			// reads out room enter text
 			intro.close(); 
@@ -54,10 +54,10 @@ public class introLevel extends Room {
 			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
 			String line2 = chickenBuffer.readLine();
 			System.out.print(line2);
-			while (line2 != null && !line2.equals("\n")) {
+			while (line2 != null && scnr.hasNext()) {
 				System.out.print(line2);
-				System.out.println();
 				line2 = chickenBuffer.readLine();
+				scnr.next();
 			}
 			chickenBuffer.close();
 		} catch (FileNotFoundException e) {
