@@ -108,23 +108,11 @@ public class cathedralLevel extends Room {
 			|| word2.equalsIgnoreCase("Yes") || word2.equalsIgnoreCase("Y")));
 
 
-		if (word2.equalsIgnoreCase("NO") || word2.equalsIgnoreCase("N")) {
+		if (word2.equalsIgnoreCase("YES") || word2.equalsIgnoreCase("Y")) {
 			// if the player chooses not to enter the cave, the game ends.
-			generateChickenText();
 			IOException end = new IOException(); 
 			throw end;
-			// add ioextension end method to interact with game engine (register an ending)
-			// reads out chest text
-			
-		} 
-		/**
-		 * Because the game is thrown into two states - enter the cave or not, 
-		 *we know the game is currently in the enter the cave state.
-		 */
-		
-		//Move south by default
-		
-		try {
+{
 			map.move('s');
 		} catch (IndexOutOfBoundsException e ) {
 		} catch (Exception e) {
