@@ -53,9 +53,10 @@
 //     		try {
 //     			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
 //                 	String line = trap.readLine(); 
-//     			while(line != null && scnr.next().equals("/n")) {
+//     			while(line != null && scnr.hasNext()) {
 //     				System.out.print(line);
-// 				line = trap.readLine(); 
+// 				   line = trap.readLine(); 
+//                scnr.next();
 //     			}
 // 			System.out.print("Tread lightly, dear hero.");
 //                     //reads out room enter text
@@ -64,10 +65,11 @@
 //                     //if you fall into the lava, 
 //     				try {
 //                        		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
-// 				String line2 = pitBuffer.readLine();
-//     			        while(line2 != null && scnr.next().equals("/n")) {
-//     				        System.out.print(line);
-// 					line2 = pitBuffer.readLine();
+// 				               String line2 = pitBuffer.readLine();
+//     			               while(line2 != null && scnr.hasNext()) {
+//     				                  System.out.print(line);
+// 					                  line2 = pitBuffer.readLine();
+//                                  scnr.next();
 //     			        }
 //                         pitBuffer.close();
 //                         Exception end = null;
