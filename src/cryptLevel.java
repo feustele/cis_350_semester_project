@@ -60,17 +60,22 @@ public class cryptLevel extends Room {
 	/**
         * Reads and prints the text from the 'cryptExit file'
         */
+	//TODO: Please update all of the other classes' functions/descriptions/Javadocs to better match 
+	//what they do. I already did this one for you. It helps the rest of the group understand 
+	//your intentions with your coding. For example, I'm not entirely sure what your intentions 
+	//were for the roomEngine class, so I had to take a swing in the dark and make comments based
+	//off of that swing in the dark.
 	private void generateCryptExit() {
 		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("cryptExit.txt"));
-			String line2 = chickenBuffer.readLine();
+			BufferedReader exitText = new BufferedReader(new FileReader("cryptExit.txt"));
+			String line2 = exitText.readLine();
 			System.out.print(line2);
 			while (line2 != null && scnr.hasNext()) {
 				System.out.print(line2);
-				line2 = chickenBuffer.readLine();
+				line2 = exitText.readLine();
 				scnr.next();
 			}
-			chickenBuffer.close();
+			exitText.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
