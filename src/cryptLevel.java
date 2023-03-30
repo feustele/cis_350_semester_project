@@ -35,6 +35,10 @@ public class cryptLevel extends Room {
 		return 'y'; 
 
 	}
+	
+	/**
+        * Reads and prints the text from the 'introCrypt file', meant to give the player some flair as they enter the room.
+        */
 
 	private void generateIntroText() {
 		try {
@@ -58,13 +62,9 @@ public class cryptLevel extends Room {
 	} 
        
 	/**
-        * Reads and prints the text from the 'cryptExit file'
+        * Reads and prints the text from the 'cryptExit file', meant to give the player some flair as they leave the room.
         */
-	//TODO: Please update all of the other classes' functions/descriptions/Javadocs to better match 
-	//what they do. I already did this one for you. It helps the rest of the group understand 
-	//your intentions with your coding. For example, I'm not entirely sure what your intentions 
-	//were for the roomEngine class, so I had to take a swing in the dark and make comments based
-	//off of that swing in the dark.
+	
 	private void generateCryptExit() {
 		try {
 			BufferedReader exitText = new BufferedReader(new FileReader("cryptExit.txt"));
@@ -86,46 +86,48 @@ public class cryptLevel extends Room {
 
 	/**
 	 * This method contains the specific behavior of the intro room.
-	 * It reads the intro text from a file, and prompts the user to enter the cave.
-	 * If the user decides not to enter, the game ends. If the user enters the cave,
-	 * a new room is generated.
+	 * It reads the intro text from a file, and prompts to either investigate the chest or not, generating text accordingly.
+	 * Reguardless of the user's choice, they are prompted to either exit the cave or remain.
+	 * If the player choses to leave, a new room is generated.
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	//TODO: Update javadocs above to better match the description of the room.
-	//TODO: Currently, this class is written so that the player either approaches the chest 
-	//or they exit the crypt.
 	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
 
+		char answer = promptUser("Do you investigate the chest?");
 		
-		char answer = promptUser("Do you approach the chest?");
-
-		if (answer == 'n') {
-			// if the player chooses not to approach the chest, the player leaves the crypt room?????
-			//TODO: Fix the below code. Currently causes an IOException to make the game 'end'?
-			generateCryptExit();
-			IOException end = new IOException(); 
-			throw end;
-		} 
-
-
+		if (answer == 'y') {
+			try {
+			BufferedReader chestText = new BufferedReader(new FileReader("chest.txt"));
+			String line3 = chestText.readLine();
+			System.out.print(line3);
+			while (line3 != null && scnr.hasNext()) {
+				System.out.print(line3);
+				line3 = chestText.readLine();
+				scnr.next();
+			}
+			chestText.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		answer = promptUser("Do you exit the crypt?");
 		
-		if (answer == 'n') {
-			//TODO: So if the player exits the crypt, the game ends?
-			IOException end = new IOException(); 
-			throw end;
-		}
-		try {
+		if (answer == 'y') {
+			// If the player chooses to exit, they leave the crypt.
+			try {
 			//TODO: If the player has already visited the south room, the below code will not work. 
 			map.move('s');
-		} catch (IndexOutOfBoundsException e ) {
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+			} catch (IndexOutOfBoundsException e ) {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 	
 	}
 }
+		
