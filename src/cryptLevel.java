@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 /**
- * The cryptLevel class represents the first room in the game.
+ * The cryptLevel class represents a room in the game.
  * It prompts the player to explore a new location
  * displays different endings based on the player's choice.
  * Prevents a monster from being spawned in this room.
