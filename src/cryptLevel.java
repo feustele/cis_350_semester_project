@@ -11,6 +11,30 @@ import java.util.Scanner;
  */
 public class cryptLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
+	//TODO: Add a default constructor.
+	/**
+	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
+	 * yes or no
+	 * @param prompt
+	 * @return
+	 */
+	private char promptUser(String prompt) {
+		String input;
+
+		do {
+			System.out.println(prompt);
+			input = scnr.next();
+		} while(!(
+			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
+			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
+		
+		
+		if (input.equalsIgnoreCase("NO") || input.equalsIgnoreCase("N"))
+			return 'n';
+
+		return 'y'; 
+
+	}
 
 	private void generateIntroText() {
 		try {
@@ -34,9 +58,9 @@ public class cryptLevel extends Room {
 	} 
        
 	/**
-        * Reads and prints the text about the chicken from the "chicken.txt" file
+        * Reads and prints the text from the 'cryptExit file'
         */
-	private void generateChickenText() {
+	private void generateCryptExit() {
 		try {
 			BufferedReader chickenBuffer = new BufferedReader(new FileReader("cryptExit.txt"));
 			String line2 = chickenBuffer.readLine();
@@ -63,43 +87,35 @@ public class cryptLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
+	//TODO: Update javadocs above to better match the description of the room.
+	//TODO: Currently, this class is written so that the player either approaches the chest 
+	//or they exit the crypt.
 	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
 
-		String word1;
-		do {
-			System.out.println("Do you approach the chest?");
-			word1 = scnr.next();
-		} while(!(
-			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
-			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
+		
+		char answer = promptUser("Do you approach the chest?");
 
-
-		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
-			// if the player chooses not to enter the cave, the game ends.
-			generateChickenText();
+		if (answer == 'n') {
+			// if the player chooses not to approach the chest, the player leaves the crypt room?????
+			//TODO: Fix the below code. Currently causes an IOException to make the game 'end'?
+			generateCryptExit();
 			IOException end = new IOException(); 
 			throw end;
-			// add ioextension end method to interact with game engine (register an ending)
-			// reads out fall text
-			
 		} 
-    String word2;
-		do {
-			System.out.println("Do you exit the crypt?");
-			word2 = scnr.next();
-		} while(!(
-			word2.equalsIgnoreCase("No") || word2.equalsIgnoreCase("N") 
-			|| word2.equalsIgnoreCase("Yes") || word2.equalsIgnoreCase("Y")));
 
 
-		if (word2.equalsIgnoreCase("YES") || word2.equalsIgnoreCase("Y")) {
-			// if the player chooses not to enter the cave, the game ends.
+		answer = promptUser("Do you exit the crypt?");
+		
+		if (answer == 'n') {
+			//TODO: So if the player exits the crypt, the game ends?
 			IOException end = new IOException(); 
 			throw end;
+		}
 		try {
+			//TODO: If the player has already visited the south room, the below code will not work. 
 			map.move('s');
 		} catch (IndexOutOfBoundsException e ) {
 		} catch (Exception e) {

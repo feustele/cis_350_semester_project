@@ -4,30 +4,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 /**
- * The cathedralLevel class represents the first room in the game.
+ * The mysticSpringLevel class represents a room in the game.
  * It prompts the player to explore a new location
  * displays different endings based on the player's choice.
  * Prevents a monster from being spawned in this room.
  */
-public class cathedralLevel extends Room {
+public class mysticSpringLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
+	//TODO: Default constructor
 
-        /**
-	      * Creates a new cathedral object
-	 */
-	public cathedralLevel() {
-		super();
-		int[] size = {1, 1};
-		generateRoom(size);
 
-	}
-
-	/**
-	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
-	 * yes or no
-	 * @param prompt
-	 * @return
-	 */
+	/** Takes in a string, which it will continue to prompt the user with until the user answers with a 
+	* yes or no
+	* @param prompt
+	* @return
+	*/
 	private char promptUser(String prompt) {
 		String input;
 
@@ -46,13 +37,9 @@ public class cathedralLevel extends Room {
 
 	}
 
-       
-	/**
-         * Reads and prints the introduction text from the "intro.txt" file
-         */
 	private void generateIntroText() {
 		try {
-			BufferedReader intro = new BufferedReader(new FileReader("introCathedral.txt"));
+			BufferedReader intro = new BufferedReader(new FileReader("introSpring.txt"));
 			String line = intro.readLine();
 
 			while (line != null && scnr.hasNext()) {
@@ -72,11 +59,11 @@ public class cathedralLevel extends Room {
 	} 
        
 	/**
-        * Reads and prints the text about the chicken from the "chicken.txt" file
+        * Reads and prints the text about the chicken from the "introSpring.txt" file
         */
 	private void generateChickenText() {
 		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chest.txt"));
+			BufferedReader chickenBuffer = new BufferedReader(new FileReader("springExit.txt"));
 			String line2 = chickenBuffer.readLine();
 			System.out.print(line2);
 			while (line2 != null && scnr.hasNext()) {
@@ -106,8 +93,10 @@ public class cathedralLevel extends Room {
 		
 		generateIntroText();
 
-		char answer = promptUser("Do you approach the chest?");
-		if (answer == 'y') {
+		char answer = promptUser("Do you approach the spring?");
+			
+
+		if ('n' == answer) {
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText();
 			IOException end = new IOException(); 
@@ -116,17 +105,14 @@ public class cathedralLevel extends Room {
 			// reads out fall text
 			
 		} 
-		answer = promptUser("Do you exit the cave?");
-		
-
-
-		if ('y' == answer) {
+		answer = promptUser("Do you exit the spring?");
+		if('y' == answer) {
 			// if the player chooses not to enter the cave, the game ends.
 			IOException end = new IOException(); 
 			throw end;
 		}
 		try {
-			map.move('s'); 
+			map.move('s');
 		} catch (IndexOutOfBoundsException e ) {
 		} catch (Exception e) {
 			e.printStackTrace();
