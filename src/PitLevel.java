@@ -58,57 +58,61 @@ public class PitLevel extends Room {
         return pitPosition;
     }
 
+
+    private char promptUser(String prompt) {
+		String input;
+
+		do {
+			System.out.println(prompt);
+			input = scnr.next();
+		} while(!(
+			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
+			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
+		
+		
+		if (input.equalsIgnoreCase("NO") || input.equalsIgnoreCase("N"))
+			return 'n';
+
+		return 'y'; 
+
+	}
+	
+	private void readTextFile(String file) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
+				scnr.next();
+			}
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
     /**
      * Generates the introduction text for the room and reads it from a file.
      */
     private void generateIntroText() {
-        try {
-            BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
-        	String line = trap.readLine(); 
-	    	System.out.println(line);
-			while (line != null && scnr.hasNext()) {
-                		line = trap.readLine();
-				System.out.println(line);
-				scnr.next();
-            }
-            //reads out room enter text
-            trap.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
-        }
+        readTextFile("trap.txt");
+        	
     }
 
     /**
      * Generates the text for falling into the pit and reads it from a file.
      */
     private void generatePitText() {
-        try {
-
-            BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
-            String line2 = pit.readLine(); 
-            System.out.println(line2);
-            while(line2 != null && scnr.hasNext()) {         
-                System.out.println(line2);
-                line2 = pit.readLine(); 
-		scnr.next();
-            }
-            pit.close();
-        
-        }
-        // reads out fall text
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
-        }
+       readTextFile("pit.txt");
+            
     }
 	
     /**

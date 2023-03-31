@@ -132,7 +132,6 @@ public class outroLevel extends Room {
          * displays different endings based on the player's choice.
 	 * @throws IOException
          */
-	@Override
     public void roomEngine(Map map) throws IOException{
 		generateOutroText();
 		// reads out room enter text

@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.security.InvalidParameterException;
 
 /**
  * The parent class to all rooms implemented. Holds the framework that will be used by all rooms.
  */
-public abstract class Room {
-    //TODO: Create an exit to the room.
+public abstract class Room implements RoomInterface {
     //Limits the max size of the rooms to spawn
     protected int roomLimit = 5; 
     //Holds the player's position
@@ -22,17 +19,12 @@ public abstract class Room {
     protected boolean hasVisited = false; 
 
     //Represents a percentage that an item will spawn
-    protected double itemSpawnChance = .5; 
+    //protected double itemSpawnChance = .5; 
     //Represents a percentage that an enemy will spawn.
-    protected double enemySpawnChance = .5; 
+    //protected double enemySpawnChance = .5; 
 
     //A grid containing both items and enemies.
     protected Object[][] room; 
-
-    /**
-     * An abstract method for other room classes to override
-    */
-    public abstract void roomEngine(Map map) throws IOException;
     
 
     /** 
@@ -61,7 +53,7 @@ public abstract class Room {
         room = new Object[roomSize[0]][roomSize[1]];
 
         //Generate items in the room
-        generateItems();
+        //generateItems();
         
         //Generate enemies
         //generateEnemies();
@@ -89,7 +81,7 @@ public abstract class Room {
         room = new Object[roomSize[0]][roomSize[1]];
 
         //Generate items in the room
-        generateItems();
+        //generateItems();
         
         //Generate enemies
         //generateEnemies();
@@ -98,42 +90,42 @@ public abstract class Room {
     /**
      * Generates the items that should be contained within the room. 
      */
-    protected void generateItems() {
-        Random ran = new Random();
+    // protected void generateItems() {
+    //     Random ran = new Random();
 
-        for(int x = 0; x < room.length; x++) {
-            for (int y = 0; y < room[x].length; y++) {
+    //     for(int x = 0; x < room.length; x++) {
+    //         for (int y = 0; y < room[x].length; y++) {
 
-                double ranDoub = ran.nextDouble();
-                boolean spawn = ranDoub >= itemSpawnChance;
+    //             double ranDoub = ran.nextDouble();
+    //             boolean spawn = ranDoub >= itemSpawnChance;
 
-                if(spawn) {
-                    spawnItemRandomly(new int[] {x, y});
-                }
-            }  
-        }
-    }
+    //             if(spawn) {
+    //                 spawnItemRandomly(new int[] {x, y});
+    //             }
+    //         }  
+    //     }
+    // }
 
 
-    /**
-     * Generates the enemies that should be contained within the room.
-     */
-    protected void generateEnemies() {
-        Random ran = new Random();
+    // /**
+    //  * Generates the enemies that should be contained within the room.
+    //  */
+    // protected void generateEnemies() {
+    //     Random ran = new Random();
 
-        for(int x = 0; x < room.length; x++) {
-            for (int y = 0; y < room[x].length; y++) {
-                double ranDoub = ran.nextDouble();
-                boolean spawn = ranDoub >= enemySpawnChance;
+    //     for(int x = 0; x < room.length; x++) {
+    //         for (int y = 0; y < room[x].length; y++) {
+    //             double ranDoub = ran.nextDouble();
+    //             boolean spawn = ranDoub >= enemySpawnChance;
 
-                if(spawn) {
+    //             if(spawn) {
 
-                    spawnMonsterRandomly(new int[] {x, y});
+    //                 spawnMonsterRandomly(new int[] {x, y});
 
-                }
-            }
-        }
-    }
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Checks if the given position is valid.
@@ -175,15 +167,13 @@ public abstract class Room {
 
         if(roomLimit > 0) 
             this.roomLimit = roomLimit;
-        if(itemSpawnChance >= 0 ) 
-            this.itemSpawnChance = itemSpawnChance;
-        if(enemySpawnChance >= 0)
-            this.enemySpawnChance = enemySpawnChance;
+        // if(itemSpawnChance >= 0 ) 
+        //     this.itemSpawnChance = itemSpawnChance;
+        // if(enemySpawnChance >= 0)
+        //     this.enemySpawnChance = enemySpawnChance;
 
         //Generates the number of sections, enemies, and items within the room.
         generateRoom(roomSize);
-
-        
         
     }
 
@@ -197,7 +187,7 @@ public abstract class Room {
         generateRoom(roomSize);
 
         //Generate items in the room
-        generateItems();
+        //generateItems();
         
         //Generate enemies
         //generateEnemies();
@@ -213,7 +203,7 @@ public abstract class Room {
         generateRoom();
 
         //Generate items in the room
-        generateItems();
+        //generateItems();
         
         //Generate enemies
         //generateEnemies();
@@ -429,114 +419,114 @@ public abstract class Room {
      * @param item
      * @param pos
      */
-    private void spawnItem(Item item, int[] pos) {
+    // private void spawnItem(Item item, int[] pos) {
 
-        room[pos[0]][pos[1]] = item;
+    //     room[pos[0]][pos[1]] = item;
 
-    }
+    // }
     
-    /**
-     *Spawn a random item at a random position in the room
-     */
-    private void spawnItemRandomly() {
-        //Randomly generate a position
-        int[] pos = new int[2];
-        Random ran = new Random();
-        pos[0] = ran.nextInt(room.length);
-        pos[1] = ran.nextInt(room[0].length);
-        spawnItemRandomly(pos);
-    }
+    // /**
+    //  *Spawn a random item at a random position in the room
+    //  */
+    // private void spawnItemRandomly() {
+    //     //Randomly generate a position
+    //     int[] pos = new int[2];
+    //     Random ran = new Random();
+    //     pos[0] = ran.nextInt(room.length);
+    //     pos[1] = ran.nextInt(room[0].length);
+    //     spawnItemRandomly(pos);
+    // }
 
-    /**
-     *Spawn an item at the specified position
-     *@param pos the position where the item should be spawned
-     */
-    private void spawnItemRandomly(int[] pos) {
-        Random ran = new Random();
-        int ranInt = ran.nextInt(Items.length());
+    // /**
+    //  *Spawn an item at the specified position
+    //  *@param pos the position where the item should be spawned
+    //  */
+    // private void spawnItemRandomly(int[] pos) {
+    //     Random ran = new Random();
+    //     int ranInt = ran.nextInt(Items.length());
 
-        Object itemObj;
-        try {
-            itemObj = Items.getItem(ranInt);
-            Item item = (Item) itemObj;
+    //     Object itemObj;
+    //     try {
+    //         itemObj = Items.getItem(ranInt);
+    //         Item item = (Item) itemObj;
 
-            spawnItem(item, pos);
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    //         spawnItem(item, pos);
+    //     } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+    //             | NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+    //         e.printStackTrace();
+    //     }
        
-            //System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
+    //         //System.out.println("Unable to create item... An item in 'Items' list of items likely does not correspond to an item\n");
         
-    }
+    // }
     
-    /**
-     *Spawn the specified item at a random position in the room
-     *@param item the item to be spawned
-     */
-    private void spawnItemRandomly(Item item) {
-        int[] pos = new int[2];
-        Random ran = new Random();
-        pos[0] = ran.nextInt(room.length);
-        pos[1] = ran.nextInt(room[0].length);
+    // /**
+    //  *Spawn the specified item at a random position in the room
+    //  *@param item the item to be spawned
+    //  */
+    // private void spawnItemRandomly(Item item) {
+    //     int[] pos = new int[2];
+    //     Random ran = new Random();
+    //     pos[0] = ran.nextInt(room.length);
+    //     pos[1] = ran.nextInt(room[0].length);
 
-        spawnItem(item, pos);
-    }
+    //     spawnItem(item, pos);
+    // }
 
-    /**
-     *Spawn the specified monster at the specified position in the room
-     *@param enemy the monster to be spawned
-     *@param pos the position where the monster should be spawned
-     */
-    private void spawnMonster(Monster enemy, int[] pos) {
+    // /**
+    //  *Spawn the specified monster at the specified position in the room
+    //  *@param enemy the monster to be spawned
+    //  *@param pos the position where the monster should be spawned
+    //  */
+    // private void spawnMonster(Monster enemy, int[] pos) {
 
-        room[pos[0]][pos[1]] = enemy;
-    }
+    //     room[pos[0]][pos[1]] = enemy;
+    // }
 
-    /**
-     *Spawn a random monster at a random position in the room
-     */
-    private void spawnMonsterRandomly() {
-        //Randomly generate a position
-        int[] pos = new int[2];
-        Random ran = new Random();
-        pos[0] = ran.nextInt(room.length);
-        pos[1] = ran.nextInt(room[0].length);
-        spawnMonsterRandomly(pos);
-    }
+    // /**
+    //  *Spawn a random monster at a random position in the room
+    //  */
+    // private void spawnMonsterRandomly() {
+    //     //Randomly generate a position
+    //     int[] pos = new int[2];
+    //     Random ran = new Random();
+    //     pos[0] = ran.nextInt(room.length);
+    //     pos[1] = ran.nextInt(room[0].length);
+    //     spawnMonsterRandomly(pos);
+    // }
     
-    /**
-     *Spawn a monster at the specified position in the room
-     *@param pos the position where the monster should be spawned
-     */
-    private void spawnMonsterRandomly(int[] pos) {
-        Random ran = new Random();
-        int ranInt = ran.nextInt(Items.length());
+    // /**
+    //  *Spawn a monster at the specified position in the room
+    //  *@param pos the position where the monster should be spawned
+    //  */
+    // private void spawnMonsterRandomly(int[] pos) {
+    //     Random ran = new Random();
+    //     int ranInt = ran.nextInt(Items.length());
 
-        try {
+    //     try {
 
-            Object itemObj = Monsters.getMonster(ranInt);
-            Monster item = (Monster) itemObj;
+    //         Object itemObj = Monsters.getMonster(ranInt);
+    //         Monster item = (Monster) itemObj;
 
-            spawnMonster(item, pos);
+    //         spawnMonster(item, pos);
        
-        }catch (Exception e) {
-            System.out.println("Unable to create a monster... An monster in 'Monsters' list of monsters likely does not correspond to an Monster\n");
-        }
-    }
+    //     }catch (Exception e) {
+    //         System.out.println("Unable to create a monster... An monster in 'Monsters' list of monsters likely does not correspond to an Monster\n");
+    //     }
+    // }
    
-    /**
-     *Spawn the specified monster at a random position in the room
-     *@param mon the monster to be spawned
-     */
-    private void spawnMonsterRandomly(Monster mon) {
-        int[] pos = new int[2];
-        Random ran = new Random();
-        pos[0] = ran.nextInt(room.length);
-        pos[1] = ran.nextInt(room[0].length);
+    // /**
+    //  *Spawn the specified monster at a random position in the room
+    //  *@param mon the monster to be spawned
+    //  */
+    // private void spawnMonsterRandomly(Monster mon) {
+    //     int[] pos = new int[2];
+    //     Random ran = new Random();
+    //     pos[0] = ran.nextInt(room.length);
+    //     pos[1] = ran.nextInt(room[0].length);
 
-        spawnMonster(mon, pos);
-    }
+    //     spawnMonster(mon, pos);
+    // }
 
 
      

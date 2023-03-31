@@ -45,51 +45,43 @@ public class cathedralLevel extends Room {
 		return 'y'; 
 
 	}
+	
+	private void readTextFile(String file) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
+				scnr.next();
+			}
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
        
 	/**
          * Reads and prints the introduction text from the "intro.txt" file
          */
 	private void generateIntroText() {
-		try {
-			BufferedReader intro = new BufferedReader(new FileReader("introCathedral.txt"));
-			String line = intro.readLine();
-
-			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
-				line = intro.readLine();
-				scnr.next();
-			}
-			// reads out room enter text
-			intro.close(); 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+		readTextFile("introCathedral.txt");
+			
 	} 
        
 	/**
         * Reads and prints the text about the chicken from the "chicken.txt" file
         */
 	private void generateChickenText() {
-		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chest.txt"));
-			String line2 = chickenBuffer.readLine();
-			System.out.print(line2);
-			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
-				line2 = chickenBuffer.readLine();
-				scnr.next();
-			}
-			chickenBuffer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		readTextFile("chest.txt");
 		
 	}
 
@@ -101,7 +93,6 @@ public class cathedralLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();

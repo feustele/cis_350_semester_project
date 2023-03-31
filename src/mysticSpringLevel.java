@@ -36,47 +36,40 @@ public class mysticSpringLevel extends Room {
 		return 'y'; 
 
 	}
-
-	private void generateIntroText() {
+	
+	private void readTextFile(String file) {
 		try {
-			BufferedReader intro = new BufferedReader(new FileReader("introSpring.txt"));
-			String line = intro.readLine();
 
-			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
-				line = intro.readLine();
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
 				scnr.next();
 			}
-			// reads out room enter text
-			intro.close(); 
+
+			exitText.close();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		}
+	}
+
+
+	private void generateIntroText() {
+		readTextFile("introSpring.txt");
+			
 	} 
        
 	/**
         * Reads and prints the text about the chicken from the "introSpring.txt" file
         */
 	private void generateChickenText() {
-		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("springExit.txt"));
-			String line2 = chickenBuffer.readLine();
-			System.out.print(line2);
-			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
-				line2 = chickenBuffer.readLine();
-				scnr.next();
-			}
-			chickenBuffer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		readTextFile("springExit.txt");
 		
 	}
 
@@ -88,7 +81,6 @@ public class mysticSpringLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();

@@ -89,7 +89,6 @@ public class hallwayLevel extends Room {
 	//TODO: Update javadocs above to better match the description of the room.
 	//TODO: Currently, this class is written so that the player either approaches the chest 
 	//or they exit the crypt.
-	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();

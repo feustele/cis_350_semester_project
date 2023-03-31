@@ -22,49 +22,59 @@ public class introLevel extends Room {
 
 	}
        
+	private char promptUser(String prompt) {
+		String input;
+
+		do {
+			System.out.println(prompt);
+			input = scnr.next();
+		} while(!(
+			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
+			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
+		
+		
+		if (input.equalsIgnoreCase("NO") || input.equalsIgnoreCase("N"))
+			return 'n';
+
+		return 'y'; 
+
+	}
+	
+	private void readTextFile(String file) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
+				scnr.next();
+			}
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
          * Reads and prints the introduction text from the "intro.txt" file
          */
 	private void generateIntroText() {
-		try {
-			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
-			String line = intro.readLine();
-
-			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
-				line = intro.readLine();
-				scnr.next();
-			}
-			// reads out room enter text
-			intro.close(); 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+		readTextFile("intro.txt");
+			
 	} 
        
 	/**
         * Reads and prints the text about the chicken from the "chicken.txt" file
         */
 	private void generateChickenText() {
-		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
-			String line2 = chickenBuffer.readLine();
-			System.out.print(line2);
-			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
-				line2 = chickenBuffer.readLine();
-				scnr.next();
-			}
-			chickenBuffer.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		readTextFile("chicken.txt");
 		
 	}
 
@@ -76,21 +86,15 @@ public class introLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
 
-		String word1;
-		do {
-			System.out.println("Do you enter the cave?");
-			word1 = scnr.next();
-		} while(!(
-			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
-			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
+		char answer = promptUser("Do you enter the cave?");
+		
 
 
-		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
+		if (answer == 'n'){
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText();
 			IOException end = new IOException(); 

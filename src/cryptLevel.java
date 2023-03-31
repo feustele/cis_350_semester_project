@@ -36,29 +36,34 @@ public class cryptLevel extends Room {
 
 	}
 	
+	private void readTextFile(String file) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
+				scnr.next();
+			}
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
         * Reads and prints the text from the 'introCrypt file', meant to give the player some flair as they enter the room.
         */
 
 	private void generateIntroText() {
-		try {
-			BufferedReader intro = new BufferedReader(new FileReader("introCrypt.txt"));
-			String line = intro.readLine();
-
-			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
-				line = intro.readLine();
-				scnr.next();
-			}
-			// reads out room enter text
-			intro.close(); 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
+		readTextFile("introCrypt.txt");
 	} 
        
 	/**
@@ -66,22 +71,12 @@ public class cryptLevel extends Room {
         */
 	
 	private void generateCryptExit() {
-		try {
-			BufferedReader exitText = new BufferedReader(new FileReader("cryptExit.txt"));
-			String line2 = exitText.readLine();
-			System.out.print(line2);
-			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
-				line2 = exitText.readLine();
-				scnr.next();
-			}
-			exitText.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		readTextFile("cryptExit.txt");
 		
+	}
+	private void generateChestText() {
+		readTextFile("chest.txt");
+
 	}
 
 	/**
@@ -92,7 +87,6 @@ public class cryptLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	@Override
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
@@ -100,29 +94,18 @@ public class cryptLevel extends Room {
 		char answer = promptUser("Do you investigate the chest?");
 		
 		if (answer == 'y') {
-			try {
-			BufferedReader chestText = new BufferedReader(new FileReader("chest.txt"));
-			String line3 = chestText.readLine();
-			System.out.print(line3);
-			while (line3 != null && scnr.hasNext()) {
-				System.out.print(line3);
-				line3 = chestText.readLine();
-				scnr.next();
-			}
-			chestText.close();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//TODO: Factor the below code so that we only have to call a function which will
+			//read out the chest text.
+			generateChestText();
 		}
+
 		answer = promptUser("Do you exit the crypt?");
 		
 		if (answer == 'y') {
 			// If the player chooses to exit, they leave the crypt.
 			try {
-			//TODO: If the player has already visited the south room, the below code will not work. 
-			map.move('s');
+				//TODO: If the player has already visited the south room, the below code will not work. 
+				map.move('s');
 			} catch (IndexOutOfBoundsException e ) {
 			} catch (Exception e) {
 				e.printStackTrace();
