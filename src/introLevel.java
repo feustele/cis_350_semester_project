@@ -80,6 +80,7 @@ public class introLevel extends Room {
 	public void roomEngine(Map map) throws IOException {
 		
 		generateIntroText();
+		audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
 
 		String word1;
 		do {
@@ -91,7 +92,7 @@ public class introLevel extends Room {
 
 
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
-			audioEngine.playSong("Never Gonna Give You Up (Medieval Cover)");
+			audioEngine.playSong("Never Gonna Give You Up (Medieval Cover).mp3");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText();
 			IOException end = new IOException(); 
