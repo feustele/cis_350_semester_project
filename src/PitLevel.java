@@ -88,7 +88,7 @@ public class PitLevel extends Room {
      */
     private void generatePitText() {
         try {
-
+	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
             BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
             String line2 = pit.readLine(); 
             System.out.println(line2);
@@ -164,7 +164,7 @@ public class PitLevel extends Room {
      *@return A character representing the direction to move in after the game is finished.
      */
     public void roomEngine(Map map) throws IOException{
-        	
+       	audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
         generateIntroText();
 
         //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
