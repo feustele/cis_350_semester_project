@@ -51,6 +51,7 @@ import java.io.BufferedReader;
 
 	@Override
 	public void roomEngine(Map map) throws IOException {
+		audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore).mp3");
  		try {
  			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
              	String line = trap.readLine(); 
@@ -64,8 +65,9 @@ import java.io.BufferedReader;
              	trap.close();
              	if (getLavaPosition() == getPlayerPosition()) {
                  //if you fall into the lava, 
+			audioEngine.playSong("Pompeii - Medieval Cover Bardcore.mp3");
  				try {
-                    BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
+                    		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
 				    String line2 = pitBuffer.readLine();
  			        while(line2 != null && scnr.hasNext()) {
  			        	System.out.print(line);
