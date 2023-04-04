@@ -96,20 +96,21 @@ public class basicLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map) throws IOException {
-		
+		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
 		generateIntroText();
 
 		char answer = promptUser("Do you investigate the computer?");
 		
 		if (answer == 'y') {
+			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
 			generateComputerText();
 			IOException end = new IOException(); 
 			throw end;
 		}
 
 		answer = promptUser("Do you exit the board room?");
-		
 		if (answer == 'y') {
+			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 			// If the player chooses to exit, they leave the crypt.
 			generateExitText();
 			try {
