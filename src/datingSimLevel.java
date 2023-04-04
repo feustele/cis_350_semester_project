@@ -95,13 +95,13 @@ public class datingSimLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map) throws IOException {
-		
+		audioEngine.playSong("Pompeii - Medieval Cover Bardcore.mp3");
 		generateIntroText();
 
 		char answer = promptUser("Do you run?");
 		
 		if (answer == 'n') {
-
+			audioEngine.playSong("Haddaway - What Is Love (Medieval Style Bardcore).mp3");
 			generateSeduceText();
 			
 			int chances = 3;
@@ -152,6 +152,7 @@ public class datingSimLevel extends Room {
 		
 				if (answer == 'y') {
 					// If the player chooses to exit, they leave the date.
+					audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
 					generateExitText();
 					try {
 						//TODO: If the player has already visited the south room, the below code will not work. 
