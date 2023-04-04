@@ -70,7 +70,7 @@ public class basicLevel extends Room {
         * Reads and prints the text from the 'introBasic file', meant to give the player some flair as they enter the room.
         */
 	
-	private void generateCryptExit() {
+	private void generateExitText() {
 		readTextFile("exitBasic.txt");
 		
 	}
@@ -106,6 +106,7 @@ public class basicLevel extends Room {
 		
 		if (answer == 'y') {
 			// If the player chooses to exit, they leave the crypt.
+			generateExitText();
 			try {
 				//TODO: If the player has already visited the south room, the below code will not work. 
 				map.move('s');
