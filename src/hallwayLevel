@@ -111,9 +111,6 @@ public class hallwayLevel extends Room {
 			throw end;
 		} 
     // if the player tries to open a door, they get sucked into a "backroom" and the game ends.
-
-
-		answer = promptUser("Do you exit through the end of the hallway?");
 		
 		if (answer == 'n') {
 			System.out.print("You walk to the end of the hallway and exit, ignoring the hallway doors.");
