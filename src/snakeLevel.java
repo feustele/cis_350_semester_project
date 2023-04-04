@@ -71,7 +71,7 @@ public class snakeLevel extends Room {
         */
 	
 	private void generateExitText() {
-		readTextFile("exitBasic.txt");
+		readTextFile("snakeExit.txt");
 		
 	}
 	private void generateCharmText() {
