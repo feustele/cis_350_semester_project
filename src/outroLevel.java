@@ -134,6 +134,7 @@ public class outroLevel extends Room {
          */
 	@Override
     public void roomEngine(Map map) throws IOException{
+	    	audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore");
 		generateOutroText();
 		// reads out room enter text
 		String word1;
@@ -143,16 +144,17 @@ public class outroLevel extends Room {
 			word1 = scnr.next();
 		} while(!(
 			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
-			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
-
-
-		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N"))
-		//if the player chooses not to take the amulet, the game ends.
-			generateBadEnding();
-		else if (word1.equalsIgnoreCase("YES") 
-				|| word1.equalsIgnoreCase("Y")) 
-			generateGoodEnding();
-		
+			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y"))){
+  
+    		}if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
+			//if the player chooses not to take the amulet, the game ends.
+				audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
+				generateBadEnding();
+	    			
+    		}else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")) {
+				audioEngine.playSong("THE REAL SLIM SHADY Medieval Bardcore Version Eminem vs Beedle the Bardcore.mp3");
+				generateGoodEnding();	
+		}
 		// reads out ending text.
 
 		generateCredits();
