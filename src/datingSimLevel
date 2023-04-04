@@ -1,0 +1,155 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+/**
+ * The datingSimLevel class represents a room in the game.
+ * It prompts the player to explore a new location
+ * displays different endings based on the player's choice.
+ * Prevents a monster from being spawned in this room.
+ */
+public class datingSimLevel extends Room {
+	Scanner scnr = new Scanner(System.in);
+	//TODO: Add a default constructor.
+	/**
+	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
+	 * yes or no
+	 * @param prompt
+	 * @return
+	 */
+	private char promptUser(String prompt) {
+		String input;
+
+		do {
+			System.out.println(prompt);
+			input = scnr.next();
+		} while(!(
+			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
+			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
+		
+		
+		if (input.equalsIgnoreCase("NO") || input.equalsIgnoreCase("N"))
+			return 'n';
+
+		return 'y'; 
+
+	}
+	
+	private void readTextFile(String file) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+			System.out.print(line2);
+
+			while (line2 != null && scnr.hasNext()) {
+				System.out.print(line2);
+				line2 = exitText.readLine();
+				scnr.next();
+			}
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+        * Reads and prints the text from a file, meant to give the player some flair.
+        */
+
+	private void generateIntroText() {
+		readTextFile("datingSimIntro.txt");
+	} 
+       
+	/**
+        * Reads and prints the text from the 'snakeIntro file', meant to give the player some flair as they enter the room.
+        */
+	
+	private void generateExitText() {
+		readTextFile("datingSimExit.txt");
+		
+	}
+	private void generateSeduceText() {
+		readTextFile("seduce.txt");
+
+	}
+
+	/**
+	 * This method contains the specific behavior of the basic room.
+	 * It reads the intro text from a file, and prompts to either investigate the computer or not, generating text accordingly.
+   * If the player chooses to investigate the computer, the game ends as they are trapped in the 9 to 5.
+	 * If they avoid the trap, they are prompted to either exit the room or remain.
+	 * If the player choses to leave, a new room is generated.
+	 * 
+	 * @return 's' character, indicating the direction of the player's movement.
+	 */
+	public void roomEngine(Map map) throws IOException {
+		
+		generateIntroText();
+
+		char answer = promptUser("Do you run?");
+		
+		if (answer == 'n') {
+			//TODO: Factor the below code so that we only have to call a function which will
+			//read out the computer text.
+			generateSeduceText();
+      int chances = 3;
+      int hearts = 0;
+      while (chances >= 1 || hearts <= 2){
+      System.out.println("What do you do?");
+      if (scnr.nextLine.equals.ignoreCase("Ask her about her day") || scnr.nextLine.equals.ignoreCase("Compliment her.") || scnr.nextLine.equals.ignoreCase("Ask what such a beautiful dragon is doing in a place like this?") || scnr.nextLine.equals.ignoreCase("Tell her you've never met a dragon before.")  {
+        if (hearts = 0){
+         System.out.println("The dragon blushes, surprised.");
+        }
+        if (hearts = 1){
+         System.out.println("The dragon curls back. She doesn't seem to want to attack you.");
+        }
+        if (hearts = 2){
+          System.out.println("The dragon bats her eyelashes at you.");
+        }
+        hearts = hearts + 1;
+      }
+      else if (scnr.nextLine.equals.ignoreCase("run") || scnr.nextLine.equals.ignoreCase("escape") scnr.nextLine.equals.ignoreCase("flee")){
+        chances = 0;
+      }
+      else{
+        if (chances = 3){
+          System.out.println("The dragon blows smoke at you. You'd better be careful with what you say next.");
+        }
+        else if (chances = 2){
+          System.out.println("The dragon snarls. Buddy, are you blind?");
+        } 
+        else{
+          System.out.println("The dragon creeps closer, ready to pounce. You'd better hope you have a will in place.");
+        } 
+        chances = chances - 1;
+      }
+		}
+    if (chances == 0){
+      System.out.println("The dragon gobbles you up! Your charisma stat really was lacking.");
+      IOException end = new IOException(); 
+			throw end;
+    }
+    else{
+    System.out.println("You and the dragon decide to order takeout. She reccomends a lovely Indian place in the next cavern over.");
+		answer = promptUser("Do you go to the next room after the date?");
+		
+		if (answer == 'y') {
+			// If the player chooses to exit, they leave the date.
+			generateExitText();
+			try {
+				//TODO: If the player has already visited the south room, the below code will not work. 
+				map.move('s');
+			} catch (IndexOutOfBoundsException e ) {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 	
+	}
+}
+}
