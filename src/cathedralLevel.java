@@ -80,7 +80,7 @@ public class cathedralLevel extends Room {
 	/**
         * Reads and prints the text about the chicken from the "chicken.txt" file
         */
-	private void generateChickenText() {
+	private void generateChestText() {
 		readTextFile("chest.txt");
 		
 	}
@@ -99,28 +99,21 @@ public class cathedralLevel extends Room {
 
 		char answer = promptUser("Do you approach the chest?");
 		if (answer == 'y') {
-			// if the player chooses not to enter the cave, the game ends.
-			generateChickenText();
-			IOException end = new IOException(); 
-			throw end;
-			// add ioextension end method to interact with game engine (register an ending)
-			// reads out fall text
-			
+			// if the player approaches the chest, they get flavor text.
+			generateChestText();
+
 		} 
-		answer = promptUser("Do you exit the cave?");
+		answer = promptUser("Do you exit the cathedral?");
 		
-
-
 		if ('y' == answer) {
-			// if the player chooses not to enter the cave, the game ends.
-			IOException end = new IOException(); 
-			throw end;
-		}
-		try {
-			map.move('s'); 
-		} catch (IndexOutOfBoundsException e ) {
-		} catch (Exception e) {
-			e.printStackTrace();
+			// if the player chooses to exit the cathedral, the next room is generated.
+			try {
+				map.move('s'); 
+			} catch (IndexOutOfBoundsException e ) {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}
