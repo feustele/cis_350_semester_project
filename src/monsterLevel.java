@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 	@Override
 	public void roomEngine(Map map) throws IOException {
 		Scanner scnr = new Scanner(System.in);
+		audioEngine.playSong("Pompeii - Medieval Cover Bardcore.mp3");
  		try {
  			BufferedReader trap = new BufferedReader(new FileReader("monsterLevelText.txt"));
              	String line = trap.readLine(); 
@@ -40,14 +41,17 @@ import java.io.BufferedReader;
             		//reads out room enter text, with each new line being generated when the player hits enter
              	trap.close();
              if (this.Room.getMonsters() == "Snake"){
+		 audioEngine.playSong("Toxic - Britney Spears (Bardcore Medieval Style).mp3");
                  System.out.print("You see a horrible, slithery snake!");
              }
              // If there's a snake in the room, it generates text. (insert toxic by britney spears) 
              else if (this.Room.getMonsters() == "Zombie"){
-                 System.out.print("You see a shambling corpse!");
+                 audioEngine.playSong("The Cranberries - Zombie [Medieval Bardcore Instrumental Cover].mp3");
+		 System.out.print("You see a shambling corpse!");
              }
              // If there's a zombie (insert Cranberries song here)
              else if (this.Room.getMonsters() == "Frog"){
+		 audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
                  System.out.print("You see a... brightly colored frog?");
              }
              //poison dart frog - soon to have its own ending (greatful dead?).
