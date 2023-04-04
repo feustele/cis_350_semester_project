@@ -91,6 +91,7 @@ public class introLevel extends Room {
 
 
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
+			audioEngine.playSong("NeverGonnaGiveYouUp.mp3");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText();
 			IOException end = new IOException(); 
