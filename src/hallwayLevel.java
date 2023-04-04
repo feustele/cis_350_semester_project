@@ -110,13 +110,14 @@ public class hallwayLevel extends Room {
 	 */
 	
 	public void roomEngine(Map map) throws IOException {
-		
+		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
 		generateIntroText();
 		// player is prompted with the level's flavor text
 
 		char answer = promptUser("Do you open a door?");
 
 		if (answer == 'y') {
+			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
 			try {
 				generateInfiniteEnding();
 				IOException end = new IOException(); 
@@ -130,6 +131,7 @@ public class hallwayLevel extends Room {
 		// if the player tries to open a door, they get sucked into a "backroom" and the game ends.
 		
 		if (answer == 'n') {
+			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 			System.out.print("You walk to the end of the hallway and exit, ignoring the hallway doors.");
 			generateHallwayExit();
 			try {
