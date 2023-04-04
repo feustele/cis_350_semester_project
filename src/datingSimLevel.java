@@ -88,8 +88,9 @@ public class datingSimLevel extends Room {
 	/**
 	 * This method contains the specific behavior of the dragon's room.
 	 * It reads the intro text from a file, and prompts to either engage with the dragon or not, generating text accordingly.
-	 * If the player chooses to run at any point, the dragon eats them.
+	 * If the player chooses to run at any point, or fail the date as marked by three "chances", the dragon eats them.
 	 * If they flirt with the dragon, they stand a chance at survival, with text generated based on every descicion they make with the dragon.
+	 * If they successfully romance the dragon, they are allowed to leave.
 	 * If the player choses to leave, a new room is generated.
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
