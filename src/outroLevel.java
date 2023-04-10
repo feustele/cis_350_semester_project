@@ -19,6 +19,30 @@ public class outroLevel extends Room {
 	public outroLevel() {
 		super();
 	}
+
+	/**
+	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
+	 * yes or no
+	 * @param prompt
+	 * @return
+	 */
+	private char promptUser(String prompt) {
+		String input;
+
+		do {
+			System.out.println(prompt);
+			input = scnr.next();
+		} while(!(
+			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
+			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
+		
+		
+		if (input.equalsIgnoreCase("NO") || input.equalsIgnoreCase("N"))
+			return 'n';
+
+		return 'y'; 
+
+	}
 	
 	/**
          * Generates the text for the outroLevel room by reading from a file called "outro.txt"
@@ -134,26 +158,21 @@ public class outroLevel extends Room {
          */
 	@Override
     public void roomEngine(Map map) throws IOException{
-	    	audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore");
+
+	    audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore");
 		generateOutroText();
 		// reads out room enter text
-		String word1;
 
-		do {
-			System.out.println("Do you retrieve the Mysterious Amulet?");
-			word1 = scnr.next();
-		} while(!(
-			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
-			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y"))){
-  
-    		}if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")){
+		char answer = promptUser("Do you retrieve the Mysterious Amulet?");
+
+		if (answer == 'n') {
 			//if the player chooses not to take the amulet, the game ends.
-				audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
-				generateBadEnding();
+			audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
+			generateBadEnding();
 	    			
-    		}else if (word1.equalsIgnoreCase("YES") || word1.equalsIgnoreCase("Y")) {
-				audioEngine.playSong("THE REAL SLIM SHADY Medieval Bardcore Version Eminem vs Beedle the Bardcore.mp3");
-				generateGoodEnding();	
+		}else if(answer == 'y') {
+			audioEngine.playSong("THE REAL SLIM SHADY Medieval Bardcore Version Eminem vs Beedle the Bardcore.mp3");
+			generateGoodEnding();	
 		}
 		// reads out ending text.
 
