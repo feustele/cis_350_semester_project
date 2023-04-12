@@ -210,9 +210,9 @@ public abstract class Room implements RoomInterface {
     }
 
     /**
-     * Moves the player in a given direction.
+     * Moves the player in a given direction. 
      * @param d The direction to move the player in ('n' for north, 'e' for east, 's' for south, 'w' for west).
-     * @throws IndexOutOfBoundsException If the player attempts to move outside the game board boundaries.
+     * @throws IndexOutOfBoundsException If the player attempts to move outside of the current room.
      * @throws InvalidParameterException If the direction parameter is not a valid character ('n', 'e', 's', or 'w').
      */
     public void movePlayer(char d) {
@@ -279,27 +279,27 @@ public abstract class Room implements RoomInterface {
     /**
      * Sets the player's position, but only adapting one axis of the position. 
      * Should only be used when the player enter a room from a certain direction
-     * @param direction
+     * @param direction The direction the player is leaving the past room from.
      */
     public void setPlayerPosition(char direction) {
         Random ran = new Random();
 
         switch(direction) {
         case 'n':
-            playerPosition[0] = 0;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
-            break;
-        case 'e':
-            playerPosition[0] = ran.nextInt(room.length);
+            playerPosition[0] = ran.nextInt(room[playerPosition[0]].length);
             playerPosition[1] = room[0].length - 1;
             break;
+        case 'e':
+            playerPosition[0] = 0;
+            playerPosition[1] = ran.nextInt(room.length);
+            break;
         case 's':
-            playerPosition[0] = room[0].length - 1;
-            playerPosition[1] = ran.nextInt(room[playerPosition[0]].length);
+            playerPosition[0] = ran.nextInt(room[playerPosition[0]].length);
+            playerPosition[1] = 0;
             break;
         case 'w':
-            playerPosition[0] = ran.nextInt(room.length);
-            playerPosition[1] = 0;
+            playerPosition[0] = room.length - 1;
+            playerPosition[1] = ran.nextInt(room.length);
             break;
         }
 

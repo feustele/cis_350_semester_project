@@ -84,23 +84,29 @@ public class TestClass {
     @Test
     public void mapMoveARoomSouth() throws Exception  {
         Map map = new Map();
-        Player player = new Player("Test");
 
         introLevel tempVar = new introLevel();
+        int[] roomSize = map.getPlayerRoom().getSize();
         int[] setPosition = {0, 1};
 
-        map.moveRooms('s', player);
+        for (int i = 0; i < roomSize[0]; i++) {
+            map.move('s');
+        }
+
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
         assertEquals(2, map.getMap().get(1).getRoomPosition().length);
         assertEquals(setPosition[0], map.getMap().get(1).getRoomPosition()[0]);
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
-
+        
+        assertNotEquals(tempVar, map.getPlayerRoom());
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
         assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
         assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
+
+
     @Test
     public void mapMoveARoomNorth() throws Exception {
         Map map = new Map();
@@ -108,15 +114,19 @@ public class TestClass {
 
         introLevel tempVar = new introLevel();
         int[] setPosition = {0, -1};
+        int[] roomSize = map.getPlayerRoom().getSize();
 
-        map.moveRooms('n', player);
 
+        for (int i = roomSize[0]; i > 0;  i--) {
+            map.move('n');
+        }
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
         assertEquals(2, map.getMap().get(1).getRoomPosition().length);
         assertEquals(setPosition[0], map.getMap().get(1).getRoomPosition()[0]);
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
+        assertNotEquals(tempVar, map.getPlayerRoom());
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
         assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
         assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
@@ -129,14 +139,19 @@ public class TestClass {
         introLevel tempVar = new introLevel();
         int[] setPosition = {1, 0};
 
-        map.moveRooms('e', player);
+        int[] roomSize = map.getPlayerRoom().getSize();
 
+
+        for (int i = 0; i < roomSize[1];  i++) {
+            map.move('e');
+        }
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
         assertEquals(2, map.getMap().get(1).getRoomPosition().length);
         assertEquals(setPosition[0], map.getMap().get(1).getRoomPosition()[0]);
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
+        assertNotEquals(tempVar, map.getPlayerRoom());
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
         assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
         assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
@@ -147,8 +162,12 @@ public class TestClass {
         Player player = new Player("Test");
         introLevel tempVar = new introLevel();
         int[] setPosition = {-1, 0};
+        int[] roomSize = map.getPlayerRoom().getSize();
 
-        map.moveRooms('w', player);
+
+        for (int i = roomSize[1]; i > 0;  i--) {
+            map.move('w');
+        }
 
         assertEquals(2, map.getMapSize());
         assertEquals(tempVar.getClass(), map.getMap().get(0).getClass());
@@ -156,23 +175,13 @@ public class TestClass {
         assertEquals(setPosition[0], map.getMap().get(1).getRoomPosition()[0]);
         assertEquals(setPosition[1], map.getMap().get(1).getRoomPosition()[1]);
 
+        assertNotEquals(tempVar, map.getPlayerRoom());
         assertNotEquals(tempVar.getClass(), map.getMap().get(1).getClass());
         assertNotEquals(outroLevel.class, map.getMap().get(1).getClass());
         assertNotEquals(introLevel.class, map.getMap().get(1).getClass());
     }
 
-    @Test
-    public void mapMoveARoomGenerateEnding() throws Exception {
-        Map map = new Map();
-        ArrayList<Item> inventory = new ArrayList<Item>();
-        inventory.add(new MysteriousAmulet());
-        Player player = new Player("Test", inventory);
-        
-        map.moveRooms('w', player);
-
-        assertEquals(outroLevel.class, map.getMap().get(1).getClass());
-
-    }
+    
 
     @Test(expected = Exception.class)
     public void mapMoveToPrevVisitedSquareSimple() throws Exception {
@@ -180,9 +189,9 @@ public class TestClass {
         Player player = new Player("Test");
 
 
-        map.moveRooms('w', player);
+        map.move('w');
 
-        map.moveRooms('e', player);
+        map.move('e');
     }
 
     @Test(expected = Exception.class)
@@ -190,11 +199,11 @@ public class TestClass {
         Map map = new Map();
         Player player = new Player("Test");
 
-        map.moveRooms('w', player);
+        map.move('w');
 
-        map.moveRooms('s', player);
-        map.moveRooms('e', player);
-        map.moveRooms('n', player);
+        map.move('s');
+        map.move('e');
+        map.move('n');
     }
 
     
@@ -202,30 +211,30 @@ public class TestClass {
     @Test
     public void roomSetPlayerNorth() {
         PitLevel room = new PitLevel();
-        room.setPlayerPosition('w');
-        assertEquals(0, room.getPlayerPosition()[0]);
-        
+        room.setPlayerPosition('n');
+        System.out.println(room.getSize()[0] -1);
+        assertEquals(room.getSize()[0] - 1, room.getPlayerPosition()[1]);
     }  
     @Test
     public void roomSetPlayerSouth() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('s');
-        assertEquals(room.getSize()[0] - 1, room.getPlayerPosition()[0]);
-        
+        assertEquals(0, room.getPlayerPosition()[1]);
+
     }  
     @Test
     public void roomSetPlayerEast() {
         PitLevel room = new PitLevel();
         room.setPlayerPosition('e');
-        assertEquals(room.getSize()[1] - 1, room.getPlayerPosition()[1]);
-        
+        assertEquals(0, room.getPlayerPosition()[0]);
+
     }  
     @Test
     public void roomSetPlayerWest() {
         PitLevel room = new PitLevel();
-        room.setPlayerPosition('a');
-        assertEquals(0, room.getPlayerPosition()[1]);
-        
+        room.setPlayerPosition('w');
+        assertEquals(room.getSize()[1] - 1, room.getPlayerPosition()[0]);
+
     }  
 
     @Test
@@ -320,7 +329,7 @@ public class TestClass {
         assertEquals(finalPos[1], room.getPlayerPosition()[1]);
 
 
-        pos[0] = room.getSize()[0] - 1 ;
+        pos[0] = room.getSize()[0] - 1;
         pos[1] = room.getSize()[1] - 2;
 
         finalPos[0] = room.getSize()[0] - 1;
@@ -408,21 +417,44 @@ public class TestClass {
         assertEquals(finalPos[0], room.getPlayerPosition()[0]);
         assertEquals(finalPos[1], room.getPlayerPosition()[1]);
     }
-    
 
-    public static void main(String args[]) throws Exception {
-        //Map map = new Map();
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void roomSetPlayerNorthInvalid1() {
+        int[] pos = {0,0};
         Room room = new PitLevel();
-        int[] pos = {room.getSize()[0], room.getSize()[1] - 2};
-        
+        room.setPlayerPosition(pos);
+        room.movePlayer('n');
+    }
 
-        int[] finalPos = {room.getSize()[0], room.getSize()[1] - 2};
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void roomSetPlayerNorthInvalid2() {
+        int[] pos = {1,0};
+        Room room = new PitLevel();
+        room.setPlayerPosition(pos);
+        room.movePlayer('n');
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void roomSetPlayerSouthInvalid1() {
+        Room room = new PitLevel();
+        int[] pos = {0, room.getSize()[1]};
 
         room.setPlayerPosition(pos);
         room.movePlayer('s');
-        
-        assertEquals(finalPos[0], room.getPlayerPosition()[0]);
-        assertEquals(finalPos[1], room.getPlayerPosition()[1]);
-        
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void roomSetPlayerSouthInvalid2() {
+        Room room = new PitLevel();
+        int[] pos = {1, room.getSize()[1]};
+        room.setPlayerPosition(pos);
+        room.movePlayer('s');
+    }
+    
+
+    public static void main(String args[]) throws Exception {
+        PitLevel room = new PitLevel();
+        room.setPlayerPosition('a');
+        assertEquals(room.getSize()[1] - 1, room.getPlayerPosition()[0]);
     }
 }

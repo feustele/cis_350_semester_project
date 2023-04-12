@@ -72,8 +72,10 @@ public class Map {
      */
     private Room tryCreatingOutro() {
         
-        if(getMapSize() > 3) {
-            return createOutroRoom();
+        if(getMapSize() > 5) {
+            Room outroRoom = createOutroRoom(); 
+            playerRoom = outroRoom;
+            return outroRoom;
         }
         
         return null;
@@ -90,6 +92,7 @@ public class Map {
         int roomToGenerate = ran.nextInt(Rooms.length());
         try {
             Room room = (Room) Rooms.getRoom(roomToGenerate);
+            playerRoom = room;
             return room;
         } catch (Exception e) {
             throw new Exception("Unable to generate a new room");
@@ -104,7 +107,7 @@ public class Map {
      * @throws Exception
      */
     private Room moveRooms(char direction) throws Exception {
-        
+        //TODO: I think I have a logic error somewhere in here.
         int[] oldPosition = playerRoom.getRoomPosition();
         /**Creates a hard copy of oldPosition */
         int[] position = {oldPosition[0], oldPosition[1]};
@@ -135,6 +138,7 @@ public class Map {
             room = generateNewRoom();
         }
 
+        
         room.setPlayerPosition(direction);
         room.setRoomPosition(position);
         map.add(room);
@@ -199,8 +203,9 @@ public class Map {
         try {
             playerRoom.movePlayer(d);
         } catch (IndexOutOfBoundsException e) {
+           
+
             moveRooms(d);
-            throw e;
         }
     }
     
