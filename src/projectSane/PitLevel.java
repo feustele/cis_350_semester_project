@@ -172,18 +172,10 @@ public class PitLevel extends Room {
         while(isPositionValid(playerPosition)) {
             System.out.println("What would you like to do?");
             String action = scnr.nextLine();
-            try {
-                fullFillAction(map, action);
-            } catch(IndexOutOfBoundsException e) {
-                return;
-            }
-        } 
             
-	   
-	    // if (getPlayerPosition() != null){
-		//     System.out.println("Sorry! You can't do that here.");
-	    // }
-		
+            fullFillAction(map, action);
+           
+        } 
         
 
     }

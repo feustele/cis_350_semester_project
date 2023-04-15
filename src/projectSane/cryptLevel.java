@@ -11,8 +11,16 @@ import java.util.Scanner;
  * Prevents a monster from being spawned in this room.
  */
 public class cryptLevel extends Room {
-	Scanner scnr = new Scanner(System.in);
-	//TODO: Add a default constructor.
+
+	
+
+	Scanner scnr = new Scanner(System.in);	
+	
+	public cryptLevel() {		
+		//super();
+		super(new int[] {1, 1});
+
+	}
 	/**
 	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
 	 * yes or no
@@ -44,11 +52,13 @@ public class cryptLevel extends Room {
 			String line2 = exitText.readLine();
 			System.out.print(line2);
 
-			while (line2 != null && scnr.hasNext()) {
+			while (line2 != null) {
 				System.out.print(line2);
 				line2 = exitText.readLine();
-				scnr.next();
-			}
+
+				scnr.nextLine();
+				
+				}
 
 			exitText.close();
 
@@ -80,6 +90,42 @@ public class cryptLevel extends Room {
 
 	}
 
+
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
+
 	/**
 	 * This method contains the specific behavior of the intro room.
 	 * It reads the intro text from a file, and prompts to either investigate the chest or not, generating text accordingly.
@@ -100,18 +146,13 @@ public class cryptLevel extends Room {
 			generateChestText();
 		}
 
-		//TODO: Make a default constructor which sets the size to 0, and remove the below code.
-		answer = promptUser("Do you exit the crypt?");
-		
-		if (answer == 'y') {
-			// If the player chooses to exit, they leave the crypt.
-			try {
-				map.move('s');
-			} catch (IndexOutOfBoundsException e ) {
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} 	
+
+
+		exit(map);
+	}
+
+	public void setScanner(Scanner scnr) {
+		this.scnr = scnr; 
 	}
 }
 		

@@ -17,9 +17,7 @@ public class introLevel extends Room {
 	 * Creates a new introLevel object
 	 */
 	public introLevel() {
-		super();
-		int[] size = {1, 1};
-		generateRoom(size);
+		super(new int[] {1, 1});
 
 	}
        
@@ -69,6 +67,41 @@ public class introLevel extends Room {
 		
 	}
 
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to exit the board room?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
+
 	/**
 	 * This method contains the specific behavior of the intro room.
 	 * It reads the intro text from a file, and prompts the user to enter the cave.
@@ -102,20 +135,10 @@ public class introLevel extends Room {
 			// reads out fall text
 			
 		} 
-		/**
-		 * Because the game is thrown into two states - enter the cave or not, 
-		 *we know the game is currently in the enter the cave state.
-		 */
 		
-		//Move south by default
+		exit(map);
 		
-		try {
-			map.move('s');
-		} catch (IndexOutOfBoundsException e ) {
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 
 	public void setScanner(Scanner scnr) {

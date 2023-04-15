@@ -85,6 +85,41 @@ public class mysticSpringLevel extends Room {
 		
 	}
 	
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
+	
 	/**
      * Reads and prints the text from the "spring.txt" file to give user flavor text about the spring.
      */
@@ -109,17 +144,13 @@ public class mysticSpringLevel extends Room {
 			generateSpringText();
 		} 
 		
-		answer = promptUser("Do you exit the cave?");
-		audioEngine.playSong("Daft Punk - Around The World (Bardcore, Medieval style).mp3");
-		if('y' == answer) {
-			generateExitText();
-			try {
-				map.move('s');
-			} catch (IndexOutOfBoundsException e ) {
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		exit(map);
 
-		}
+		audioEngine.playSong("Daft Punk - Around The World (Bardcore, Medieval style).mp3");
+		
+		generateExitText();
+			
+
+		
 	}
 }

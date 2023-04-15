@@ -130,6 +130,7 @@ public class Map {
         }
         
         if(hasVisitedPosition(position)) {
+            System.out.println("This room has already been visited");
             throw new Exception("Room has already been visited");
         }
 
@@ -204,7 +205,6 @@ public class Map {
             playerRoom.movePlayer(d);
         } catch (IndexOutOfBoundsException e) {
            
-
             moveRooms(d);
         }
     }

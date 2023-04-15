@@ -12,7 +12,11 @@ import java.util.Scanner;
  */
 public class basicLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
-	//TODO: Add a default constructor.
+
+	public basicLevel() {
+		super(new int[] {1, 1});
+	}
+
 	/**
 	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
 	 * yes or no
@@ -83,6 +87,41 @@ public class basicLevel extends Room {
 		readTextFile("Text/computer.txt");
 
 	}
+
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
 	/**
      * Reads and prints the text from the 'computer file', meant to give the player some flair as they interact with the computer.
      */
@@ -109,19 +148,16 @@ public class basicLevel extends Room {
 			throw end;
 		}
 
-		answer = promptUser("Do you exit the board room?");
-		if (answer == 'y') {
-			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
-			// If the player chooses to exit, they leave the crypt.
-			generateExitText();
-			try {
-				//TODO: If the player has already visited the south room, the below code will not work. 
-				map.move('s');
-			} catch (IndexOutOfBoundsException e ) {
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} 	
+		
+
+		exit(map);
+
+
+		audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
+		// If the player chooses to exit, they leave the crypt.
+		generateExitText();
+			
+	
 	}
 }
 		

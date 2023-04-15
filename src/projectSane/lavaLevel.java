@@ -46,12 +46,44 @@ import java.io.BufferedReader;
          return lavaPosition;
          //returns where the lava is positioned.
      }
- 	/**
-          * Overrides the method in Room to implement custom room functionality for lavaLevel.
-          */
+ 	
+     private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
 
-	@Override
-	public void roomEngine(Map map) throws IOException {
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}   
+    
+    //TODO: Javadocs. Reformat code below. Add exit lines.
+    public void roomEngine(Map map) throws IOException {
 		audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore).mp3");
  		try {
  			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));

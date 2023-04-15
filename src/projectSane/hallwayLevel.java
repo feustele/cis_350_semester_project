@@ -103,6 +103,41 @@ public class hallwayLevel extends Room {
 		
 	}
 
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to exit the board room?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
+
 	/**
 	 * this method reads the exit text from a file, and provides it when the player chooses to exit the cave.
 	 * if the player exits, they get a new room.
@@ -133,15 +168,13 @@ public class hallwayLevel extends Room {
 		//TODO: Implement some solution for below.
 
 		if (answer == 'n') {
+			
+			exit(map);
+
 			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 			System.out.print("You walk to the end of the hallway and exit, ignoring the hallway doors.");
 			generateHallwayExit();
-			try {
-				map.move('s');
-			} catch (IndexOutOfBoundsException e ) {
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 		}
 		// if the player does not try to open the door and instead exits at the end of the hallway, they get to proceed
 		// to the next level. 

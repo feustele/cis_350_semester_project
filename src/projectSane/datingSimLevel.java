@@ -12,7 +12,10 @@ import java.util.Scanner;
  */
 public class datingSimLevel extends Room {
 	Scanner scnr = new Scanner(System.in);
-	//TODO: Add a default constructor.
+	public datingSimLevel() {
+		super(new int[] {1,1});
+	}
+
 	/**
 	 * Takes in a string, which it will continue to prompt the user with until the user answers with a 
 	 * yes or no
@@ -81,6 +84,41 @@ public class datingSimLevel extends Room {
 	private void generateSeduceText() {
 		readTextFile("Text/seduce.txt");
 
+	}
+
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
 	}
 	/**
      * Reads and prints the text from the 'seduce file', meant to advise the player on the next course of action - be a good date or else!
@@ -153,16 +191,11 @@ public class datingSimLevel extends Room {
 				}
 		
 				if (answer == 'y') {
+					exit(map);
 					// If the player chooses to exit, they leave the date.
 					audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
 					generateExitText();
-					try {
-						//TODO: If the player has already visited the south room, the below code will not work. 
-						map.move('s');
-					} catch (IndexOutOfBoundsException e ) {
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					
 				} 	
 			}
 		}

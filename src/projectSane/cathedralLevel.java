@@ -86,6 +86,41 @@ public class cathedralLevel extends Room {
 		
 	}
 
+	private boolean move(Map map, String input) {
+		if (input.length() > 1) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			return false;
+		}
+		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
+			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+		}
+		
+		try {
+			map.move(input.charAt(0));
+			return true;
+		} catch (Exception e) {
+			return false;
+			
+		}
+	}
+
+	private void exit(Map map) {
+		String prompt = "Which direction do you want to head?";
+		String input = null;
+			
+		while(input == null || !(
+				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
+				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
+			System.out.println(prompt);
+			input = scnr.next();
+
+			if(!move(map, input)) {
+				input = null;
+			}
+		};
+	}
+
 	/**
 	 * This method contains the specific behavior of the intro room.
 	 * It reads the intro text from a file, and prompts the user to enter the cave.
@@ -106,21 +141,7 @@ public class cathedralLevel extends Room {
 
 		} 
 
-		//TODO: Instead of prompting the user to exit the cathedral, just have them use the 'move'. 
-		//In order to allow this to work fine, the roomSize must be size of 1,1. 
-		//TL;DR: The below code is redundant and a source for errors. 
-		answer = promptUser("Do you exit the cathedral?");
-		
-		if ('y' == answer) {
-			// if the player chooses to exit the cathedral, the next room is generated.
-			try {
-				map.move('s'); 
-			} catch (IndexOutOfBoundsException e ) {
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
+		exit(map);
 
 	}
 }

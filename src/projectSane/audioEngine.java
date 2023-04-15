@@ -23,7 +23,6 @@ public class audioEngine {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

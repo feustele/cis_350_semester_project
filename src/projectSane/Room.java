@@ -24,7 +24,7 @@ public abstract class Room implements RoomInterface {
     //Represents a percentage that an item will spawn
     //protected double itemSpawnChance = .5; 
     //Represents a percentage that an monster will spawn in a square of the room.
-    protected double monsterSpawnChance = .1; 
+    protected double monsterSpawnChance = 0; 
 
     //A grid containing enemies.
     protected Object[][] room; 
