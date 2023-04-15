@@ -42,7 +42,7 @@ public class hallwayLevel extends Room {
      */
 	private void generateIntroText() {
 		try {
-			BufferedReader intro = new BufferedReader(new FileReader("enterHallway.txt"));
+			BufferedReader intro = new BufferedReader(new FileReader("Text/enterHallway.txt"));
 			String line = intro.readLine();
 
 			while (line != null && scnr.hasNext()) {
@@ -65,7 +65,7 @@ public class hallwayLevel extends Room {
      */
 	private void generateHallwayExit() {
 		try {
-			BufferedReader exitText = new BufferedReader(new FileReader("hallwayExit.txt"));
+			BufferedReader exitText = new BufferedReader(new FileReader("Text/hallwayExit.txt"));
 			String line2 = exitText.readLine();
 			System.out.print(line2);
 			while (line2 != null && scnr.hasNext()) {
@@ -86,7 +86,7 @@ public class hallwayLevel extends Room {
      */
 	private void generateInfiniteEnding() {
 		try {
-			BufferedReader exitText = new BufferedReader(new FileReader("infiniteDoors.txt"));
+			BufferedReader exitText = new BufferedReader(new FileReader("Text/infiniteDoors.txt"));
 			String line = exitText.readLine();
 			System.out.print(line);
 			while (line != null && scnr.hasNext()) {
@@ -130,13 +130,13 @@ public class hallwayLevel extends Room {
 			}
 		}	
 		// if the player tries to open a door, they get sucked into a "backroom" and the game ends.
-		
+		//TODO: Implement some solution for below.
+
 		if (answer == 'n') {
 			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 			System.out.print("You walk to the end of the hallway and exit, ignoring the hallway doors.");
 			generateHallwayExit();
 			try {
-				//TODO: If the player has already visited the south room, the below code will not work. 
 				map.move('s');
 			} catch (IndexOutOfBoundsException e ) {
 			} catch (Exception e) {

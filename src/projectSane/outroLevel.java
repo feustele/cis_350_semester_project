@@ -52,7 +52,7 @@ public class outroLevel extends Room {
 	private void generateOutroText() {
 		try {
 
-			BufferedReader outro = new BufferedReader(new FileReader("outro.txt"));
+			BufferedReader outro = new BufferedReader(new FileReader("Text/outro.txt"));
 			String line = outro.readLine(); 
 			System.out.println(line);
 			
@@ -78,7 +78,7 @@ public class outroLevel extends Room {
          */
 	private void generateBadEnding() {
 		try {
-			BufferedReader badBuffer = new BufferedReader(new FileReader("badOutro.txt"));
+			BufferedReader badBuffer = new BufferedReader(new FileReader("Text/badOutro.txt"));
 			String line2 = badBuffer.readLine();
 
 			System.out.println(line2);
@@ -107,7 +107,7 @@ public class outroLevel extends Room {
          */
 	private void generateGoodEnding() {
 		try {
-			BufferedReader goodBuffer = new BufferedReader(new FileReader("goodOutro.txt"));
+			BufferedReader goodBuffer = new BufferedReader(new FileReader("Text/goodOutro.txt"));
 			String line3 = goodBuffer.readLine();
 			System.out.println(line3);
 			while (line3 != null && scnr.hasNext()) {
@@ -133,7 +133,7 @@ public class outroLevel extends Room {
           */
 	private void generateCredits() {
 		try {
-			BufferedReader creditBuffer = new BufferedReader(new FileReader("credits.txt"));
+			BufferedReader creditBuffer = new BufferedReader(new FileReader("Text/credits.txt"));
 			String line4 = creditBuffer.readLine();
 			System.out.println(line4);
 			while (line4 != null && scnr.hasNext()) {
@@ -160,7 +160,7 @@ public class outroLevel extends Room {
 	@Override
     public void roomEngine(Map map) throws IOException{
 
-	    audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore");
+	    audioEngine.playSong("Katy Perry - Firework (Medieval Cover   Bardcore).mp3");
 		generateOutroText();
 		// reads out room enter text
 
@@ -183,4 +183,8 @@ public class outroLevel extends Room {
 		throw new IOException();
 	}
 
+
+	public void setScanner(Scanner scnr) {
+		this.scnr = scnr; 
+	}
 }

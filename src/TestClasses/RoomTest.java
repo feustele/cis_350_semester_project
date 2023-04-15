@@ -247,5 +247,30 @@ public class RoomTest {
         room.setPlayerPosition(pos);
         room.movePlayer('s');
     }
+    @Test
+    public void NoEnemySpawns() {
+        for(int i = 0; i < 10; i++) {
+            Room room = new PitLevel();
+            room.setMonsterSpawnChance(0);
+    
+            assertEquals(0, room.getEnemyPosition().size());
+        }
+        
+    }
+    @Test
+    public void AllEnemySpawns() {
+        for(int i = 0; i < 10; i++) {
+            Room room = new PitLevel();
+            room.setMonsterSpawnChance(1);
+
+            assertEquals(room.getSize()[0] * room.getSize()[1], room.getEnemyPosition().size());
+        }
+    }
+
+    public static void main(String args[]) {
+        Room room = new PitLevel();
+        room.setMonsterSpawnChance(1);
+        room.getEnemyPosition();
+    }
     
 }

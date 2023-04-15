@@ -8,8 +8,6 @@ public class MapTest {
     @Test
     public void mapSetupTest() {
         
-        
-        
         Map map = new Map();
         introLevel tempVar = new introLevel();
         assertEquals(1, map.getMapSize());
@@ -141,4 +139,17 @@ public class MapTest {
         map.move('e');
         map.move('n');
     }
+    @Test(expected = Exception.class)
+    public void mapMoveToPrevVisitedRectangleComplex() throws Exception {
+        Map map = new Map();
+        map.move('s');
+        map.move('s');
+        map.move('s');
+        map.move('e');
+        map.move('n');
+        map.move('n');
+        map.move('n');
+        map.move('w');
+    }
+    //TODO: Figure out if I need a test case for when we move on the outroRoom or not.
 }

@@ -111,6 +111,7 @@ public abstract class Room implements RoomInterface {
      * Generates the enemies that should be contained within the room.
      */
     protected void generateEnemies() {
+        //TODO: I need to clear out the previous enemies here.
         Random ran = new Random();
 
         for(int x = 0; x < room.length; x++) {
@@ -118,7 +119,7 @@ public abstract class Room implements RoomInterface {
                 room[x][y] = null;
 
                 double ranDoub = ran.nextDouble();
-                boolean spawn = ranDoub >= monsterSpawnChance;
+                boolean spawn = ranDoub <= monsterSpawnChance;
 
                 if(spawn) {
 
@@ -390,7 +391,7 @@ public abstract class Room implements RoomInterface {
      * Returns the player's current position
      * @return
      */
-    protected int[] getPlayerPosition() {
+    public int[] getPlayerPosition() {
         return playerPosition;
     }
 
@@ -398,7 +399,7 @@ public abstract class Room implements RoomInterface {
      * Returns the size of the room
      * @return
      */
-    protected int[] getSize() {
+    public int[] getSize() {
         return new int[] {room.length, room[0].length};
     }
 
@@ -510,7 +511,7 @@ public abstract class Room implements RoomInterface {
      */
     private void spawnMonsterRandomly(int[] pos) {
         Random ran = new Random();
-        int ranInt = ran.nextInt(Items.length());
+        int ranInt = ran.nextInt(Monsters.length());
 
         try {
 

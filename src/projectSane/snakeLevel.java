@@ -66,14 +66,14 @@ public class snakeLevel extends Room {
      * Reads and prints the text from the 'snakeIntro file', meant to give the player some flair as they enter the room.
      */
 	private void generateIntroText() {
-		readTextFile("snakeIntro.txt");
+		readTextFile("Text/snakeIntro.txt");
 	} 
 	
 	/**
      * Reads and prints the text from the 'snakeExit file', meant to be read out as the player exits the room.
      */  
 	private void generateExitText() {
-		readTextFile("snakeExit.txt");
+		readTextFile("Text/snakeExit.txt");
 		
 	}
 	
@@ -81,7 +81,7 @@ public class snakeLevel extends Room {
      * Reads out what happens if the player chooses to charm the snakes.
      */
 	private void generateCharmText() {
-		readTextFile("charm.txt");
+		readTextFile("Text/charm.txt");
 
 	}
 	

@@ -76,7 +76,7 @@ public class Monsters {
      * @return boolean
      */
     public static boolean isObjectAEnemy(Object potentialEnemy) {
-        for (int i = 0; i < Rooms.length(); i++) {
+        for (int i = 0; i < Monsters.length(); i++) {
             if (potentialEnemy.getClass().equals(listOfMonsters[i])) {
                 return true;
             }

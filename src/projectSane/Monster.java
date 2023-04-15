@@ -14,7 +14,7 @@ public abstract class Monster {
 	/**
          * The combat power of the monster.
          */
-	protected int combatPower = 0;
+	private int combatPower = 0;
 
 	
 	/**
@@ -41,7 +41,7 @@ public abstract class Monster {
          * Returns the combat power of the monster.
          * @return the combat power of the monster
          */
-	protected int getCombatPower() {
+	public int getCombatPower() {
 		return combatPower;
 	}
 

@@ -64,14 +64,14 @@ public class datingSimLevel extends Room {
         */
 
 	private void generateIntroText() {
-		readTextFile("datingSimIntro.txt");
+		readTextFile("Text/datingSimIntro.txt");
 	} 
 	/**
         * Reads and prints the text from the 'datingSimIntro file', meant to give the player some flair as they enter the room.
         */
 	
 	private void generateExitText() {
-		readTextFile("datingSimExit.txt");
+		readTextFile("Text/datingSimExit.txt");
 		
 	}
 	/**
@@ -79,7 +79,7 @@ public class datingSimLevel extends Room {
      */
 	
 	private void generateSeduceText() {
-		readTextFile("seduce.txt");
+		readTextFile("Text/seduce.txt");
 
 	}
 	/**
@@ -144,7 +144,7 @@ public class datingSimLevel extends Room {
 				throw end;
 			}
 			else{
-				System.out.println("You and the dragon decide to order takeout. She reccomends a lovely Indian place in the next cavern over.");
+				System.out.println("You and the dragon decide to order takeout. She recommends a lovely Indian place in the next cavern over.");
 				answer = promptUser("Do you go to the next room after the date?");
 				
 				while (answer == 'n') {

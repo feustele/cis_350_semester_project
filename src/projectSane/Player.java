@@ -33,7 +33,7 @@ public class Player {
           * 
           * @return The player's inventory.
           */
-	ArrayList<Item> openInventory() {
+	public ArrayList<Item> openInventory() {
 		return Inventory;
 	}
 	
@@ -43,7 +43,7 @@ public class Player {
          * @param selectedItem The item to be added to the inventory.
          * @return A message indicating whether the item was successfully added or not.
          */
-	String addItem(Item selectedItem) {
+	public String addItem(Item selectedItem) {
 		Inventory.add(selectedItem);
 		String finalLine = "You picked up the " + selectedItem + "!";
 		if (Inventory.size() > 10) {
@@ -57,7 +57,7 @@ public class Player {
           * @param selectedItem The item to be removed from the inventory.
           * @return A message indicating whether the item was successfully removed or not.
           */
-	String dropItem(Item selectedItem) {
+	public String dropItem(Item selectedItem) {
 		Inventory.remove(selectedItem);
 		String finalLine = "You dropped the " + selectedItem + "!";
 		return finalLine;

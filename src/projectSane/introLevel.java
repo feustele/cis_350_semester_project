@@ -28,7 +28,7 @@ public class introLevel extends Room {
          */
 	private void generateIntroText() {
 		try {
-			BufferedReader intro = new BufferedReader(new FileReader("intro.txt"));
+			BufferedReader intro = new BufferedReader(new FileReader("Text/intro.txt"));
 			String line = intro.readLine();
 
 			while (line != null && scnr.hasNext()) {
@@ -52,7 +52,7 @@ public class introLevel extends Room {
         */
 	private void generateChickenText() {
 		try {
-			BufferedReader chickenBuffer = new BufferedReader(new FileReader("chicken.txt"));
+			BufferedReader chickenBuffer = new BufferedReader(new FileReader("Text/chicken.txt"));
 			String line2 = chickenBuffer.readLine();
 			System.out.print(line2);
 			while (line2 != null && scnr.hasNext()) {
@@ -116,5 +116,9 @@ public class introLevel extends Room {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void setScanner(Scanner scnr) {
+		this.scnr = scnr; 
 	}
 }

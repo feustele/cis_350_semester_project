@@ -10,8 +10,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class audioEngine {
 	
-	public static void playSong(String path) {
+	public static void playSong(String songName) {
 		try {
+			String path = "Music/"+ songName;
 			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(path));
 			Clip track = AudioSystem.getClip();
 			track.open(stream);

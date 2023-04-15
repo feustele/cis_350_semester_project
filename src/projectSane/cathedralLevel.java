@@ -74,7 +74,7 @@ public class cathedralLevel extends Room {
          * Reads and prints the introduction text from the "intro.txt" file
          */
 	private void generateIntroText() {
-		readTextFile("introCathedral.txt");
+		readTextFile("Text/introCathedral.txt");
 			
 	} 
        
@@ -82,7 +82,7 @@ public class cathedralLevel extends Room {
         * Reads and prints the text about the chicken from the "chicken.txt" file
         */
 	private void generateChestText() {
-		readTextFile("chest.txt");
+		readTextFile("Text/chest.txt");
 		
 	}
 
@@ -105,6 +105,10 @@ public class cathedralLevel extends Room {
 			audioEngine.playSong("Pompeii - Medieval Cover Bardcore.mp3");
 
 		} 
+
+		//TODO: Instead of prompting the user to exit the cathedral, just have them use the 'move'. 
+		//In order to allow this to work fine, the roomSize must be size of 1,1. 
+		//TL;DR: The below code is redundant and a source for errors. 
 		answer = promptUser("Do you exit the cathedral?");
 		
 		if ('y' == answer) {

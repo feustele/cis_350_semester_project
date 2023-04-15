@@ -63,7 +63,7 @@ public class mysticSpringLevel extends Room {
 
 
 	private void generateIntroText() {
-		readTextFile("introSpring.txt");
+		readTextFile("Text/introSpring.txt");
 			
 	} 
        
@@ -72,7 +72,7 @@ public class mysticSpringLevel extends Room {
         */
 	
 	private void generateExitText() {
-		readTextFile("springExit.txt");
+		readTextFile("Text/springExit.txt");
 		
 	}
 	
@@ -81,7 +81,7 @@ public class mysticSpringLevel extends Room {
      */
 	
 	private void generateSpringText() {
-		readTextFile("spring.txt");
+		readTextFile("Text/spring.txt");
 		
 	}
 	

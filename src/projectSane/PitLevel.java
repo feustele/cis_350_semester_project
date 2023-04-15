@@ -64,7 +64,7 @@ public class PitLevel extends Room {
      */
     private void generateIntroText() {
         try {
-            BufferedReader trap = new BufferedReader(new FileReader("trap.txt"));
+            BufferedReader trap = new BufferedReader(new FileReader("Text/trap.txt"));
         	String line = trap.readLine(); 
 	    	System.out.println(line);
 			while (line != null && scnr.hasNext()) {
@@ -90,7 +90,7 @@ public class PitLevel extends Room {
     private void generatePitText() {
         try {
 	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
-            BufferedReader pit = new BufferedReader(new FileReader("pit.txt"));
+            BufferedReader pit = new BufferedReader(new FileReader("Text/pit.txt"));
             String line2 = pit.readLine(); 
             System.out.println(line2);
             while(line2 != null && scnr.hasNext()) {         

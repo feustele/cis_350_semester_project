@@ -64,7 +64,7 @@ public class cryptLevel extends Room {
         */
 
 	private void generateIntroText() {
-		readTextFile("introCrypt.txt");
+		readTextFile("Text/introCrypt.txt");
 	} 
        
 	/**
@@ -72,11 +72,11 @@ public class cryptLevel extends Room {
         */
 	
 	private void generateCryptExit() {
-		readTextFile("cryptExit.txt");
+		readTextFile("Text/cryptExit.txt");
 		
 	}
 	private void generateChestText() {
-		readTextFile("chest.txt");
+		readTextFile("Text/chest.txt");
 
 	}
 
@@ -95,18 +95,17 @@ public class cryptLevel extends Room {
 		char answer = promptUser("Do you investigate the chest?");
 		
 		if (answer == 'y') {
-			//TODO: Factor the below code so that we only have to call a function which will
 			//read out the chest text.
 			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 			generateChestText();
 		}
 
+		//TODO: Make a default constructor which sets the size to 0, and remove the below code.
 		answer = promptUser("Do you exit the crypt?");
 		
 		if (answer == 'y') {
 			// If the player chooses to exit, they leave the crypt.
 			try {
-				//TODO: If the player has already visited the south room, the below code will not work. 
 				map.move('s');
 			} catch (IndexOutOfBoundsException e ) {
 			} catch (Exception e) {

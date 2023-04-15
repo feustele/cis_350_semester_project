@@ -108,7 +108,6 @@ public class Map {
      * @throws Exception
      */
     private Room moveRooms(char direction) throws Exception {
-        //TODO: I think I have a logic error somewhere in here.
         int[] oldPosition = playerRoom.getRoomPosition();
         /**Creates a hard copy of oldPosition */
         int[] position = {oldPosition[0], oldPosition[1]};

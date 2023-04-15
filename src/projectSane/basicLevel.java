@@ -64,7 +64,7 @@ public class basicLevel extends Room {
         */
 
 	private void generateIntroText() {
-		readTextFile("introBasic.txt");
+		readTextFile("Text/introBasic.txt");
 	} 
        
 	/**
@@ -72,7 +72,7 @@ public class basicLevel extends Room {
         */
 	
 	private void generateExitText() {
-		readTextFile("exitBasic.txt");
+		readTextFile("Text/exitBasic.txt");
 		
 	}
 	/**
@@ -80,7 +80,7 @@ public class basicLevel extends Room {
      */
 	
 	private void generateComputerText() {
-		readTextFile("computer.txt");
+		readTextFile("Text/computer.txt");
 
 	}
 	/**
