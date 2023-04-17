@@ -24,13 +24,13 @@ public class introLevel extends Room {
 	/**
          * Reads and prints the introduction text from the "intro.txt" file
          */
-	private void generateIntroText() {
+	private void generateIntroText(GUI gui) {
 		try {
 			BufferedReader intro = new BufferedReader(new FileReader("Text/intro.txt"));
 			String line = intro.readLine();
 
 			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
+				gui.addText(line);
 				line = intro.readLine();
 				scnr.next();
 			}
@@ -48,13 +48,13 @@ public class introLevel extends Room {
 	/**
         * Reads and prints the text about the chicken from the "chicken.txt" file
         */
-	private void generateChickenText() {
+	private void generateChickenText(GUI gui) {
 		try {
 			BufferedReader chickenBuffer = new BufferedReader(new FileReader("Text/chicken.txt"));
 			String line2 = chickenBuffer.readLine();
-			System.out.print(line2);
+			gui.addText(line2);
 			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
+				gui.addText(line2);
 				line2 = chickenBuffer.readLine();
 				scnr.next();
 			}
@@ -111,9 +111,9 @@ public class introLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	@Override
-	public void roomEngine(Map map) throws IOException {
+	public void roomEngine(Map map, GUI gui) throws IOException {
 		
-		generateIntroText();
+		generateIntroText(gui);
 		audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
 
 		String word1;
@@ -128,7 +128,7 @@ public class introLevel extends Room {
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
 			audioEngine.playSong("Never Gonna Give You Up (Medieval Cover).mp3");
 			// if the player chooses not to enter the cave, the game ends.
-			generateChickenText();
+			generateChickenText(gui);
 			IOException end = new IOException(); 
 			throw end;
 			// add ioextension end method to interact with game engine (register an ending)
