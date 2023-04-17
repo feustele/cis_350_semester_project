@@ -67,14 +67,14 @@ public class introLevel extends Room {
 		
 	}
 
-	private boolean move(Map map, String input) {
+	private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -86,17 +86,17 @@ public class introLevel extends Room {
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to exit the board room?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 
-			if(!move(map, input)) {
+			if(!move(map, input, gui)) {
 				input = null;
 			}
 		};
@@ -118,7 +118,7 @@ public class introLevel extends Room {
 
 		String word1;
 		do {
-			System.out.println("Do you enter the cave?");
+			gui.addText("Do you enter the cave?");
 			word1 = scnr.next();
 		} while(!(
 			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
@@ -136,7 +136,7 @@ public class introLevel extends Room {
 			
 		} 
 		
-		exit(map);
+		exit(map, gui);
 		
 		
 	}
