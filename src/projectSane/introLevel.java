@@ -126,7 +126,7 @@ public class introLevel extends Room {
 
 
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
-			audioEngine.playSong("Never Gonna Give You Up (Medieval Cover).mp3");
+			audioEngine.playSong("rickroll.wav");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText(gui);
 			IOException end = new IOException(); 
