@@ -19,11 +19,11 @@ public class hallwayLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
@@ -40,13 +40,13 @@ public class hallwayLevel extends Room {
 	/**
      * Reads and prints the text from the 'enterHallway file'
      */
-	private void generateIntroText() {
+	private void generateIntroText(GUI gui) {
 		try {
 			BufferedReader intro = new BufferedReader(new FileReader("Text/enterHallway.txt"));
 			String line = intro.readLine();
 
 			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
+				gui.addText(line);
 				line = intro.readLine();
 				scnr.next();
 			}
@@ -63,13 +63,13 @@ public class hallwayLevel extends Room {
 	/**
      * Reads and prints the text from the 'hallwayExit file' before the player exits the room.
      */
-	private void generateHallwayExit() {
+	private void generateHallwayExit(GUI gui) {
 		try {
 			BufferedReader exitText = new BufferedReader(new FileReader("Text/hallwayExit.txt"));
 			String line2 = exitText.readLine();
-			System.out.print(line2);
+			gui.addText(line2);
 			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
+				gui.addText(line2);
 				line2 = exitText.readLine();
 				scnr.next();
 			}
@@ -84,13 +84,13 @@ public class hallwayLevel extends Room {
 	/**
      * Reads and prints the text from the 'infiniteDoors file'. Prompts the backrooms ending.
      */
-	private void generateInfiniteEnding() {
+	private void generateInfiniteEnding(GUI gui) {
 		try {
 			BufferedReader exitText = new BufferedReader(new FileReader("Text/infiniteDoors.txt"));
 			String line = exitText.readLine();
-			System.out.print(line);
+			gui.addText(line);
 			while (line != null && scnr.hasNext()) {
-				System.out.print(line);
+				gui.addText(line);
 				line = exitText.readLine();
 				scnr.next();
 			}
@@ -103,14 +103,14 @@ public class hallwayLevel extends Room {
 		
 	}
 
-	private boolean move(Map map, String input) {
+	private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -122,17 +122,17 @@ public class hallwayLevel extends Room {
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to exit the board room?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 
-			if(!move(map, input)) {
+			if(!move(map, input, gui)) {
 				input = null;
 			}
 		};
@@ -145,17 +145,17 @@ public class hallwayLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	
-	public void roomEngine(Map map) throws IOException {
+	public void roomEngine(Map map, GUI gui) throws IOException {
 		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
-		generateIntroText();
+		generateIntroText(gui);
 		// player is prompted with the level's flavor text
 
-		char answer = promptUser("Do you open a door?");
+		char answer = promptUser("Do you open a door?", gui);
 
 		if (answer == 'y') {
 			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
 			try {
-				generateInfiniteEnding();
+				generateInfiniteEnding(gui);
 				IOException end = new IOException(); 
 				throw end;
 			} catch (FileNotFoundException e) {
@@ -169,11 +169,11 @@ public class hallwayLevel extends Room {
 
 		if (answer == 'n') {
 			
-			exit(map);
+			exit(map, gui);
 
 			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
-			System.out.print("You walk to the end of the hallway and exit, ignoring the hallway doors.");
-			generateHallwayExit();
+			gui.addText("You walk to the end of the hallway and exit, ignoring the hallway doors.");
+			generateHallwayExit(gui);
 			
 		}
 		// if the player does not try to open the door and instead exits at the end of the hallway, they get to proceed
