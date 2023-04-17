@@ -47,14 +47,14 @@ import java.io.BufferedReader;
          //returns where the lava is positioned.
      }
  	
-     private boolean move(Map map, String input) {
+     private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -66,14 +66,14 @@ import java.io.BufferedReader;
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to head?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 
 			if(!move(map, input)) {
@@ -83,17 +83,17 @@ import java.io.BufferedReader;
 	}   
     
     //TODO: Javadocs. Reformat code below. Add exit lines.
-    public void roomEngine(Map map) throws IOException {
+    public void roomEngine(Map map, GUI gui) throws IOException {
 		audioEngine.playSong("Katy Perry - Firework (Medieval Cover Bardcore).mp3");
  		try {
  			BufferedReader trap = new BufferedReader(new FileReader("lavaroom.txt"));
              	String line = trap.readLine(); 
              	while(line != null && scnr.hasNext()) {
-             		System.out.print(line);
+             		gui.addText(line);
              		line = trap.readLine(); 
              		scnr.next();
              	}
-             	System.out.print("Tread lightly, dear hero.");
+             	gui.addText("Tread lightly, dear hero.");
                 //reads out room enter text
              	trap.close();
              	if (getLavaPosition() == getPlayerPosition()) {
@@ -103,7 +103,7 @@ import java.io.BufferedReader;
                     		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
 				    String line2 = pitBuffer.readLine();
  			        while(line2 != null && scnr.hasNext()) {
- 			        	System.out.print(line);
+ 			        	gui.addText(line);
 					    line2 = pitBuffer.readLine();
                         scnr.next();
  			        }
