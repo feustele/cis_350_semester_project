@@ -23,7 +23,7 @@ public class basicLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt, Gui gui) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
@@ -135,7 +135,7 @@ public class basicLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	public void roomEngine(Map map, Gui gui) throws IOException {
+	public void roomEngine(Map map, GUI gui) throws IOException {
 		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
 		generateIntroText(gui);
 
