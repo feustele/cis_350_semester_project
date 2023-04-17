@@ -8,6 +8,7 @@ public class SaneEngine {
 	ArrayList<Item> inventory;
 	Player P1;
 	Map gameMap;
+	GUI view;
 	/**
 	 * The main game engine for the game.
  	 */
@@ -18,6 +19,7 @@ public class SaneEngine {
 		inventory = new ArrayList<Item>();
 		P1 = new Player(name, inventory);
 		gameMap = new Map();
+		view = new GUI();
 		runGameLoop();
 	}
 	
@@ -29,7 +31,7 @@ public class SaneEngine {
 	private void runGameLoop() {
 		try {
 			while(true) {
-				gameMap.getPlayerRoom().roomEngine(gameMap);
+				gameMap.getPlayerRoom().roomEngine(gameMap, view);
 				//gameMap.moveRooms(c, P1);
 
 				
