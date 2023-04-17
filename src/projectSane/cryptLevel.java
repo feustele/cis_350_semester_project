@@ -27,11 +27,11 @@ public class cryptLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
@@ -45,15 +45,15 @@ public class cryptLevel extends Room {
 
 	}
 	
-	private void readTextFile(String file) {
+	private void readTextFile(String file, GUI gui) {
 		try {
 
 			BufferedReader exitText = new BufferedReader(new FileReader(file));
 			String line2 = exitText.readLine();
-			System.out.print(line2);
+			gui.addText(line2);
 
 			while (line2 != null) {
-				System.out.print(line2);
+				gui.addText(line2);
 				line2 = exitText.readLine();
 
 				scnr.nextLine();
@@ -73,32 +73,32 @@ public class cryptLevel extends Room {
         * Reads and prints the text from the 'introCrypt file', meant to give the player some flair as they enter the room.
         */
 
-	private void generateIntroText() {
-		readTextFile("Text/introCrypt.txt");
+	private void generateIntroText(GUI gui) {
+		readTextFile("Text/introCrypt.txt", gui);
 	} 
        
 	/**
         * Reads and prints the text from the 'cryptExit file', meant to give the player some flair as they leave the room.
         */
 	
-	private void generateCryptExit() {
-		readTextFile("Text/cryptExit.txt");
+	private void generateCryptExit(GUI gui) {
+		readTextFile("Text/cryptExit.txt", gui);
 		
 	}
-	private void generateChestText() {
-		readTextFile("Text/chest.txt");
+	private void generateChestText(GUI gui) {
+		readTextFile("Text/chest.txt", gui);
 
 	}
 
 
-	private boolean move(Map map, String input) {
+	private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -110,14 +110,14 @@ public class cryptLevel extends Room {
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to head?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 
 			if(!move(map, input)) {
@@ -134,21 +134,21 @@ public class cryptLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	public void roomEngine(Map map) throws IOException {
+	public void roomEngine(Map map, GUI gui) throws IOException {
 		audioEngine.playSong("The Cranberries - Zombie [Medieval Bardcore Instrumental Cover].mp3");
-		generateIntroText();
+		generateIntroText(gui);
 		
-		char answer = promptUser("Do you investigate the chest?");
+		char answer = promptUser("Do you investigate the chest?", gui);
 		
 		if (answer == 'y') {
 			//read out the chest text.
 			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
-			generateChestText();
+			generateChestText(gui);
 		}
 
 
 
-		exit(map);
+		exit(map, gui);
 	}
 
 	public void setScanner(Scanner scnr) {
