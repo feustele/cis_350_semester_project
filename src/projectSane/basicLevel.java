@@ -23,11 +23,11 @@ public class basicLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt) {
+	private char promptUser(String prompt, Gui gui) {
 		String input;
 
 		do {
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
@@ -41,15 +41,15 @@ public class basicLevel extends Room {
 
 	}
 	
-	private void readTextFile(String file) {
+	private void readTextFile(String file, GUI gui) {
 		try {
 
 			BufferedReader exitText = new BufferedReader(new FileReader(file));
 			String line2 = exitText.readLine();
-			System.out.print(line2);
+			gui.addText(line2);
 
 			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
+				gui.addText(line2);
 				line2 = exitText.readLine();
 				scnr.next();
 			}
@@ -67,35 +67,35 @@ public class basicLevel extends Room {
         * Reads and prints the text from a file, meant to give the player some flair.
         */
 
-	private void generateIntroText() {
-		readTextFile("Text/introBasic.txt");
+	private void generateIntroText(GUI gui) {
+		readTextFile("Text/introBasic.txt", gui);
 	} 
        
 	/**
         * Reads and prints the text from the 'introBasic file', meant to give the player some flair as they enter the room.
         */
 	
-	private void generateExitText() {
-		readTextFile("Text/exitBasic.txt");
+	private void generateExitText(GUI gui) {
+		readTextFile("Text/exitBasic.txt", gui);
 		
 	}
 	/**
      * Reads and prints the text from the 'exitBasic file', meant to give the player some flair as they exit the room.
      */
 	
-	private void generateComputerText() {
-		readTextFile("Text/computer.txt");
+	private void generateComputerText(GUI gui) {
+		readTextFile("Text/computer.txt", gui);
 
 	}
 
-	private boolean move(Map map, String input) {
+	private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -107,14 +107,14 @@ public class basicLevel extends Room {
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to head?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
+			gui.addText(prompt);
 			input = scnr.next();
 
 			if(!move(map, input)) {
@@ -135,27 +135,27 @@ public class basicLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	public void roomEngine(Map map) throws IOException {
+	public void roomEngine(Map map, Gui gui) throws IOException {
 		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
-		generateIntroText();
+		generateIntroText(gui);
 
-		char answer = promptUser("Do you investigate the computer?");
+		char answer = promptUser("Do you investigate the computer?", gui);
 		
 		if (answer == 'y') {
 			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
-			generateComputerText();
+			generateComputerText(gui);
 			IOException end = new IOException(); 
 			throw end;
 		}
 
 		
 
-		exit(map);
+		exit(map, gui);
 
 
 		audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
 		// If the player chooses to exit, they leave the crypt.
-		generateExitText();
+		generateExitText(gui);
 			
 	
 	}
