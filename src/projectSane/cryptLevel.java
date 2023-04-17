@@ -120,7 +120,7 @@ public class cryptLevel extends Room {
 			gui.addText(prompt);
 			input = scnr.next();
 
-			if(!move(map, input)) {
+			if(!move(map, input, gui)) {
 				input = null;
 			}
 		};
