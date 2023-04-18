@@ -225,16 +225,19 @@ public abstract class Room implements RoomInterface {
             if(playerPosition[0] < 0) 
                 return;    
                 //throw new IndexOutOfBoundsException();
-            if(playerPosition[1] <= 0)
-                throw new IndexOutOfBoundsException();
+            if(playerPosition[1] <= 0) {
+                hasVisited = true;
+                throw new IndexOutOfBoundsException(); }
             if(playerPosition[0] > getSize()[0] - 1 || playerPosition[1] > getSize()[1] - 1)
                 return;
             
             playerPosition[1] -= 1;
             break;
         case 'e':
-            if(playerPosition[0] >= getSize()[0] - 1) 
+            if(playerPosition[0] >= getSize()[0] - 1)  {
+                hasVisited = true;
                 throw new IndexOutOfBoundsException();
+            }
             if(playerPosition[0] < 0 )
                 return;
             if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
@@ -247,14 +250,16 @@ public abstract class Room implements RoomInterface {
                 return;
             if(playerPosition[1] < 0)
                 return;
-            if(playerPosition[1] >= getSize()[1] - 1)
-                throw new IndexOutOfBoundsException();
+            if(playerPosition[1] >= getSize()[1] - 1) {
+                hasVisited = true;
+                throw new IndexOutOfBoundsException(); }
 
             playerPosition[1] += 1;
             break;
         case 'w':
-            if(playerPosition[0] <= 0) 
-                throw new IndexOutOfBoundsException();
+            if(playerPosition[0] <= 0) {
+                hasVisited = true;
+                throw new IndexOutOfBoundsException(); }
             if(playerPosition[0] > getSize()[0] - 1) 
                 return;
             if(playerPosition[1] < 0 || playerPosition[1] > getSize()[1] - 1)
