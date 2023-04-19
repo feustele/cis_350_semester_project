@@ -2,13 +2,14 @@ package projectSane;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.DefaultCaret;
 /**
 * Acts as the view for the player to go through the adventure. Text given by the narrator is written on this GUI.
 */
-public class GUI {
+public class GUI{
 	// This is the JFrame containing our textbox
 	JFrame window;
 	
@@ -25,6 +26,7 @@ public class GUI {
 		window = new JFrame();
 		text = new JTextPane();
 		scroll = new JScrollPane(text);
+		input = new JOptionPane();
 		window.setBounds(0, 0, 1000, 600);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,6 +47,10 @@ public class GUI {
 		this.text.setText(this.text.getText() + "\n" + s);
 		DefaultCaret caret = (DefaultCaret)text.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+	}
+	
+	public String getInput() {
+		return JOptionPane.showInputDialog(null, "Please enter input:", "Question", JOptionPane.PLAIN_MESSAGE);
 	}
 	
 	/**
