@@ -159,7 +159,7 @@ public class PitLevel extends Room {
         //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
         while(!getVisited()) {
             gui.addText("What would you like to do?");
-            String action = scnr.nextLine();
+            String action = gui.getInput();
             
             fullFillAction(map, action, gui);
            
