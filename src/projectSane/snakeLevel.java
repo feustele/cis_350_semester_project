@@ -152,10 +152,12 @@ public class snakeLevel extends Room {
 			while (chances >= 1 || chances != 4){
 				gui.addText("What do you do?");
 					if (scnr.next().contains("sing") || scnr.next().equalsIgnoreCase("sing to the snakes")){
+						audioEngine.track.stop();
 						audioEngine.playSong("umbrella.wav");
 						// plays umbrella
 						gui.addText("You break into a rousing rendition of Rhianna's Umbrella. The snakes love it!");
 						chances = 4;
+						audioEngine.track.stop();
 					}
 					else{
 						if (chances == 3){
@@ -174,6 +176,7 @@ public class snakeLevel extends Room {
 			if (chances == 0){
 				audioEngine.playSong("toxic.wav");
 				gui.addText("The snakes attack! You die of poisoning.");
+				audioEngine.track.stop();
 				IOException end = new IOException(); 
 				throw end;
 			}
@@ -188,6 +191,7 @@ public class snakeLevel extends Room {
 				}
 		
 				if (answer == 'y') {
+					audioEngine.track.stop();
 					// If the player chooses to exit, they leave the snake room.
 					exit(map, gui);
 					generateExitText(gui);
