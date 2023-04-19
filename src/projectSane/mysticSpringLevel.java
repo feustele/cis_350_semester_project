@@ -133,20 +133,20 @@ public class mysticSpringLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		audioEngine.playSong("Daft Punk - Around The World (Bardcore, Medieval style).mp3");
+		audioEngine.playSong("yeoldedaftpunk.wav");
 		generateIntroText(gui);
 
 		char answer = promptUser("Do you approach the spring?", gui);
 			
 
 		if ('y' == answer) {
-			audioEngine.playSong("Self Healing Water Sound for Effortless Deep Sleeping for Crying Babies.mp3");
+			audioEngine.playSong("rain.wav");
 			generateSpringText(gui);
 		} 
 		
 		exit(map, gui);
 
-		audioEngine.playSong("Daft Punk - Around The World (Bardcore, Medieval style).mp3");
+		audioEngine.playSong("yeoldedaftpunk.wav");
 		
 		generateExitText(gui);
 			
