@@ -26,7 +26,6 @@ public class GUI{
 		window = new JFrame();
 		text = new JTextPane();
 		scroll = new JScrollPane(text);
-		input = new JOptionPane();
 		window.setBounds(0, 0, 1000, 600);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
