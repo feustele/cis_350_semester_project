@@ -59,57 +59,45 @@ public class PitLevel extends Room {
         return pitPosition;
     }
 
+
+    private void readTextFile(String file, GUI gui) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+
+			while (line2 != null) {
+				gui.addText(line2);
+
+				scnr.nextLine();  // wait for user input
+
+				line2 = exitText.readLine();
+			}
+			
+			gui.addText("");
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
     /**
      * Generates the introduction text for the room and reads it from a file.
      */
     private void generateIntroText(GUI gui) {
-        try {
-            BufferedReader trap = new BufferedReader(new FileReader("Text/trap.txt"));
-        	String line = trap.readLine(); 
-	    	gui.addText(line);
-			while (line != null && scnr.hasNext()) {
-                		line = trap.readLine();
-				gui.addText(line);
-				scnr.next();
-            }
-            //reads out room enter text
-            trap.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            gui.addText("Sorry! You can't do that here.");
-        }
+        readTextFile("Text/trap.txt", gui);
     }
 
     /**
      * Generates the text for falling into the pit and reads it from a file.
      */
     private void generatePitText(GUI gui) {
-        try {
-	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
-            BufferedReader pit = new BufferedReader(new FileReader("Text/pit.txt"));
-            String line2 = pit.readLine(); 
-            gui.addText(line2);
-            while(line2 != null && scnr.hasNext()) {         
-                gui.addText(line2);
-                line2 = pit.readLine(); 
-		scnr.next();
-            }
-            pit.close();
         
-        }
-        // reads out fall text
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            gui.addText("Sorry! You can't do that here.");
-        }
+	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
+        readTextFile("Text/pit.txt", gui);
     }
 	
     /**
