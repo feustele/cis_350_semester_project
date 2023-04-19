@@ -135,14 +135,14 @@ public class cryptLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		audioEngine.playSong("The Cranberries - Zombie [Medieval Bardcore Instrumental Cover].mp3");
+		audioEngine.playSong("zombie.wav");
 		generateIntroText(gui);
 		
 		char answer = promptUser("Do you investigate the chest?", gui);
 		
 		if (answer == 'y') {
 			//read out the chest text.
-			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
+			audioEngine.playSong("thelessIknowthebetter.wav");
 			generateChestText(gui);
 		}
 
