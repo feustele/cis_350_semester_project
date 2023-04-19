@@ -135,7 +135,8 @@ public class snakeLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		audioEngine.playSong("Toxic - Britney Spears (Bardcore Medieval Style).mp3");
+		audioEngine.playSong("toxic.wav");
+		//plays britney spears toxic
 		generateIntroText(gui);
 		
 	    int chances = 3;
@@ -151,7 +152,8 @@ public class snakeLevel extends Room {
 			while (chances >= 1 || chances != 4){
 				gui.addText("What do you do?");
 					if (scnr.next().contains("sing") || scnr.next().equalsIgnoreCase("sing to the snakes")){
-						audioEngine.playSong("Rihanna - Umbrella [Bardcore Medieval Style Cover].mp3");
+						audioEngine.playSong("umbrella.wav");
+						// plays umbrella
 						gui.addText("You break into a rousing rendition of Rhianna's Umbrella. The snakes love it!");
 						chances = 4;
 					}
@@ -168,14 +170,15 @@ public class snakeLevel extends Room {
 						chances = chances - 1;
 					}
 			}
+			
 			if (chances == 0){
-				audioEngine.playSong("Toxic - Britney Spears (Bardcore Medieval Style).mp3");
+				audioEngine.playSong("toxic.wav");
 				gui.addText("The snakes attack! You die of poisoning.");
 				IOException end = new IOException(); 
 				throw end;
 			}
 			else{
-				audioEngine.playSong("Rihanna - Umbrella [Bardcore Medieval Style Cover].mp3");
+				audioEngine.playSong("umbrella.wav");
 				gui.addText("The snakes do a little boogie. They seem to be amenable to you passing them.");
 				answer = promptUser("Do you exit the impromptu snake dance party?", gui);
 				
