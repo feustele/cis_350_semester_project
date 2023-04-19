@@ -16,7 +16,7 @@ public class SaneEngine {
 		scnr = new Scanner(System.in);
 		view = new GUI();
 		view.addText("Before you embark on your quest, Hero - What is your name? ");
-		name = scnr.nextLine();
+		name = view.getInput();
 		inventory = new ArrayList<Item>();
 		P1 = new Player(name, inventory);
 		gameMap = new Map();
