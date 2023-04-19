@@ -146,14 +146,14 @@ public class hallwayLevel extends Room {
 	 */
 	
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
+		audioEngine.playSong("muzak.wav");
 		generateIntroText(gui);
 		// player is prompted with the level's flavor text
 
 		char answer = promptUser("Do you open a door?", gui);
 
 		if (answer == 'y') {
-			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
+			audioEngine.playSong("bo.wav");
 			try {
 				generateInfiniteEnding(gui);
 				IOException end = new IOException(); 
@@ -171,7 +171,7 @@ public class hallwayLevel extends Room {
 			
 			exit(map, gui);
 
-			audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
+			audioEngine.playSong("thelessIknowthebetter.wav");
 			gui.addText("You walk to the end of the hallway and exit, ignoring the hallway doors.");
 			generateHallwayExit(gui);
 			
