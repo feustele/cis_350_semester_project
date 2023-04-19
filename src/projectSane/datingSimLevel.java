@@ -141,6 +141,7 @@ public class datingSimLevel extends Room {
 		char answer = promptUser("Do you run?", gui);
 		
 		if (answer == 'n') {
+			audioEngine.track.stop();
 			audioEngine.playSong("babydonthurtme.wav");
 			generateSeduceText(gui);
 			
@@ -182,6 +183,7 @@ public class datingSimLevel extends Room {
 				throw end;
 			}
 			else{
+				audioEngine.track.stop();
 				audioEngine.playSong("babydonthurtme.wav");
 				gui.addText("You and the dragon decide to order takeout. She recommends a lovely Indian place in the next cavern over.");
 				answer = promptUser("Do you go to the next room after the date?", gui);
@@ -192,6 +194,7 @@ public class datingSimLevel extends Room {
 				}
 		
 				if (answer == 'y') {
+					audioEngine.track.stop();
 					exit(map, gui);
 					// If the player chooses to exit, they leave the date.
 					audioEngine.playSong("moonlight.wav");
