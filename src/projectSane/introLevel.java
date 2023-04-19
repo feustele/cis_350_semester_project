@@ -87,7 +87,7 @@ public class introLevel extends Room {
 	}
 
 	private void exit(Map map, GUI gui) {
-		String prompt = "Which direction do you want to exit the board room?";
+		String prompt = "Which direction do you want to exit the room?";
 		String input = null;
 			
 		while(input == null || !(
@@ -114,7 +114,7 @@ public class introLevel extends Room {
 	public void roomEngine(Map map, GUI gui) throws IOException {
 		
 		generateIntroText(gui);
-		audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
+		audioEngine.playSong("moonlight.wav");
 
 		String word1;
 		do {
