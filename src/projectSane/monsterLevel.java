@@ -33,25 +33,28 @@ import java.io.BufferedReader;
 		audioEngine.playSong("pompeii.wav");
  		try {
  			BufferedReader trap = new BufferedReader(new FileReader("monsterLevelText.txt"));
-             	String line = trap.readLine(); 
+             		String line = trap.readLine(); 
  			while(line != null && scnr.hasNext()) {
  				gui.addText(line);
 				line = trap.readLine();
             		scnr.next();
  			}
             		//reads out room enter text, with each new line being generated when the player hits enter
-             	trap.close();
+             		trap.close();
              if (this.Room.getMonsters() == "Snake"){
+		 audioEngine.track.stop();
 		 audioEngine.playSong("toxic.wav");
                  gui.addText("You see a horrible, slithery snake!");
              }
              // If there's a snake in the room, it generates text. (insert toxic by britney spears) 
              else if (this.Room.getMonsters() == "Zombie"){
+		 audioEngine.track.stop();
                  audioEngine.playSong("zombie.wav");
 		 gui.addText("You see a shambling corpse!");
              }
              // If there's a zombie (insert Cranberries song here)
              else if (this.Room.getMonsters() == "Frog"){
+		 audioEngine.track.stop();
 		 audioEngine.playSong("thelessIknowthebetter.wav");
                  gui.addText("You see a... brightly colored frog?");
              }
