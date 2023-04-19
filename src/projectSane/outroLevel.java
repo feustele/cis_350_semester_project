@@ -160,7 +160,7 @@ public class outroLevel extends Room {
 	@Override
     public void roomEngine(Map map, GUI gui) throws IOException{
 
-	    audioEngine.playSong("Katy Perry - Firework (Medieval Cover   Bardcore).mp3");
+	    audioEngine.playSong("firework.wav");
 		generateOutroText(gui);
 		// reads out room enter text
 
@@ -168,11 +168,11 @@ public class outroLevel extends Room {
 
 		if (answer == 'n') {
 			//if the player chooses not to take the amulet, the game ends.
-			audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
+			audioEngine.playSong("thereaper.wav");
 			generateBadEnding(gui);
 	    			
 		}else if(answer == 'y') {
-			audioEngine.playSong("THE REAL SLIM SHADY Medieval Bardcore Version Eminem vs Beedle the Bardcore.mp3");
+			audioEngine.playSong("pleasestandup.wav");
 			generateGoodEnding(gui);	
 		}
 		// reads out ending text.
