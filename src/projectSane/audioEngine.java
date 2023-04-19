@@ -19,7 +19,7 @@ public class audioEngine {
 	public static void playSong(String songName) {
 		try {
 
-			String path = "cis_350_semester_project-master/Music/" + songName;
+			String path = "Music/" + songName;
 			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(path));
 			Clip track = AudioSystem.getClip();
 			track.open(stream);
