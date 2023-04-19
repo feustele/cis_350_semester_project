@@ -153,6 +153,7 @@ public class hallwayLevel extends Room {
 		char answer = promptUser("Do you open a door?", gui);
 
 		if (answer == 'y') {
+			audioEngine.track.stop();
 			audioEngine.playSong("bo.wav");
 			try {
 				generateInfiniteEnding(gui);
@@ -170,7 +171,7 @@ public class hallwayLevel extends Room {
 		if (answer == 'n') {
 			
 			exit(map, gui);
-
+			audioEngine.track.stop();
 			audioEngine.playSong("thelessIknowthebetter.wav");
 			gui.addText("You walk to the end of the hallway and exit, ignoring the hallway doors.");
 			generateHallwayExit(gui);
