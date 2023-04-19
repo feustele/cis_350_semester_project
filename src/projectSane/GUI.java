@@ -49,7 +49,7 @@ public class GUI{
 	}
 	
 	public String getInput() {
-		return JOptionPane.showInputDialog(null, "Please enter input:", "Question", JOptionPane.PLAIN_MESSAGE);
+		return JOptionPane.showInputDialog(null, "What will you do?", "Question", JOptionPane.QUESTION_MESSAGE);
 	}
 	
 	/**
