@@ -20,6 +20,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class audioEngine {
+	static Clip track;
+	// used for stopping tracks within levels
 	
 	public static void playSong(String songName) {
 		// takes in the string of the name of the song in question
