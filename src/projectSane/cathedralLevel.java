@@ -130,14 +130,14 @@ public class cathedralLevel extends Room {
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
+		audioEngine.playSong("thelessIknowthebetter.wav");
 		generateIntroText(gui);
 
 		char answer = promptUser("Do you approach the chest?", gui);
 		if (answer == 'y') {
 			// if the player approaches the chest, they get flavor text.
 			generateChestText(gui);
-			audioEngine.playSong("Pompeii - Medieval Cover Bardcore.mp3");
+			audioEngine.playSong("pompeii.wav");
 
 		} 
 
