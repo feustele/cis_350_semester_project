@@ -36,6 +36,7 @@ public class introLevel extends Room {
 			}
 			// reads out room enter text
 			intro.close(); 
+			audioEngine.track.stop();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 
@@ -126,6 +127,7 @@ public class introLevel extends Room {
 
 
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
+			audioEngine.track.stop();
 			audioEngine.playSong("rickroll.wav");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText(gui);
