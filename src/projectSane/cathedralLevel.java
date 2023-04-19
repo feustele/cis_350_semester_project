@@ -136,8 +136,10 @@ public class cathedralLevel extends Room {
 		char answer = promptUser("Do you approach the chest?", gui);
 		if (answer == 'y') {
 			// if the player approaches the chest, they get flavor text.
-			generateChestText(gui);
+			audioEngine.track.stop();
 			audioEngine.playSong("pompeii.wav");
+			generateChestText(gui);
+			
 
 		} 
 
