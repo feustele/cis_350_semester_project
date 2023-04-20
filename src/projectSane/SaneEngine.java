@@ -14,12 +14,12 @@ public class SaneEngine {
  	 */
 	public SaneEngine() {
 		scnr = new Scanner(System.in);
-		System.out.print("Before you embark on your quest, Hero - What is your name? ");
-		name = scnr.nextLine();
+		view = new GUI();
+		view.addText("Before you embark on your quest, Hero - What is your name? ");
+		name = view.getInput();
 		inventory = new ArrayList<Item>();
 		P1 = new Player(name, inventory);
 		gameMap = new Map();
-		view = new GUI();
 		runGameLoop();
 	}
 	

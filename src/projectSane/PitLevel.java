@@ -59,70 +59,58 @@ public class PitLevel extends Room {
         return pitPosition;
     }
 
+
+    private void readTextFile(String file, GUI gui) {
+		try {
+
+			BufferedReader exitText = new BufferedReader(new FileReader(file));
+			String line2 = exitText.readLine();
+
+			while (line2 != null) {
+				gui.addText(line2);
+
+				scnr.nextLine();  // wait for user input
+
+				line2 = exitText.readLine();
+			}
+			
+			gui.addText("");
+
+			exitText.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
     /**
      * Generates the introduction text for the room and reads it from a file.
      */
-    private void generateIntroText() {
-        try {
-            BufferedReader trap = new BufferedReader(new FileReader("Text/trap.txt"));
-        	String line = trap.readLine(); 
-	    	System.out.println(line);
-			while (line != null && scnr.hasNext()) {
-                		line = trap.readLine();
-				System.out.println(line);
-				scnr.next();
-            }
-            //reads out room enter text
-            trap.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
-        }
+    private void generateIntroText(GUI gui) {
+        readTextFile("Text/trap.txt", gui);
     }
 
     /**
      * Generates the text for falling into the pit and reads it from a file.
      */
-    private void generatePitText() {
-        try {
-	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
-            BufferedReader pit = new BufferedReader(new FileReader("Text/pit.txt"));
-            String line2 = pit.readLine(); 
-            System.out.println(line2);
-            while(line2 != null && scnr.hasNext()) {         
-                System.out.println(line2);
-                line2 = pit.readLine(); 
-		scnr.next();
-            }
-            pit.close();
+    private void generatePitText(GUI gui) {
         
-        }
-        // reads out fall text
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
-        }
+	    audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
+        readTextFile("Text/pit.txt", gui);
     }
 	
     /**
      * Parses and executes the action string entered by the player.
      * @param action the action string to execute
      */
-    private void fullFillAction(Map m, String action) {
+    private void fullFillAction(Map m, String action, GUI gui) {
         if (action.length() > 5) {
             if(action.substring(0, 4).toLowerCase()
                     .equals("move")) { //If the first word within the action string is equal to move, then move
                 char direction = action.toLowerCase().charAt(5);
                 
-                move(m, direction); 
+                move(m, direction, gui); 
             }
         }
     }
@@ -144,7 +132,7 @@ public class PitLevel extends Room {
      * @param dir the direction to move in
      * @throws Exception
      */
-    private void move(Map m, char dir) { 
+    private void move(Map m, char dir, GUI gui) { 
         if (getPlayerPosition() != null && 
                 (  dir == 'w'
                 || dir == 'a' 
@@ -155,7 +143,7 @@ public class PitLevel extends Room {
             
             if (getPitPosition() == getPlayerPosition()) {
                 //if you fall into the pit, 
-               generatePitText();
+               generatePitText(gui);
             }
         }
     }
@@ -164,16 +152,16 @@ public class PitLevel extends Room {
      *Runs the game engine loop until the player's position is no longer valid within the game's map.
      *@return A character representing the direction to move in after the game is finished.
      */
-    public void roomEngine(Map map) throws IOException{
+    public void roomEngine(Map map, GUI gui) throws IOException{
        	audioEngine.playSong("Dancing In The Moonlight (Medieval Version) - Bardcore.mp3");
-        generateIntroText();
+        generateIntroText(gui);
 
         //The below code needs to loop through until a index out of bounds exception occurs from moving rooms
-        while(isPositionValid(playerPosition)) {
-            System.out.println("What would you like to do?");
-            String action = scnr.nextLine();
+        while(!getVisited()) {
+            gui.addText("What would you like to do?");
+            String action = gui.getInput();
             
-            fullFillAction(map, action);
+            fullFillAction(map, action, gui);
            
         } 
         

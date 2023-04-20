@@ -21,12 +21,12 @@ public class snakeLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
-			System.out.println(prompt);
-			input = scnr.next();
+			gui.addText(prompt);
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
@@ -43,15 +43,15 @@ public class snakeLevel extends Room {
      * Reads and prints the text from a file, meant to give the player some flair.
      */
 	
-	private void readTextFile(String file) {
+	private void readTextFile(String file, GUI gui) {
 		try {
 
 			BufferedReader exitText = new BufferedReader(new FileReader(file));
 			String line2 = exitText.readLine();
-			System.out.print(line2);
+			gui.addText(line2);
 
 			while (line2 != null && scnr.hasNext()) {
-				System.out.print(line2);
+				gui.addText(line2);
 				line2 = exitText.readLine();
 				scnr.next();
 			}
@@ -68,34 +68,34 @@ public class snakeLevel extends Room {
 	/**
      * Reads and prints the text from the 'snakeIntro file', meant to give the player some flair as they enter the room.
      */
-	private void generateIntroText() {
-		readTextFile("Text/snakeIntro.txt");
+	private void generateIntroText(GUI gui) {
+		readTextFile("Text/snakeIntro.txt", gui);
 	} 
 	
 	/**
      * Reads and prints the text from the 'snakeExit file', meant to be read out as the player exits the room.
      */  
-	private void generateExitText() {
-		readTextFile("Text/snakeExit.txt");
+	private void generateExitText(GUI gui) {
+		readTextFile("Text/snakeExit.txt", gui);
 		
 	}
 	
 	/**
      * Reads out what happens if the player chooses to charm the snakes.
      */
-	private void generateCharmText() {
-		readTextFile("Text/charm.txt");
+	private void generateCharmText(GUI gui) {
+		readTextFile("Text/charm.txt", gui);
 
 	}
 
-	private boolean move(Map map, String input) {
+	private boolean move(Map map, String input, GUI gui) {
 		if (input.length() > 1) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 			return false;
 		}
 		if(!(input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))) {
-			System.out.println("Please input the initial character of the cardinal direction that you wish to move");
+			gui.addText("Please input the initial character of the cardinal direction that you wish to move");
 		}
 		
 		try {
@@ -107,17 +107,17 @@ public class snakeLevel extends Room {
 		}
 	}
 
-	private void exit(Map map) {
+	private void exit(Map map, GUI gui) {
 		String prompt = "Which direction do you want to head?";
 		String input = null;
 			
 		while(input == null || !(
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
-			System.out.println(prompt);
-			input = scnr.next();
+			gui.addText(prompt);
+			input = gui.getInput();
 
-			if(!move(map, input)) {
+			if(!move(map, input, gui)) {
 				input = null;
 			}
 		};
@@ -134,60 +134,67 @@ public class snakeLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	public void roomEngine(Map map) throws IOException {
-		audioEngine.playSong("Toxic - Britney Spears (Bardcore Medieval Style).mp3");
-		generateIntroText();
+	public void roomEngine(Map map, GUI gui) throws IOException {
+		audioEngine.playSong("toxic.wav");
+		//plays britney spears toxic
+		generateIntroText(gui);
 		
 	    int chances = 3;
 	    //basically a counter to limit the length of the interaction. If player fails to please the snakes before the counter runs out,
 	    //the encounter ends.
 
-		char answer = promptUser("Do you face the snakes?");
+		char answer = promptUser("Do you face the snakes?", gui);
 		
 		if (answer == 'y') {
 			
-			generateCharmText();
+			generateCharmText(gui);
 			
 			while (chances >= 1 || chances != 4){
-				System.out.println("What do you do?");
+				gui.addText("What do you do?");
 					if (scnr.next().contains("sing") || scnr.next().equalsIgnoreCase("sing to the snakes")){
-						audioEngine.playSong("Rihanna - Umbrella [Bardcore Medieval Style Cover].mp3");
-						System.out.println("You break into a rousing rendition of Rhianna's Umbrella. The snakes love it!");
+						audioEngine.track.stop();
+						audioEngine.playSong("umbrella.wav");
+						// plays umbrella
+						gui.addText("You break into a rousing rendition of Rhianna's Umbrella. The snakes love it!");
 						chances = 4;
+						audioEngine.track.stop();
 					}
 					else{
 						if (chances == 3){
-							System.out.println("The snakes look saddened. You haven't impressed them.");
+							gui.addText("The snakes look saddened. You haven't impressed them.");
 						}
 						else if (chances == 2){
-							System.out.println("The snakes look peeved. You haven't impressed them. What do snakes like, again?");
+							gui.addText("The snakes look peeved. You haven't impressed them. What do snakes like, again?");
 						} 
 						else{
-							System.out.println("The snakes look angry. One hisses 'Get off the ssssstage!!'");
+							gui.addText("The snakes look angry. One hisses 'Get off the ssssstage!!'");
 						} 
 						chances = chances - 1;
 					}
 			}
+			
 			if (chances == 0){
-				audioEngine.playSong("Toxic - Britney Spears (Bardcore Medieval Style).mp3");
-				System.out.println("The snakes attack! You die of poisoning.");
+				audioEngine.playSong("toxic.wav");
+				gui.addText("The snakes attack! You die of poisoning.");
+				audioEngine.track.stop();
 				IOException end = new IOException(); 
 				throw end;
 			}
 			else{
-				audioEngine.playSong("Rihanna - Umbrella [Bardcore Medieval Style Cover].mp3");
-				System.out.println("The snakes do a little boogie. They seem to be amenable to you passing them.");
-				answer = promptUser("Do you exit the impromptu snake dance party?");
+				audioEngine.playSong("umbrella.wav");
+				gui.addText("The snakes do a little boogie. They seem to be amenable to you passing them.");
+				answer = promptUser("Do you exit the impromptu snake dance party?", gui);
 				
 				while (answer == 'n') {
-					System.out.println("You dance a little while longer.");
-					answer = promptUser("Do you want to leave now?");
+					gui.addText("You dance a little while longer.");
+					answer = promptUser("Do you want to leave now?", gui);
 				}
 		
 				if (answer == 'y') {
+					audioEngine.track.stop();
 					// If the player chooses to exit, they leave the snake room.
-					exit(map);
-					generateExitText();
+					exit(map, gui);
+					generateExitText(gui);
 					
 				}
 			}

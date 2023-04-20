@@ -23,12 +23,12 @@ public class basicLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt, Gui gui) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
@@ -115,9 +115,9 @@ public class basicLevel extends Room {
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 
-			if(!move(map, input)) {
+			if(!move(map, input, gui)) {
 				input = null;
 			}
 		};
@@ -135,14 +135,15 @@ public class basicLevel extends Room {
 	 * 
 	 * @return 's' character, indicating the direction of the player's movement.
 	 */
-	public void roomEngine(Map map, Gui gui) throws IOException {
-		audioEngine.playSong("Muzak Track 10A (May be original).mp3");
+	public void roomEngine(Map map, GUI gui) throws IOException {
+		audioEngine.playSong("muzak.wav");
 		generateIntroText(gui);
 
 		char answer = promptUser("Do you investigate the computer?", gui);
 		
 		if (answer == 'y') {
-			audioEngine.playSong("Welcome to the Internet - medieval style from Bo Burnhams Inside.mp3");
+			audioEngine.track.stop();
+			audioEngine.playSong("bo.wav");
 			generateComputerText(gui);
 			IOException end = new IOException(); 
 			throw end;
@@ -152,8 +153,8 @@ public class basicLevel extends Room {
 
 		exit(map, gui);
 
-
-		audioEngine.playSong("Tame Impala - The Less I know the better (Medieval style).mp3");
+		audioEngine.track.stop();
+		audioEngine.playSong("thelessIknowthebetter.wav");
 		// If the player chooses to exit, they leave the crypt.
 		generateExitText(gui);
 			

@@ -27,12 +27,12 @@ public class outroLevel extends Room {
 	 * @param prompt
 	 * @return
 	 */
-	private char promptUser(String prompt) {
+	private char promptUser(String prompt, GUI gui) {
 		String input;
 
 		do {
-			System.out.println(prompt);
-			input = scnr.next();
+			gui.addText(prompt);
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
@@ -49,16 +49,16 @@ public class outroLevel extends Room {
          * Generates the text for the outroLevel room by reading from a file called "outro.txt"
          * @throws IOException if there is an error reading the file
          */
-	private void generateOutroText() {
+	private void generateOutroText(GUI gui) {
 		try {
 
 			BufferedReader outro = new BufferedReader(new FileReader("Text/outro.txt"));
 			String line = outro.readLine(); 
-			System.out.println(line);
+			gui.addText(line);
 			
 			while (line != null && scnr.hasNext()) {
 				line = outro.readLine();
-				System.out.println(line);
+				gui.addText(line);
 				scnr.next();
 			}
 			outro.close();
@@ -67,7 +67,7 @@ public class outroLevel extends Room {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Sorry! You can't do that here.");
+            gui.addText("Sorry! You can't do that here.");
         }
 	}
 
@@ -76,15 +76,15 @@ public class outroLevel extends Room {
          * and then throws an IOException to end the game.
          * @throws IOException if there is an error reading the file or to end the game
          */
-	private void generateBadEnding() {
+	private void generateBadEnding(GUI gui) {
 		try {
 			BufferedReader badBuffer = new BufferedReader(new FileReader("Text/badOutro.txt"));
 			String line2 = badBuffer.readLine();
 
-			System.out.println(line2);
+			gui.addText(line2);
 			while (line2 != null && scnr.hasNext()) {
 				line2 = badBuffer.readLine();
-				System.out.println(line2);
+				gui.addText(line2);
 				scnr.next();
 			}
 		
@@ -105,14 +105,14 @@ public class outroLevel extends Room {
          * and then throws an IOException to display the credits.
          * @throws IOException if there is an error reading the file or to display the credits
          */
-	private void generateGoodEnding() {
+	private void generateGoodEnding(GUI gui) {
 		try {
 			BufferedReader goodBuffer = new BufferedReader(new FileReader("Text/goodOutro.txt"));
 			String line3 = goodBuffer.readLine();
-			System.out.println(line3);
+			gui.addText(line3);
 			while (line3 != null && scnr.hasNext()) {
 				line3 = goodBuffer.readLine();
-				System.out.println(line3);
+				gui.addText(line3);
 				scnr.next();
 			}
 			goodBuffer.close();
@@ -131,14 +131,14 @@ public class outroLevel extends Room {
           * and then throws an IOException to end the game.
           * @throws IOException if there is an error reading the file or to end the game
           */
-	private void generateCredits() {
+	private void generateCredits(GUI gui) {
 		try {
 			BufferedReader creditBuffer = new BufferedReader(new FileReader("Text/credits.txt"));
 			String line4 = creditBuffer.readLine();
-			System.out.println(line4);
+			gui.addText(line4);
 			while (line4 != null && scnr.hasNext()) {
 				line4 = creditBuffer.readLine();
-				System.out.println(line4);
+				gui.addText(line4);
 				scnr.next();
 			}
 
@@ -158,26 +158,28 @@ public class outroLevel extends Room {
 	 * @throws IOException
          */
 	@Override
-    public void roomEngine(Map map) throws IOException{
+    public void roomEngine(Map map, GUI gui) throws IOException{
 
-	    audioEngine.playSong("Katy Perry - Firework (Medieval Cover   Bardcore).mp3");
-		generateOutroText();
+	    audioEngine.playSong("firework.wav");
+		generateOutroText(gui);
 		// reads out room enter text
 
-		char answer = promptUser("Do you retrieve the Mysterious Amulet?");
+		char answer = promptUser("Do you retrieve the Mysterious Amulet?", gui);
 
 		if (answer == 'n') {
+			audioEngine.track.stop();
 			//if the player chooses not to take the amulet, the game ends.
-			audioEngine.playSong("Don't Fear The Reaper (Medieval Style) Blue Oyster Cult Bardcore Cover.mp3");
-			generateBadEnding();
+			audioEngine.playSong("thereaper.wav");
+			generateBadEnding(gui);
 	    			
 		}else if(answer == 'y') {
-			audioEngine.playSong("THE REAL SLIM SHADY Medieval Bardcore Version Eminem vs Beedle the Bardcore.mp3");
-			generateGoodEnding();	
+			audioEngine.track.stop();
+			audioEngine.playSong("pleasestandup.wav");
+			generateGoodEnding(gui);	
 		}
 		// reads out ending text.
 
-		generateCredits();
+		generateCredits(gui);
 		
 		//It should generate an exception within the generation of credits
 		throw new IOException();
