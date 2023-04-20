@@ -32,7 +32,7 @@ public class outroLevel extends Room {
 
 		do {
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
