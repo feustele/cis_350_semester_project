@@ -27,7 +27,7 @@ public class datingSimLevel extends Room {
 
 		do {
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
@@ -113,7 +113,7 @@ public class datingSimLevel extends Room {
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 
 			if(!move(map, input, gui)) {
 				input = null;
@@ -149,7 +149,7 @@ public class datingSimLevel extends Room {
 			int hearts = 0;
 			while (chances >= 1 || hearts <= 2){
 				gui.addText("What do you do?");
-				if (scnr.next().contains("flirt")|| scnr.next().equalsIgnoreCase("Ask her about her day") || scnr.next().equalsIgnoreCase("Compliment her.") || scnr.next().equalsIgnoreCase("Ask what such a beautiful dragon is doing in a place like this?") || scnr.next().equalsIgnoreCase("Tell her you've never met a dragon before."))  {
+				if (gui.getInput().contains("flirt")|| gui.getInput().equalsIgnoreCase("Ask her about her day") || gui.getInput().equalsIgnoreCase("Compliment her.") || scnr.next().equalsIgnoreCase("Ask what such a beautiful dragon is doing in a place like this?") || scnr.next().equalsIgnoreCase("Tell her you've never met a dragon before."))  {
 					if (hearts == 0){
 						gui.addText("The dragon blushes, surprised.");
 					}
@@ -161,7 +161,7 @@ public class datingSimLevel extends Room {
 					}
 					hearts = hearts + 1;
 				}
-				else if (scnr.next().equalsIgnoreCase("run") || scnr.next().equalsIgnoreCase("escape") || scnr.next().equalsIgnoreCase("flee")){
+				else if (gui.getInput().equalsIgnoreCase("run") || gui.getInput().equalsIgnoreCase("escape") || gui.getInput().equalsIgnoreCase("flee")){
 					chances = 0;
 				}
 				else{
