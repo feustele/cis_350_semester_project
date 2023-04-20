@@ -95,7 +95,7 @@ public class introLevel extends Room {
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 
 			if(!move(map, input, gui)) {
 				input = null;
@@ -120,7 +120,7 @@ public class introLevel extends Room {
 		String word1;
 		do {
 			gui.addText("Do you enter the cave?");
-			word1 = scnr.next();
+			word1 = gui.getInput();
 		} while(!(
 			word1.equalsIgnoreCase("No") || word1.equalsIgnoreCase("N") 
 			|| word1.equalsIgnoreCase("Yes") || word1.equalsIgnoreCase("Y")));
