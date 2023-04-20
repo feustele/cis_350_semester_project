@@ -32,7 +32,7 @@ public class cryptLevel extends Room {
 
 		do {
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 		} while(!(
 			input.equalsIgnoreCase("No") || input.equalsIgnoreCase("N") 
 			|| input.equalsIgnoreCase("Yes") || input.equalsIgnoreCase("Y")));
@@ -118,7 +118,7 @@ public class cryptLevel extends Room {
 				input.equalsIgnoreCase("n") || input.equalsIgnoreCase("w") 
 				|| input.equalsIgnoreCase("s") || input.equalsIgnoreCase("e"))){
 			gui.addText(prompt);
-			input = scnr.next();
+			input = gui.getInput();
 
 			if(!move(map, input, gui)) {
 				input = null;
