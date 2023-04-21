@@ -36,7 +36,6 @@ public class introLevel extends Room {
 			}
 			// reads out room enter text
 			intro.close(); 
-			audioEngine.track.stop();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 
@@ -113,9 +112,8 @@ public class introLevel extends Room {
 	 */
 	@Override
 	public void roomEngine(Map map, GUI gui) throws IOException {
-		
-		generateIntroText(gui);
 		audioEngine.playSong("moonlight.wav");
+		generateIntroText(gui);
 
 		String word1;
 		do {
@@ -131,11 +129,11 @@ public class introLevel extends Room {
 			audioEngine.playSong("rickroll.wav");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText(gui);
+			audioEngine.stop();
 			IOException end = new IOException(); 
 			throw end;
 			// add ioextension end method to interact with game engine (register an ending)
 			// reads out fall text
-			audioEngine.stop();
 		} 
 		
 		exit(map, gui);
