@@ -167,13 +167,13 @@ public class outroLevel extends Room {
 		char answer = promptUser("Do you retrieve the Mysterious Amulet?", gui);
 
 		if (answer == 'n') {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			//if the player chooses not to take the amulet, the game ends.
 			audioEngine.playSong("thereaper.wav");
 			generateBadEnding(gui);
 	    			
 		}else if(answer == 'y') {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			audioEngine.playSong("pleasestandup.wav");
 			generateGoodEnding(gui);	
 		}
