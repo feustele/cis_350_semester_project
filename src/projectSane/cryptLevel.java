@@ -141,13 +141,13 @@ public class cryptLevel extends Room {
 		char answer = promptUser("Do you investigate the chest?", gui);
 		
 		if (answer == 'y') {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			//read out the chest text.
 			audioEngine.playSong("thelessIknowthebetter.wav");
 			generateChestText(gui);
 		}
 
-		audioEngine.track.stop();
+		audioEngine.stop();
 		audioEngine.playSong("zombie.wav");
 		exit(map, gui);
 	}
