@@ -139,7 +139,7 @@ public class introLevel extends Room {
 		} 
 		
 		exit(map, gui);
-		
+		audioEngine.stop();
 		
 	}
 
