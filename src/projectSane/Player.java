@@ -1,5 +1,6 @@
 package projectSane;
 import java.util.ArrayList;
+//generic item which creates a Player object in which an inventory and name are stored.
 
 public class Player {
 	//String Class;
