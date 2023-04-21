@@ -180,7 +180,7 @@ public class outroLevel extends Room {
 		// reads out ending text.
 
 		generateCredits(gui);
-		
+		audioEngine.stop();
 		//It should generate an exception within the generation of credits
 		throw new IOException();
 	}
