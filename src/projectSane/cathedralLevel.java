@@ -139,7 +139,7 @@ public class cathedralLevel extends Room {
 			audioEngine.track.stop();
 			audioEngine.playSong("pompeii.wav");
 			generateChestText(gui);
-			
+			audioEngine.track.stop();
 
 		} 
 
