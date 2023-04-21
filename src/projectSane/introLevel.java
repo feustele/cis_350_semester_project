@@ -127,7 +127,7 @@ public class introLevel extends Room {
 
 
 		if (word1.equalsIgnoreCase("NO") || word1.equalsIgnoreCase("N")) {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			audioEngine.playSong("rickroll.wav");
 			// if the player chooses not to enter the cave, the game ends.
 			generateChickenText(gui);
@@ -135,7 +135,7 @@ public class introLevel extends Room {
 			throw end;
 			// add ioextension end method to interact with game engine (register an ending)
 			// reads out fall text
-			
+			audioEngine.stop();
 		} 
 		
 		exit(map, gui);
