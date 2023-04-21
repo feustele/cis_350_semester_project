@@ -98,6 +98,7 @@ import java.io.BufferedReader;
              	trap.close();
              	if (getLavaPosition() == getPlayerPosition()) {
                  //if you fall into the lava, 
+			audioEngine.stop();
 			audioEngine.playSong("pompeii.wav");
  				try {
                     		BufferedReader pitBuffer = new BufferedReader(new FileReader("cookedChicken.txt"));
@@ -127,5 +128,6 @@ import java.io.BufferedReader;
  			e.printStackTrace();
 
  		}
- 	}	
+ 	}
+	 audioEngine.stop();
 }
