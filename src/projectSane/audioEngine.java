@@ -48,6 +48,10 @@ public class audioEngine {
 		}
 
 	}
+	public static void stop() {
+		track.stop();
+		
+	}
 
 }
 
