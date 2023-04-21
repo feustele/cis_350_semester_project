@@ -140,18 +140,18 @@ public class mysticSpringLevel extends Room {
 			
 
 		if ('y' == answer) {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			audioEngine.playSong("rain.wav");
 			generateSpringText(gui);
 		} 
 		
-
+		audioEngine.stop();
 		audioEngine.playSong("yeoldedaftpunk.wav");
 		
 		generateExitText(gui);
 		
 		exit(map, gui);
-		audioEngine.track.stop();
+		audioEngine.stop();
 		
 	}
 }
