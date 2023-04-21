@@ -31,7 +31,7 @@ public class audioEngine {
 			// formats to the path where the song is
 			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(path));
 			// creates a stream from that file
-			Clip track = AudioSystem.getClip();
+			track = AudioSystem.getClip();
 			// clip from the stream
 			track.open(stream);
 			// opens the clip
