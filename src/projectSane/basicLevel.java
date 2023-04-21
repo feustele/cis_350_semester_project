@@ -142,10 +142,11 @@ public class basicLevel extends Room {
 		char answer = promptUser("Do you investigate the computer?", gui);
 		
 		if (answer == 'y') {
-			audioEngine.track.stop();
+			audioEngine.stop();
 			audioEngine.playSong("bo.wav");
 			generateComputerText(gui);
 			IOException end = new IOException(); 
+			audioEngine.stop();
 			throw end;
 		}
 
@@ -153,9 +154,10 @@ public class basicLevel extends Room {
 
 		exit(map, gui);
 
-		audioEngine.track.stop();
+		audioEngine.stop();
 		audioEngine.playSong("thelessIknowthebetter.wav");
 		// If the player chooses to exit, they leave the crypt.
+		audioEngine.stop();
 		generateExitText(gui);
 			
 	
