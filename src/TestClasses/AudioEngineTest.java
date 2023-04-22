@@ -11,7 +11,7 @@ public class AudioEngineTest {
 
     @Test 
     public void playRickRoll() {
-        audioEngine.playSong("Never Gonna Give You Up (Medieval Cover).mp3");
+        audioEngine.playSong("rickroll.wav");
     }
 
     @Test
@@ -23,6 +23,6 @@ public class AudioEngineTest {
     public static void main(String args[]) {
         System.out.println(System.getProperty("user.dir"));
         
-        audioEngine.playSong("Never Gonna Give You Up (Medieval Cover).mp3");
+        audioEngine.playSong("rickroll.wav");
     }
 }
